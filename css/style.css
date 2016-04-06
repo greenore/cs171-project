@@ -1,0 +1,75 @@
+/* Main HTML */
+
+body {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+#header {
+    width: 100%;
+    height: 150px;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-image: url('../img/header.jpg');
+}
+
+#header_txt {
+    width: 100%;
+    text-align: left;
+    z-index: 100;
+    color: #862f2f;
+    margin: auto;
+    font-size: 70px;
+    font-weight: bolder;
+    width: 1000px;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+h1,
+h2,
+h5 {
+    text-shadow: #747474 0 0 10px;
+}
+
+#pic1 {
+    width: 350px;
+    height: 320px;
+}
+
+#header_source {
+    text-align: right;
+}
+
+#space1 {
+    height: 10px;
+}
+
+.space2 {
+    height: 22px;
+}
+
+#selected-variable {
+    font-size: 14px;
+    width: 450px;
+    background-color: rgba(217, 209, 209, 0.88);
+    font-weight: bold;
+    color: black;
+}
+
+#global-funding {
+    text-align: center;
+}
+
+.chart-text {
+    font-size: 12px;
+}
+
+
+/* Choropleth */
+
+.btn {
+    background-color: #cecece;
+}

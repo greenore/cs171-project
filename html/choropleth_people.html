@@ -1,0 +1,513 @@
+<!doctype HTML>
+<meta charset = 'utf-8'>
+<html>
+  <head>
+    
+    <script src='http://d3js.org/d3.v3.min.js' type='text/javascript'></script>
+    <script src='http://d3js.org/topojson.v1.min.js' type='text/javascript'></script>
+    <script src='http://datamaps.github.io/scripts/datamaps.all.min.js' type='text/javascript'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js' type='text/javascript'></script>
+    
+    <style>
+    .rChart {
+      display: block;
+      margin-left: auto; 
+      margin-right: auto;
+      width: 800px;
+      height: 400px;
+    }  
+    </style>
+    
+  </head>
+  <body >
+    
+    <div id = 'chart6b4208a37a3' class = 'rChart datamaps'></div>    
+    <script id='popup-template' type='text/x-handlebars-template'>
+    
+</script>
+<script>
+  var chartParams = {
+ "dom": "chart6b4208a37a3",
+"width":    800,
+"height":    400,
+"scope": "usa",
+"fills": {
+ "(5.84e+05,1.35e+06]": "#FEE5D9",
+"(1.35e+06,3.04e+06]": "#FCAE91",
+"(3.04e+06,5.64e+06]": "#FB6A4A",
+"(5.64e+06,9.72e+06]": "#DE2D26",
+"(9.72e+06,3.19e+08]": "#A50F15" 
+},
+"legend": true,
+"labels": true,
+"geographyConfig": {
+ "popupTemplate": function(geo, data) {
+                                       return '<div class=\"hoverinfo\"><strong>' +
+                                       data.state +
+                                       '</strong><br>' + data.population+' People'+
+                                       '</div>';} 
+},
+"data": {
+ "AK": {
+ "state": [ "Alaska" ],
+"electric_vehicle_registrations": [ 155 ],
+"population": [ 736732 ],
+"percentage": [   0.21 ],
+"abbreviation": [ "AK" ],
+"fillKey": [ "(5.84e+05,1.35e+06]" ] 
+},
+"AL": {
+ "state": [ "Alabama" ],
+"electric_vehicle_registrations": [ 773 ],
+"population": [ 4849377 ],
+"percentage": [   0.16 ],
+"abbreviation": [ "AL" ],
+"fillKey": [ "(3.04e+06,5.64e+06]" ] 
+},
+"AR": {
+ "state": [ "Arkansas" ],
+"electric_vehicle_registrations": [ 374 ],
+"population": [ 2966369 ],
+"percentage": [   0.13 ],
+"abbreviation": [ "AR" ],
+"fillKey": [ "(1.35e+06,3.04e+06]" ] 
+},
+"AZ": {
+ "state": [ "Arizona" ],
+"electric_vehicle_registrations": [ 4361 ],
+"population": [ 6731484 ],
+"percentage": [   0.65 ],
+"abbreviation": [ "AZ" ],
+"fillKey": [ "(5.64e+06,9.72e+06]" ] 
+},
+"CA": {
+ "state": [ "California" ],
+"electric_vehicle_registrations": [ 126283 ],
+"population": [ 38802500 ],
+"percentage": [   3.25 ],
+"abbreviation": [ "CA" ],
+"fillKey": [ "(9.72e+06,3.19e+08]" ] 
+},
+"CO": {
+ "state": [ "Colorado" ],
+"electric_vehicle_registrations": [ 4001 ],
+"population": [ 5355866 ],
+"percentage": [   0.75 ],
+"abbreviation": [ "CO" ],
+"fillKey": [ "(3.04e+06,5.64e+06]" ] 
+},
+"CT": {
+ "state": [ "Connecticut" ],
+"electric_vehicle_registrations": [ 2476 ],
+"population": [ 3596677 ],
+"percentage": [   0.69 ],
+"abbreviation": [ "CT" ],
+"fillKey": [ "(3.04e+06,5.64e+06]" ] 
+},
+"DC": {
+ "state": [ "District of Columbia" ],
+"electric_vehicle_registrations": [ 493 ],
+"population": [ 658893 ],
+"percentage": [   0.75 ],
+"abbreviation": [ "DC" ],
+"fillKey": [ "(5.84e+05,1.35e+06]" ] 
+},
+"DE": {
+ "state": [ "Delaware" ],
+"electric_vehicle_registrations": [ 383 ],
+"population": [ 935614 ],
+"percentage": [   0.41 ],
+"abbreviation": [ "DE" ],
+"fillKey": [ "(5.84e+05,1.35e+06]" ] 
+},
+"FL": {
+ "state": [ "Florida" ],
+"electric_vehicle_registrations": [ 10383 ],
+"population": [ 19893297 ],
+"percentage": [   0.52 ],
+"abbreviation": [ "FL" ],
+"fillKey": [ "(9.72e+06,3.19e+08]" ] 
+},
+"GA": {
+ "state": [ "Georgia" ],
+"electric_vehicle_registrations": [ 15551 ],
+"population": [ 10097343 ],
+"percentage": [   1.54 ],
+"abbreviation": [ "GA" ],
+"fillKey": [ "(9.72e+06,3.19e+08]" ] 
+},
+"HI": {
+ "state": [ "Hawaii" ],
+"electric_vehicle_registrations": [ 3050 ],
+"population": [ 1419561 ],
+"percentage": [   2.15 ],
+"abbreviation": [ "HI" ],
+"fillKey": [ "(1.35e+06,3.04e+06]" ] 
+},
+"IA": {
+ "state": [ "Iowa" ],
+"electric_vehicle_registrations": [ 928 ],
+"population": [ 3107126 ],
+"percentage": [    0.3 ],
+"abbreviation": [ "IA" ],
+"fillKey": [ "(3.04e+06,5.64e+06]" ] 
+},
+"ID": {
+ "state": [ "Idaho" ],
+"electric_vehicle_registrations": [ 409 ],
+"population": [ 1634464 ],
+"percentage": [   0.25 ],
+"abbreviation": [ "ID" ],
+"fillKey": [ "(1.35e+06,3.04e+06]" ] 
+},
+"IL": {
+ "state": [ "Illinois" ],
+"electric_vehicle_registrations": [ 6694 ],
+"population": [ 12880580 ],
+"percentage": [   0.52 ],
+"abbreviation": [ "IL" ],
+"fillKey": [ "(9.72e+06,3.19e+08]" ] 
+},
+"IN": {
+ "state": [ "Indiana" ],
+"electric_vehicle_registrations": [ 1697 ],
+"population": [ 6596855 ],
+"percentage": [   0.26 ],
+"abbreviation": [ "IN" ],
+"fillKey": [ "(5.64e+06,9.72e+06]" ] 
+},
+"KS": {
+ "state": [ "Kansas" ],
+"electric_vehicle_registrations": [ 750 ],
+"population": [ 2904021 ],
+"percentage": [   0.26 ],
+"abbreviation": [ "KS" ],
+"fillKey": [ "(1.35e+06,3.04e+06]" ] 
+},
+"KY": {
+ "state": [ "Kentucky" ],
+"electric_vehicle_registrations": [ 701 ],
+"population": [ 4413457 ],
+"percentage": [   0.16 ],
+"abbreviation": [ "KY" ],
+"fillKey": [ "(3.04e+06,5.64e+06]" ] 
+},
+"LA": {
+ "state": [ "Louisiana" ],
+"electric_vehicle_registrations": [ 527 ],
+"population": [ 4649676 ],
+"percentage": [   0.11 ],
+"abbreviation": [ "LA" ],
+"fillKey": [ "(3.04e+06,5.64e+06]" ] 
+},
+"MA": {
+ "state": [ "Massachusetts" ],
+"electric_vehicle_registrations": [ 4612 ],
+"population": [ 6745408 ],
+"percentage": [   0.68 ],
+"abbreviation": [ "MA" ],
+"fillKey": [ "(5.64e+06,9.72e+06]" ] 
+},
+"MD": {
+ "state": [ "Maryland" ],
+"electric_vehicle_registrations": [ 5028 ],
+"population": [ 5976407 ],
+"percentage": [   0.84 ],
+"abbreviation": [ "MD" ],
+"fillKey": [ "(5.64e+06,9.72e+06]" ] 
+},
+"ME": {
+ "state": [ "Maine" ],
+"electric_vehicle_registrations": [ 695 ],
+"population": [ 1330089 ],
+"percentage": [   0.52 ],
+"abbreviation": [ "ME" ],
+"fillKey": [ "(5.84e+05,1.35e+06]" ] 
+},
+"MI": {
+ "state": [ "Michigan" ],
+"electric_vehicle_registrations": [ 8844 ],
+"population": [ 9909877 ],
+"percentage": [   0.89 ],
+"abbreviation": [ "MI" ],
+"fillKey": [ "(9.72e+06,3.19e+08]" ] 
+},
+"MN": {
+ "state": [ "Minnesota" ],
+"electric_vehicle_registrations": [ 2775 ],
+"population": [ 5457173 ],
+"percentage": [   0.51 ],
+"abbreviation": [ "MN" ],
+"fillKey": [ "(3.04e+06,5.64e+06]" ] 
+},
+"MO": {
+ "state": [ "Missouri" ],
+"electric_vehicle_registrations": [ 1859 ],
+"population": [ 6063589 ],
+"percentage": [   0.31 ],
+"abbreviation": [ "MO" ],
+"fillKey": [ "(5.64e+06,9.72e+06]" ] 
+},
+"MS": {
+ "state": [ "Mississippi" ],
+"electric_vehicle_registrations": [ 201 ],
+"population": [ 2994079 ],
+"percentage": [   0.07 ],
+"abbreviation": [ "MS" ],
+"fillKey": [ "(1.35e+06,3.04e+06]" ] 
+},
+"MT": {
+ "state": [ "Montana" ],
+"electric_vehicle_registrations": [ 362 ],
+"population": [ 1023579 ],
+"percentage": [   0.35 ],
+"abbreviation": [ "MT" ],
+"fillKey": [ "(5.84e+05,1.35e+06]" ] 
+},
+"NC": {
+ "state": [ "North Carolina" ],
+"electric_vehicle_registrations": [ 3384 ],
+"population": [ 9943964 ],
+"percentage": [   0.34 ],
+"abbreviation": [ "NC" ],
+"fillKey": [ "(9.72e+06,3.19e+08]" ] 
+},
+"ND": {
+ "state": [ "North Dakota" ],
+"electric_vehicle_registrations": [ 91 ],
+"population": [ 739482 ],
+"percentage": [   0.12 ],
+"abbreviation": [ "ND" ],
+"fillKey": [ "(5.84e+05,1.35e+06]" ] 
+},
+"NE": {
+ "state": [ "Nebraska" ],
+"electric_vehicle_registrations": [ 579 ],
+"population": [ 1881503 ],
+"percentage": [   0.31 ],
+"abbreviation": [ "NE" ],
+"fillKey": [ "(1.35e+06,3.04e+06]" ] 
+},
+"NH": {
+ "state": [ "New Hampshire" ],
+"electric_vehicle_registrations": [ 761 ],
+"population": [ 1326813 ],
+"percentage": [   0.57 ],
+"abbreviation": [ "NH" ],
+"fillKey": [ "(5.84e+05,1.35e+06]" ] 
+},
+"NJ": {
+ "state": [ "New Jersey" ],
+"electric_vehicle_registrations": [ 6021 ],
+"population": [ 8938175 ],
+"percentage": [   0.67 ],
+"abbreviation": [ "NJ" ],
+"fillKey": [ "(5.64e+06,9.72e+06]" ] 
+},
+"NM": {
+ "state": [ "New Mexico" ],
+"electric_vehicle_registrations": [ 637 ],
+"population": [ 2085572 ],
+"percentage": [   0.31 ],
+"abbreviation": [ "NM" ],
+"fillKey": [ "(1.35e+06,3.04e+06]" ] 
+},
+"NV": {
+ "state": [ "Nevada" ],
+"electric_vehicle_registrations": [ 1509 ],
+"population": [ 2839099 ],
+"percentage": [   0.53 ],
+"abbreviation": [ "NV" ],
+"fillKey": [ "(1.35e+06,3.04e+06]" ] 
+},
+"NY": {
+ "state": [ "New York" ],
+"electric_vehicle_registrations": [ 11278 ],
+"population": [ 19746227 ],
+"percentage": [   0.57 ],
+"abbreviation": [ "NY" ],
+"fillKey": [ "(9.72e+06,3.19e+08]" ] 
+},
+"OH": {
+ "state": [ "Ohio" ],
+"electric_vehicle_registrations": [ 3814 ],
+"population": [ 11594163 ],
+"percentage": [   0.33 ],
+"abbreviation": [ "OH" ],
+"fillKey": [ "(9.72e+06,3.19e+08]" ] 
+},
+"OK": {
+ "state": [ "Oklahoma" ],
+"electric_vehicle_registrations": [ 806 ],
+"population": [ 3878051 ],
+"percentage": [   0.21 ],
+"abbreviation": [ "OK" ],
+"fillKey": [ "(3.04e+06,5.64e+06]" ] 
+},
+"OR": {
+ "state": [ "Oregon" ],
+"electric_vehicle_registrations": [ 5681 ],
+"population": [ 3970239 ],
+"percentage": [   1.43 ],
+"abbreviation": [ "OR" ],
+"fillKey": [ "(3.04e+06,5.64e+06]" ] 
+},
+"PA": {
+ "state": [ "Pennsylvania" ],
+"electric_vehicle_registrations": [ 4540 ],
+"population": [ 12787209 ],
+"percentage": [   0.36 ],
+"abbreviation": [ "PA" ],
+"fillKey": [ "(9.72e+06,3.19e+08]" ] 
+},
+"RI": {
+ "state": [ "Rhode Island" ],
+"electric_vehicle_registrations": [ 417 ],
+"population": [ 1055173 ],
+"percentage": [    0.4 ],
+"abbreviation": [ "RI" ],
+"fillKey": [ "(5.84e+05,1.35e+06]" ] 
+},
+"SC": {
+ "state": [ "South Carolina" ],
+"electric_vehicle_registrations": [ 1056 ],
+"population": [ 4832482 ],
+"percentage": [   0.22 ],
+"abbreviation": [ "SC" ],
+"fillKey": [ "(3.04e+06,5.64e+06]" ] 
+},
+"SD": {
+ "state": [ "South Dakota" ],
+"electric_vehicle_registrations": [ 160 ],
+"population": [ 853175 ],
+"percentage": [   0.19 ],
+"abbreviation": [ "SD" ],
+"fillKey": [ "(5.84e+05,1.35e+06]" ] 
+},
+"TN": {
+ "state": [ "Tennessee" ],
+"electric_vehicle_registrations": [ 2730 ],
+"population": [ 6549352 ],
+"percentage": [   0.42 ],
+"abbreviation": [ "TN" ],
+"fillKey": [ "(5.64e+06,9.72e+06]" ] 
+},
+"TX": {
+ "state": [ "Texas" ],
+"electric_vehicle_registrations": [ 9925 ],
+"population": [ 26956958 ],
+"percentage": [   0.37 ],
+"abbreviation": [ "TX" ],
+"fillKey": [ "(9.72e+06,3.19e+08]" ] 
+},
+"UT": {
+ "state": [ "Utah" ],
+"electric_vehicle_registrations": [ 1565 ],
+"population": [ 2942902 ],
+"percentage": [   0.53 ],
+"abbreviation": [ "UT" ],
+"fillKey": [ "(1.35e+06,3.04e+06]" ] 
+},
+"VA": {
+ "state": [ "Virginia" ],
+"electric_vehicle_registrations": [ 3628 ],
+"population": [ 8326289 ],
+"percentage": [   0.44 ],
+"abbreviation": [ "VA" ],
+"fillKey": [ "(5.64e+06,9.72e+06]" ] 
+},
+"VT": {
+ "state": [ "Vermont" ],
+"electric_vehicle_registrations": [ 840 ],
+"population": [ 626562 ],
+"percentage": [   1.34 ],
+"abbreviation": [ "VT" ],
+"fillKey": [ "(5.84e+05,1.35e+06]" ] 
+},
+"WA": {
+ "state": [ "Washington" ],
+"electric_vehicle_registrations": [ 12291 ],
+"population": [ 7061530 ],
+"percentage": [   1.74 ],
+"abbreviation": [ "WA" ],
+"fillKey": [ "(5.64e+06,9.72e+06]" ] 
+},
+"WI": {
+ "state": [ "Wisconsin" ],
+"electric_vehicle_registrations": [ 2429 ],
+"population": [ 5757564 ],
+"percentage": [   0.42 ],
+"abbreviation": [ "WI" ],
+"fillKey": [ "(5.64e+06,9.72e+06]" ] 
+},
+"WV": {
+ "state": [ "West Virginia" ],
+"electric_vehicle_registrations": [ 271 ],
+"population": [ 1850326 ],
+"percentage": [   0.15 ],
+"abbreviation": [ "WV" ],
+"fillKey": [ "(1.35e+06,3.04e+06]" ] 
+},
+"WY": {
+ "state": [ "Wyoming" ],
+"electric_vehicle_registrations": [ 73 ],
+"population": [ 584153 ],
+"percentage": [   0.12 ],
+"abbreviation": [ "WY" ],
+"fillKey": [ null ] 
+},
+"NA": {
+ "state": [ "All" ],
+"electric_vehicle_registrations": [ 278851 ],
+"population": [ 318857056 ],
+"percentage": [   0.87 ],
+"abbreviation": [ null ],
+"fillKey": [ "(9.72e+06,3.19e+08]" ] 
+} 
+},
+"id": "chart6b4208a37a3" 
+}
+  chartParams.element = document.getElementById('chart6b4208a37a3')
+  
+  
+  var mapchart6b4208a37a3 = new Datamap(chartParams);
+  
+  
+    
+  // draw a bubble map if specified
+  if (chartParams.bubbles) {
+    var bubbles = chartParams.bubbles
+    mapchart6b4208a37a3.bubbles(bubbles)
+  }
+  
+  if (chartParams.labels){
+    mapchart6b4208a37a3.labels()
+  }
+  
+  if (chartParams.legend){
+    mapchart6b4208a37a3.legend()
+  }
+  
+  setProjection = function( element, options ) {
+    var projection, path;
+ 
+      projection = d3.geo.albersUsa()
+        .scale(element.offsetWidth)
+        .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+ 
+    path = d3.geo.path()
+      .projection( projection );
+ 
+    return {path: path, projection: projection};
+  }
+</script>
+
+<style>
+.datamaps {
+  position: relative;
+}
+</style>
+    
+    <script></script>    
+  </body>
+</html>
