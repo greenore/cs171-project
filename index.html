@@ -84,18 +84,17 @@
 
                 <div class="form-group">
                     <label for="ranking-type">Chart Data:</label>
-                    <select class="form-control" id="selected-variable" onchange="document.getElementById('pic').src = this.options[this.selectedIndex].value">
-                        <option value="img/tree1.png">Fuel Economy for Hybrids</option>
-                        <option value="img/tree2.png">Fuel Economy for Electric Cars</option>
+                    <select class="form-control" id="selected-variable2" onchange="document.getElementById('youriframe2').src = this.options[this.selectedIndex].value">
+                        <option value="html/tree1.html">Fuel Economy for Hybrids</option>
+                        <option value="html/tree2.html">Fuel Economy for Electric Cars</option>
                     </select>
                 </div>
             </form>
 
             <!-- Parent container for the visualization -->
             <div class="row">
-                <img src="img/tree1.png" alt="Tree" id="pic" name="src" height=98% width=98%>
+                <iframe name="iframe2" id="youriframe2" src="html/tree1.html" height=98% width=98% scrolling=no frameborder=no></iframe>
             </div>
-
         </div>
 
         <div class="col-md-12">
