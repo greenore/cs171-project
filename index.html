@@ -37,12 +37,13 @@
 
         <!-- Select box to choose the ranking type -->
         <div class="col-md-8">
-            <h2>Electric cars in the US (Byron's Data)</h2>
+            <h2>Electric cars in the US</h2>
             <form class="form-inline">
 
                 <div class="form-group">
                     <label for="ranking-type">Chart Data:</label>
                     <select class="form-control" id="selected-variable" onchange="document.getElementById('youriframe').src = this.options[this.selectedIndex].value">
+                        <option value="html/choropleth_co2.html">Co2 Equivalence</option>
                         <option value="html/choropleth_perc.html">Percent</option>
                         <option value="html/choropleth_people.html">People</option>
                     </select>
@@ -51,8 +52,7 @@
 
             <!-- Parent container for the visualization -->
             <div class="row">
-                <iframe name="iframe" id="youriframe" src="html/choropleth_perc.html" height=450px width=100% scrolling=no frameborder=no></iframe>
-                <p class="chart-text">*This graph gives an overview on the percentage of electic cars in the states.</p>
+                <iframe name="iframe" id="youriframe" src="html/choropleth_co2.html" height=450px width=100% scrolling=no frameborder=no></iframe>
             </div>
         </div>
 
@@ -79,7 +79,7 @@
 
         <div class="col-md-12">
 
-            <h2>Fuel Economy of Electric Cars (Enrico's Data)</h2>
+            <h2>Fuel Economy of Electric Cars</h2>
             <form class="form-inline">
 
                 <div class="form-group">
@@ -104,8 +104,6 @@
             </p>
 
         </div>
-    <img src="img/Electric_charger_network.png"  style="width:1100px ;height:auto ;margin-left: auto;margin-right: auto">
-
     </div>
     <!-- Load JS libraries -->
     <script src="js/jquery.min.js"></script>
