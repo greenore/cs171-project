@@ -84,7 +84,7 @@
 
                 <div class="form-group">
                     <label for="ranking-type">Chart Data:</label>
-                    <select class="form-control" id="selected-variable2" onchange="document.getElementById('youriframe2').src = this.options[this.selectedIndex].value">
+                    <select class="form-control" id="selected-variable" onchange="document.getElementById('youriframe2').src = this.options[this.selectedIndex].value">
                         <option value="html/tree1.html">Fuel Economy for Hybrids</option>
                         <option value="html/tree2.html">Fuel Economy for Electric Cars</option>
                     </select>
@@ -93,7 +93,7 @@
 
             <!-- Parent container for the visualization -->
             <div class="row">
-                <iframe name="iframe2" id="youriframe2" src="html/tree1.html" height=450px width=98% scrolling=no frameborder=no></iframe>
+                <iframe name="iframe" id="youriframe2" src="html/tree1.html" height=600px width=98% scrolling=no frameborder=no></iframe>
             </div>
         </div>
 
@@ -102,11 +102,8 @@
 
             <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
             </p>
-            <img src="img/Electric_charger_network.png"  style="width:700px ;height:auto">
+
         </div>
-
-
-
     </div>
     <!-- Load JS libraries -->
     <script src="js/jquery.min.js"></script>
