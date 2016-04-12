@@ -12,7 +12,7 @@ body {
     -o-background-size: cover;
     background-size: cover;
     background-attachment: fixed;
-    color: white;
+    color: rgba(0, 0, 0, 0.71);
     min-height: 100vh;
 }
 
@@ -25,10 +25,10 @@ body {
     z-index: 100;
 }
 
-.header > .title > h1, .header > .title > h3, .header > p, .header > .title > p {
-    width: 50%;
+.header > .title > h1, .header > .title > h3, .header > .title > h5 {
+    width: 60%;
     margin: auto;
-    text-shadow: #747474 0 2px;
+    text-shadow: rgb(255, 255, 255) 0 10;
 }
 
 .title {
@@ -42,7 +42,7 @@ body {
     text-align: right;
     width: 100px;
     margin-top: -290px;
-    text-shadow: #747474 0 2px;
+    text-shadow: #747474 0 0 10px;
 }
 
 body, html {
@@ -53,16 +53,21 @@ body, html {
 }
 
 
-
-
 h1 {
-    font-size: 60px;
+    font-size: 70px;
 }
 
+h3 {
+    font-size: 45px;
+}
+h5 {
+    font-size: 30px;
+}
 h1,
 h2,
+h3,
 h5 {
-    text-shadow: #747474 0 0 10px;
+    text-shadow: #747474 0 0 12px;
 }
 
 #pic1 {
