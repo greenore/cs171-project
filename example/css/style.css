@@ -1,0 +1,91 @@
+.header {
+
+    background-image: url("../img/RT_zika_spraying_cf_160216_4x3_1600.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+    min-height: 100vh;
+}
+
+.container {
+    padding-bottom: 40px;
+}
+
+.header > p {
+    text-align: center;
+    font-size: 13px;
+}
+
+.header > .title > h1, .header > .title > h3, .header > p, .header > .title > p {
+
+    width: 50%;
+    margin: auto;
+}
+
+.title {
+    padding-top: 10%;
+}
+
+.image-info {
+    font-size: 14px;
+    margin-right: 10px;
+    margin-left: auto;
+    text-align: right;
+    width: 100px;
+    margin-top: -280px;
+
+}
+
+body, html {
+    font-family: 'Signika', sans-serif;
+    min-width: 679px;
+    margin: 0;
+    padding: 0;
+}
+
+#vis1 {
+    margin-right: 500px;
+}
+
+#vis2 {
+    margin-top: 20px;
+    margin-bottom: -200px;
+
+}
+
+@media (min-width: 993px) {
+    #vis2 {
+        margin-bottom: -500px;
+    }
+
+}
+
+.legend_label {
+    text-anchor: end;
+}
+
+.world {
+    stroke-width: 0.5px;
+    stroke: black;
+}
+
+.map {
+    padding-top: 60px;
+}
+
+.node-circle {
+    fill: #41B6C4;
+}
+
+.link {
+    fill: none;
+    stroke: #C7E9B4;
+    stroke-width: 2px;
+}
+
+.node-label {
+    text-anchor: middle;
+}
