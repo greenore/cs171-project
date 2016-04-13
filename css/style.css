@@ -1,9 +1,16 @@
 /* Main HTML */
 
-body {
+body,
+html {
+    font-family: 'Signika', sans-serif;
+    min-width: 679px;
+    margin: 0;
+    padding: 0;
     background-color: #262424;
     color: white;
 }
+
+/* Header */
 
 .header {
     background-image: url("../img/header.jpg");
@@ -15,26 +22,35 @@ body {
     color: rgba(0, 0, 0, 0.71);
     min-height: 100vh;
 }
-
-.container {
-    padding-bottom: 40px;
-}
-
 .header > p {
     text-align: center;
     z-index: 100;
 }
 
-.header > .title > h1, .header > .title > h3, .header > .title > h5 {
-    width: 60%;
-    margin: auto;
-    text-shadow: rgb(255, 255, 255) 0 10;
-}
+/* Title */
 
 .title {
     padding-top: 8%;
 }
-
+.title > h1 {
+    font-size: 5em;
+}
+.title > h3 {
+    font-size: 3.5em;
+}
+.title > h5 {
+    font-size: 2.8em;
+}
+.header > .title > h1,
+.header > .title > h3,
+.header > .title > h5 {
+    width: 60%;
+    margin: auto;
+    text-shadow: rgb(255, 255, 255) 0 0 12;
+}
+.container {
+    padding-bottom: 40px;
+}
 .image-info {
     font-size: 14px;
     margin-right: 10px;
@@ -44,49 +60,25 @@ body {
     margin-top: -290px;
     text-shadow: #747474 0 0 10px;
 }
-
-body, html {
-    font-family: 'Signika', sans-serif;
-    min-width: 679px;
-    margin: 0;
-    padding: 0;
-}
-
-
-h1 {
-    font-size: 5em;
-}
-
-h3 {
-    font-size: 3.5em;
-}
-h5 {
-    font-size: 2.8em;
-}
 h1,
 h2,
 h3,
 h5 {
     text-shadow: #747474 0 0 12px;
 }
-
 #pic1 {
     width: 350px;
     height: 320px;
 }
-
 #header_source {
     text-align: right;
 }
-
 #space1 {
     height: 10px;
 }
-
 .space2 {
     height: 22px;
 }
-
 #selected-variable {
     font-size: 14px;
     width: 450px;
@@ -94,15 +86,12 @@ h5 {
     font-weight: bold;
     color: black;
 }
-
 #global-funding {
     text-align: center;
 }
-
 .chart-text {
     font-size: 12px;
 }
-
 
 /* Choropleth */
 
