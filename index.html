@@ -9,50 +9,51 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
+    <!-- New Header -->
 
-    <div class="wrapper" id="header">
-        <div id="header_txt">
-            <div id="space1">
-            </div>
-            <h1>Team Tesla - Rapid Prototyp</h1>
-            <h5>Consumers Report for Electric Car Sales, Reliability, and its Contribution for the Ecosystem -- CO2</h5>
+    <div class="header">
+        <div class="title">
+            <h1>The U.S. emits more greenhouse gas per capita than any other nation.</h1>
+            <br><br>
+            <h3>Approximately one third of the CO2 emission come from the transportation system.</h3>
+            <br><br>
+            <h5>Could you change this by driving a different car?</h5>
         </div>
-
-        <p id="header_source"><a href="http://goo.gl/yykvDq" style="color: black">Source: http://goo.gl/yykvDq</a></p>
     </div>
+
 
     <div class="container">
 
         <div class="col-md-12">
 
             <h2 id="malaria">MOTIVATION & ABSTRACT</h2>
-            <p>The U.S. emits more greenhouse gas emissions per capita than any other nation. Approximately 33% of the CO2 emission of the United States come from the transportation system. Moreover, a big part of the US growth in CO2 emissions since 1990 comes from the increase in CO2 emission out of transportation. Yet, in the last couple of years a new type of car has started to appear on US roads that is being hailed as the solution to the above problem, the electric car.</p>
             <p>The project takes a deep dive into electric vehicle usage in the US. It is going to tell the story for a reader who could be a possible buyer of an electric vehicle in the near future. That mean it gives a general overview about electric vehicle technologies and how the environment can benefit from using it. Consequently that means guiding the reader through model overviews / market shares / sales statistics towards important usage questions like service and charging network.</p>
         </div>
 
         <!-- Select box to choose the ranking type -->
         <div class="col-md-8">
-            <h2>Electric cars in the US (Byron's Data)</h2>
+            <h2>US Statistics</h2>
             <form class="form-inline">
 
                 <div class="form-group">
                     <label for="ranking-type">Chart Data:</label>
                     <select class="form-control" id="selected-variable" onchange="document.getElementById('youriframe').src = this.options[this.selectedIndex].value">
-                        <option value="html/choropleth_perc.html">Percent</option>
-                        <option value="html/choropleth_people.html">People</option>
+                        <option value="html/choropleth_co2.html">EV - Annual CO2 Equivalence in pounds</option>
+                        <option value="html/choropleth_perc.html">EV - Percentage</option>
+                        <option value="html/choropleth_people.html">People living in the states</option>
                     </select>
                 </div>
             </form>
 
             <!-- Parent container for the visualization -->
             <div class="row">
-                <iframe name="iframe" id="youriframe" src="html/choropleth_perc.html" height=450px width=100% scrolling=no frameborder=no></iframe>
-                <p class="chart-text">*This graph gives an overview on the percentage of electic cars in the states.</p>
+                <iframe name="iframe" id="youriframe" src="html/choropleth_co2.html" height=450px width=100% scrolling=no frameborder=no></iframe>
             </div>
         </div>
 
@@ -79,12 +80,12 @@
 
         <div class="col-md-12">
 
-            <h2>Fuel Economy of Electric Cars (Enrico's Data)</h2>
+            <h2>Fuel Economy of Electric Cars</h2>
             <form class="form-inline">
 
                 <div class="form-group">
                     <label for="ranking-type">Chart Data:</label>
-                    <select class="form-control" id="selected-variable2" onchange="document.getElementById('youriframe2').src = this.options[this.selectedIndex].value">
+                    <select class="form-control" id="selected-variable" onchange="document.getElementById('youriframe2').src = this.options[this.selectedIndex].value">
                         <option value="html/tree1.html">Fuel Economy for Hybrids</option>
                         <option value="html/tree2.html">Fuel Economy for Electric Cars</option>
                     </select>
@@ -93,7 +94,7 @@
 
             <!-- Parent container for the visualization -->
             <div class="row">
-                <iframe name="iframe2" id="youriframe2" src="html/tree1.html" height=450px width=98% scrolling=no frameborder=no></iframe>
+                <iframe name="iframe" id="youriframe2" src="html/tree1.html" height=550px width=98% scrolling=no frameborder=no></iframe>
             </div>
         </div>
 
@@ -102,12 +103,13 @@
 
             <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
             </p>
-        </div>
-        <img src="img/Electric_charger_network.png"  style="width:1100px ;height:auto ;margin-left: auto;margin-right: auto">
 
+        </div>
+        <div class="row">
+            <iframe name="iframe" id="youriframe3" src="html/Vis4/index.html" height=1000px width=98% scrolling=no frameborder=no></iframe>
+        </div>
 
     </div>
-
     <!-- Load JS libraries -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
