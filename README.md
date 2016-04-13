@@ -8,7 +8,7 @@ A focused, minimum viable product (hence MVP). The project takes a deep dive int
 * **Milestones** for "releases" or overall steps, i.e.:
   * [Single-page site](http://greenore.github.io/EV-Website)
   * [Process Book](https://docs.google.com/document/d/1M83uYdwIpXW8BmJTyH1ezhldWYpx9OqnXTMCWDdt3jI/edit?usp=sharing)
-  * [R-Code](https://github.com/greenore/CS171-R-Code)
+  * [R-Code](https://github.com/greenore/EV-R-Code)
 
 ## Architecture/Philosophies
 * HTML, CSS, and JS
