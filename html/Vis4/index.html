@@ -38,15 +38,19 @@
                 <button class="btn btn-default" id = 'locationSearch' type="button">Go!</button>
               </span>
             <input type="text" id = 'locationSearchTerm' class="form-control" placeholder="Search">
-            <button class="btn btn-default" id = 'filter' type="button">Filter 4 TESLA!</button>
           </div><!-- /input-group -->
         </div><!-- /.col-lg-6 -->
-        <div><br></div>
-        <!-- Visualization placeholders -->
-        <div id="charger-map"></div>
       </div>
+      <div class="row">
+        <div class="col-lg-6" id = 'filterButtons'>
+        </div>
+      </div>
+      <div><br></div>
+      <!-- Visualization placeholders -->
+      <div id="charger-map"></div>
     </div>
   </div>
+</div>
 
 </div>
 
@@ -56,6 +60,8 @@
 <script src="js/leaflet.js"></script>
 <script src='js/leaflet.markercluster.js'></script>
 <script src="js/leaflet.featuregroup.subgroup-src.js"></script>
+<script src="js/d3.min.js"></script>
+
 
 <!-- Visualization objects -->
 <script src="js/chargerMap.js"></script>

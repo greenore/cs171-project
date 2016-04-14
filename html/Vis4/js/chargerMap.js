@@ -4,14 +4,16 @@
  *  @param _parentElement   -- HTML element in which to draw the visualization
  *  @param _data            -- Array with all stations of the bike-sharing network
  */
-var map;
 
-ChargerMap = function(_parentElement, _data , _mapPosition, _lines) {
+ChargerMap = function(_parentElement, _data , _mapPosition,_chargerTypes ) {
     this.parentElement = _parentElement;
-    this.lines = _lines;
+    this.chargerTypes = _chargerTypes;
     this.data = _data;
     this.mapPosition = _mapPosition;
     L.Icon.Default.imagePath = 'img';
+    this.map = null;
+    this.filterList = {};
+    this.initialState = false;
     this.initVis();
 }
 
@@ -21,30 +23,20 @@ ChargerMap = function(_parentElement, _data , _mapPosition, _lines) {
  */
 
 ChargerMap.prototype.initVis = function() {
-
     var vis = this;
-
-    map = L.map(vis.parentElement).setView(vis.mapPosition, 5);
-
-
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-    console.log("adding charger stations");
-    start = new Date().getTime();
-
-    vis.allChargers = new L.MarkerClusterGroup({ chunkedLoading: true});
-    //chargers = L.layerGroup();
-    //add station markers to  layer
-    vis.chargerTypesList = Object.keys(chargerTypes);
-    var markerList = {};
+    vis.initialState = true;
+    // creating chargerLists for specific charger layers
+    var markerList = [];
+    vis.chargerTypesList = Object.keys(vis.chargerTypes);
     vis.chargerTypesList.map(function (d) {
         markerList[d] = [];
-        });
+        vis.filterList[d]= 1;
+    });
+    // create filterObj to keep track what's displayed and what not.
 
 
-    console.log(markerList);
     var tmpMarker;
+    // sort every station from data into its specific marker list
     vis.data.map(function(d,index){
         if ( index % 1 == 0) {
             //console.log(d.ev_connector_types);
@@ -55,24 +47,30 @@ ChargerMap.prototype.initVis = function() {
                     markerList[el].push(tmpMarker);
                 });
             }
-            //chargers.addLayer(d.marker);
         }
     });
-    console.log("Done adding chargers in: " + (new Date().getTime()-start)/1000 + 's');
-    start = new Date().getTime();
 
+
+
+    //create map
+    vis.map = L.map(vis.parentElement).setView(vis.mapPosition, 5);
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(vis.map);
+
+
+    // create marker parent
+    vis.allChargers = new L.MarkerClusterGroup({ chunkedLoading: true});
+
+    // create sub groups for markers
+    start = new Date().getTime();
     vis.mySubGroup = {};
     vis.chargerTypesList.map(function (d,i) {
         vis.mySubGroup[d] = L.featureGroup.subGroup(vis.allChargers,  markerList[d]);
-        vis.mySubGroup[d].addTo(map);
     });
-    vis.allChargers.addTo(map);
-
-
-    //mySubGroup.forEach(function(d){
-    //    d.addTo(map);
-    //});
     console.log("Adding chargers to map took: " + (new Date().getTime()-start)/1000 + 's');
+
+    vis.updateVis();
 };
 
 
@@ -80,27 +78,41 @@ ChargerMap.prototype.initVis = function() {
  *  Data wrangling
  */
 
-ChargerMap.prototype.wrangleData = function(filter) {
-    var vis = this;
-
-    // Currently no data wrangling/filtering needed
-    // vis.displayData = vis.data;
-    // Update the visualization
-    console.log("Filtering for: " + filter);
-    //console.log( vis.allChargers);
-    vis.chargerTypesList.map(function (d,i) {
-        if(d!= filter){
-            //vis.mySubGroup[d].removeLayer(map);
-            map.removeLayer(vis.mySubGroup[d]);
-            console.log("Filtering: " + d);
-        }
-    });
-    vis.allChargers.refreshClusters();
-   // console.log(vis.allChargers);
-
-
+ChargerMap.prototype.isInitial = function (){
+    var vis =  this;
+    return vis.initialState;
 };
 
+ChargerMap.prototype.addAllMarkers = function() {
+    var vis =  this;
+    vis.chargerTypesList.map(function (d,i) {
+        vis.filterList[d] = 1;
+    });
+};
+
+
+ChargerMap.prototype.removeAllMarkers = function() {
+    var vis =  this;
+    vis.chargerTypesList.map(function (d,i) {
+       vis.filterList[d] = 0;
+    });
+    vis.initialState = false;
+};
+
+ChargerMap.prototype.addMarkers = function(filter) {
+    var vis =  this;
+    filter.forEach(function(d){
+        vis.filterList[d] = 1;
+    });
+    console.log(vis.filterList);
+};
+
+ChargerMap.prototype.removeMarkers = function(filter) {
+    var vis =  this;
+    filter.forEach(function(d){
+        vis.filterList[d] = 0;
+    });
+};
 
 /*
  *  The drawing function
@@ -108,10 +120,31 @@ ChargerMap.prototype.wrangleData = function(filter) {
 ChargerMap.prototype.goTo = function(location,bounds){
     var vis =  this;
     //map.setView(location);
-    map.fitBounds(bounds);
+    vis.map.fitBounds(bounds);
     vis.updateVis();
 };
 
 
 ChargerMap.prototype.updateVis = function() {
+    var vis =  this;
+    console.log("adding charger stations");
+    start = new Date().getTime();
+    vis.chargerTypesList.map(function (d,i) {
+        switch (vis.filterList[d]) {
+
+            case 0 :
+                vis.map.removeLayer(vis.mySubGroup[d]);
+                break;
+            case 1 :
+                vis.mySubGroup[d].addTo(vis.map);
+                vis.filterList[d] = 2;
+                break;
+            default :
+                console.log("nothing to do for charger type: " + d);
+                break;
+        }
+    });
+    console.log("Done adding chargers in: " + (new Date().getTime()-start)/1000 + 's');
+    if (vis.initialState) {vis.allChargers.addTo(vis.map)}
+    vis.allChargers.refreshClusters();
 };

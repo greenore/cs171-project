@@ -2,13 +2,7 @@
  * Created by mund on 12/04/2016.
  */
 $('#locationSearch').click(function (){locationSearch($('#locationSearchTerm').val())} );
-$('#filter').click(function (){filterMap('TESLA')} );
 
-
-
-function filterMap(filter){
-    chargerMap.wrangleData(filter);
-}
 
 function locationSearch(locationSeachTerm){
     var url ='https://maps.googleapis.com/maps/api/geocode/json?address=' +locationSeachTerm;
