@@ -24,10 +24,10 @@ queue()
             .entries(alldata);
         nested_data.forEach(function(fuel){
             fuel['parent'] = ModelData;
-            fuel['children']= fuel.values;
+            fuel['_children']= fuel.values;
             fuel.values.forEach(function(manufact){
                 manufact['parent'] = fuel;
-                manufact['children']= manufact.values;
+                manufact['_children']= manufact.values;
                 manufact.values.forEach(function(model){
                     model['parent'] = manufact;
                 })
@@ -36,43 +36,43 @@ queue()
         });
         ModelData['parent'] = null;
         ModelData['key'] = "EV's";
-        ModelData['_children'] = null;
-        ModelData['children'] = nested_data;
-        ModelData['manufact'] = [];
-        ModelData.children.forEach(function(d){
-            d['manufact']=[];
-            d.children.forEach(function(e){
-                    console.log(e.key);
-                    d['manufact'].push(e.key);
-                    ModelData['manufact'].push(e.key)
-            })
-        });
+        ModelData['children'] = null;
+        ModelData['_children'] = nested_data;
+        //ModelData['manufact'] = [];
+        //ModelData.children.forEach(function(d){
+        //    d['manufact']=[];
+        //    d.children.forEach(function(e){
+        //            console.log(e.key);
+        //            d['manufact'].push(e.key);
+        //            ModelData['manufact'].push(e.key)
+        //    })
+        //});
+        //
+        //// Data wrangling for Sales data
+        //var nested_salesdata = d3.nest()
+        //    .key(function(d) { return d.Manufacturer;}).sortKeys(d3.ascending)
+        //    .key(function(d) { return d.Model; }).sortKeys(d3.ascending)
+        //    //.key(function(d) { return d.Model; }).sortKeys(d3.ascending)
+        //    .entries(sales);
+        //
+        //nested_salesdata.forEach(function (d) {
+        //    d.values.forEach(function(e){
+        //        e.values.forEach(function(f){
+        //            delete f.Manufacturer;
+        //            delete f.Model
+        //        })
+        //    })
+        //});
+        //
+        //
+        //
+        //salesNumbers = new SalesNumbers(nested_salesdata);
+        //console.log(ModelData);
+        //console.log(salesNumbers.byManufacturer("Toyota"));
+        //console.log(salesNumbers.byList(["Toyota","BMW","Tesla"]));
 
-        // Data wrangling for Sales data
-        var nested_salesdata = d3.nest()
-            .key(function(d) { return d.Manufacturer;}).sortKeys(d3.ascending)
-            .key(function(d) { return d.Model; }).sortKeys(d3.ascending)
-            //.key(function(d) { return d.Model; }).sortKeys(d3.ascending)
-            .entries(sales);
 
-        nested_salesdata.forEach(function (d) {
-            d.values.forEach(function(e){
-                e.values.forEach(function(f){
-                    delete f.Manufacturer;
-                    delete f.Model
-                })
-            })
-        });
-
-
-
-        salesNumbers = new SalesNumbers(nested_salesdata);
-        console.log(ModelData);
-        console.log(salesNumbers.byManufacturer("Toyota"));
-        console.log(salesNumbers.byList(["Toyota","BMW","Tesla"]));
-
-
-       //  createVis();
+        createVis();
     });
 
 function createVis() {
