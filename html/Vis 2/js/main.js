@@ -5,9 +5,14 @@
 
 
 var treeDiagram;
-var alldata ;
+var alldata;
 var dataObj = {};
-var margin = {top: 40, right: 60, bottom: 60, left: 200};
+var margin = {
+    top: 40,
+    right: 60,
+    bottom: 60,
+    left: 200
+};
 
 var i = 0,
     duration = 750;
@@ -18,7 +23,7 @@ var ModelData = {};
 
 queue()
     .defer(d3.csv, "data/Electric_Vehicles_by_model.csv")
-    .await(function(error, data){
+    .await(function (error, data) {
         function collapse(d) {
             if (d.children) {
                 d._children = d.children;
@@ -30,8 +35,12 @@ queue()
         alldata = data;
         console.log(alldata);
         var nested_data = d3.nest()
-            .key(function(d) { return d.Fuel; }).sortKeys(d3.ascending)
-            .key(function(d) { return d.Manufacturer;}).sortKeys(d3.ascending)
+            .key(function (d) {
+                return d.Fuel;
+            }).sortKeys(d3.ascending)
+            .key(function (d) {
+                return d.Manufacturer;
+            }).sortKeys(d3.ascending)
             //.key(function(d) { return d.Model; }).sortKeys(d3.ascending)
             .entries(alldata);
         console.log(nested_data);
