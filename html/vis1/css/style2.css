@@ -1,0 +1,128 @@
+.Fillc .q01-9{fill: #FCFBFD}
+.Fillc .q02-9{fill: #EFEDF5}
+.Fillc .q03-9{fill: #DADAEB}
+.Fillc .q04-9{fill: #BCBDDC}
+.Fillc .q05-9{fill: #9E9AC8}
+.Fillc .q06-9{fill: #807DBA}
+.Fillc .q07-9{fill: #6A51A3}
+.Fillc .q08-9{fill: #54278F}
+.Fillc .q09-9{fill: #3F007D}
+
+.Fillc .q11-9{fill: #BDEDFF}
+.Fillc .q12-9{fill: #ADDFFF}
+.Fillc .q13-9{fill: #A0CFED}
+.Fillc .q14-9{fill: #82CAFA}
+.Fillc .q15-9{fill: #3BB9FF}
+.Fillc .q16-9{fill: #6698FF}
+.Fillc .q17-9{fill: #306EFF}
+.Fillc .q18-9{fill: #1F45FC}
+.Fillc .q19-9{fill: #0020C2}
+
+.Fillc .q31-9{fill: #F4FA58}
+.Fillc .q32-9{fill: #BDD7E7}
+.Fillc .q33-9{fill: #6BAED6}
+.Fillc .q34-9{fill: #3182BD}
+.Fillc .q35-9{fill: #08519C}
+
+
+.Fillc .q21-9{fill: #FBEFEF}
+.Fillc .q22-9{fill: #F6CECE}
+.Fillc .q23-9{fill: #F5A9A9}
+.Fillc .q24-9{fill: #F78181}
+.Fillc .q25-9{fill: #FA5858}
+.Fillc .q26-9{fill: #FE2E2E}
+.Fillc .q27-9{fill: #FF0000}
+.Fillc .q28-9{fill: #DF0101}
+.Fillc .q29-9{fill: #B40404}
+
+.Fillc .q41-9{fill: #FEE5D9}
+.Fillc .q42-9{fill: #FCAE91}
+.Fillc .q43-9{fill: #FB6A4A}
+.Fillc .q44-9{fill: #DE2D26}
+.Fillc .q45-9{fill: #A50F15}
+
+/* Main HTML */
+body,
+html {
+    font-family: 'Signika', sans-serif;
+    min-width: 679px;
+    margin: 0;
+    padding: 0;
+    background-color: #222;
+    color: white;
+}
+
+/*****************/
+/*   Choropleth  */
+/*****************/
+
+.d3-tip {
+    line-height: 1;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.58);
+    border: 0px solid black;
+    color: white;
+    fill: white;
+    border-radius: 0px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+}
+
+.legendq {
+    fill: white;
+}
+
+
+/****************/
+/*   BAR-CHART  */
+/****************/
+
+.bar {
+    fill: #3C948B;
+}
+
+.bar:hover {
+    fill: #327972;
+}
+
+.axis {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line,
+.domain {
+    fill: none;
+    stroke: white;
+    shape-rendering: crispEdges;
+}
+
+#barchart text {
+    font-size: 11px;
+}
+
+.axis {
+    fill: white;
+}
+.axis-label {
+    fill: white;
+    font-size: 10px;
+}
