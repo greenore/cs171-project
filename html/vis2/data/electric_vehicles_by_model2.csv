@@ -1,0 +1,60 @@
+id,manufacturer,model,model_year,price,category,fuel_economy_city,fuel_economy_city_units,fuel_economy_highway,fuel_economy_highway_units,gas_fuel_economy_city,gas_fuel_economy_highway,engine_type,engine_size
+5,BMW,i3,2016,42400,Sedan/Wagon,137,Mpge,111,Mpge,NA,NA,Electric,125
+11,Chevrolet,Spark,2016,12660,Sedan/Wagon,128,Mpge,108,Mpge,NA,NA,Electric,104
+13,Fiat,500e,2016,31800,Sedan/Wagon,122,Mpge,108,Mpge,NA,NA,Electric,83
+16,Ford,Focus,2016,17170,Sedan/Wagon,110,Mpge,99,Mpge,NA,NA,Electric,107
+25,Kia,Soul,2016,15800,Sedan/Wagon,120,Mpge,92,Mpge,NA,NA,Electric,50
+35,Mercedes-Benz,B250e,2016,41450,Sedan/Wagon,85,Mpge,82,Mpge,NA,NA,Electric,132
+38,Mitsubishi,i-MiEV,2016,23800,Sedan/Wagon,126,Mpge,99,Mpge,NA,NA,Electric,9
+39,Nissan,Leaf,2016,29010,Sedan/Wagon,126,Mpge,101,Mpge,NA,NA,Electric,80
+43,Smart,fortwo,2016,14650,Sedan/Wagon,122,Mpge,93,Mpge,NA,NA,Electric,55
+45,Tesla,Model S,2016,76200,Sedan/Wagon,88,Mpge,90,Mpge,NA,NA,Electric,285
+46,Tesla,Model S AWD,2016,85500,Sedan/Wagon,95,Mpge,106,Mpge,NA,NA,Electric,318
+47,Tesla,Model X AWD 90D,2016,132000,SUV,90,Mpge,94,Mpge,NA,NA,Electric,193
+48,Tesla,Model X AWD P90D,2016,144000,SUV,89,Mpge,90,Mpge,NA,NA,Electric,284
+57,Volkswagen,e-Golf,2016,18495,Sedan/Wagon,126,Mpge,105,Mpge,NA,NA,Electric,85
+65,BMW,i3,2015,42400,Sedan/Wagon,137,Mpge,111,Mpge,NA,NA,Electric,125
+71,Fiat,500e,2015,NA,Sedan/Wagon,122,Mpge,108,Mpge,NA,NA,Electric,83
+98,Mercedes-Benz,B-Class Electric,2015,NA,Sedan/Wagon,85,Mpge,83,Mpge,NA,NA,Electric,132
+101,Mitsubishi,i-MiEV,2015,NA,Sedan/Wagon,126,Mpge,99,Mpge,NA,NA,Electric,49
+109,Tesla,Model S,2015,NA,Sedan/Wagon,94,Mpge,97,Mpge,NA,NA,Electric,300
+1,Acura,RLX Hybrid,2016,50950,Sedan/Wagon,28,mpg,32,mpg,NA,NA,Hybrid,3.5
+3,Audi,Q5 Hybrid AWD,2016,40900,SUV,24,mpg,30,mpg,NA,NA,Hybrid,2
+4,BMW,ActiveHybrid 5,2016,62100,Sedan/Wagon,23,mpg,30,mpg,NA,NA,Hybrid,3
+6,BMW,i3 REX,2016,46125,Sedan/Wagon,117,Mpge Electric,NA,,41,37,Hybrid,0.6
+7,BMW,i8 Plug-in Hybrid,2016,141695,Sedan/Wagon,76,Mpge Combined Gas + Electric,NA,,28,29,Hybrid,1.5
+8,BMW,X5 xDrive40e Plug-in Hybrid,2016,53900,SUV,56,Mpge Combined Gas + Electric,NA,,21,24,Hybrid,2
+9,Cadillac,ELR,2016,75000,Sedan/Wagon,85,Mpge Electric,NA,,31,33,Hybrid,1.4
+12,Chevrolet,Volt,2016,33170,Sedan/Wagon,106,Mpge Electric,NA,,42,42,Hybrid,1.4
+14,Ford,C-MAX Energi,2016,31770,Sedan/Wagon,88,Mpge Combined Gas + Electric,NA,,40,36,Hybrid,2
+15,Ford,C-MAX Hybrid,2016,24170,Sedan/Wagon,42,mpg,37,mpg,NA,NA,Hybrid,2
+17,Ford,Fusion Energi,2016,34800,Sedan/Wagon,88,Mpge Combined Gas + Electric,NA,,40,36,Hybrid,2
+18,Ford,Fusion Hybrid,2016,26575,Sedan/Wagon,44,mpg,41,mpg,NA,NA,Hybrid,2
+19,Hyundai,Sonata,2016,21750,Sedan/Wagon,39,mpg,43,mpg,NA,NA,Hybrid,2.4
+20,Hyundai,Sonata Plug-in Hybrid,2016,26000,Sedan/Wagon,99,Mpge Electric,NA,,38,41,Hybrid,2.4
+26,Lexus,CT 200h,2016,31250,Sedan/Wagon,43,mpg,40,mpg,NA,NA,Hybrid,1.8
+27,Lexus,ES 300h,2016,41872,Sedan/Wagon,40,mpg,39,mpg,NA,NA,Hybrid,2.5
+28,Lexus,GS 450h,2016,20707,Sedan/Wagon,29,mpg,34,mpg,NA,NA,Hybrid,3.5
+30,Lexus,LS 600h L,2016,120440,Sedan/Wagon,19,mpg,23,mpg,NA,NA,Hybrid,5
+31,Lexus,NX 300h FWD/AWD,2016,43282,SUV,35,mpg,31,mpg,NA,NA,Hybrid,2.5
+33,Lincoln,MKZ Hybrid,2016,35010,Sedan/Wagon,41,mpg,39,mpg,NA,NA,Hybrid,2
+34,McLaren,P1,2016,1155000,Sedan/Wagon,18,Mpge Combined Gas + Electric,NA,,16,20,Hybrid,3.8
+37,Mercedes-Benz,S550e Plug-in Hybrid,2016,135015,Sedan/Wagon,58,Mpge Combined Gas + Electric,NA,,24,30,Hybrid,3
+41,Porsche,Cayenne S E-Hybrid,2016,76200,SUV,47,Mpge Electric,NA,,21,24,Hybrid,3
+42,Porsche,Panamera S E-Hybrid,2016,81346,Sedan/Wagon,51,Mpge Combined Gas + Electric,NA,,23,29,Hybrid,3
+44,Subaru,XV Crosstrek Hybrid,2016,21595,SUV,30,mpg,34,mpg,NA,NA,Hybrid,2
+50,Toyota,Camry,2016,23070,Sedan/Wagon,43,mpg,39,mpg,NA,NA,Hybrid,2.5
+55,Toyota,Prius v,2016,26675,Sedan/Wagon,44,mpg,40,mpg,NA,NA,Hybrid,1.8
+58,Volkswagen,Jetta Hybrid,2016,31120,Sedan/Wagon,42,mpg,48,mpg,NA,NA,Hybrid,1.4
+66,BMW,i3 w/Range Extender,2015,46250,Sedan/Wagon,117,Mpge Gas + Electric,NA,NULL,NA,NA,Hybrid,0.6
+67,BMW,i8,2015,140700,Sedan/Wagon,76,Mpge Gas + Electric,NA,,NA,NA,Hybrid,1.5
+68,Cadillac,ELR,2015,75000,Sedan/Wagon,82,Mpge combined electricity,NA,NULL,31,35,Hybrid,1.4
+70,Chevrolet,Volt,2015,NA,Sedan/Wagon,98,Mpge combined electricity,NA,NULL,35,40,Hybrid,1.4
+72,Ford,C-MAX Energi,2015,NA,Sedan/Wagon,88,Mpge Gas + Electric,NA,,40,36,Hybrid,2
+75,Ford,Fusion Energi,2015,NA,Sedan/Wagon,88,Mpge Gas + Electric,NA,,40,36,Hybrid,2
+78,Honda,Accord Plug-in Hybrid,2015,NA,Sedan/Wagon,115,Mpge Gas + Electric,NA,,47,46,Hybrid,2
+86,Kia,Optima,2015,NA,Sedan/Wagon,36,mpg,40,mpg,NA,NA,Hybrid,2.4
+104,Porsche,918 Spyder,2015,NA,Sedan/Wagon,67,Mpge combined electricity,NA,NULL,20,24,Hybrid,4.6
+105,Porsche,Cayenne S E-Hybrid,2015,NA,SUV,47,Mpge combine electricity,NA,NULL,21,24,Hybrid,3
+106,Porsche,Panamera S E-Hybrid,2015,NA,Sedan/Wagon,50,Mpge combined electricity,NA,NULL,23,29,Hybrid,3
+115,Toyota,Prius Plug-in,2015,NA,Sedan/Wagon,95,Mpge Gas + Electric,NA,,51,49,Hybrid,1.8

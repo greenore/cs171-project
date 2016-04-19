@@ -1,5 +1,12 @@
 /* Main HTML */
 
+.btn {
+    border: 0px solid transparent;
+    border-color: none;
+    color: black
+    /* this was 1px earlier */
+}
+
 body,
 html {
     font-family: 'Signika', sans-serif;
@@ -9,6 +16,7 @@ html {
     background-color: #222;
     color: white;
 }
+
 
 /* Header */
 
@@ -22,45 +30,53 @@ html {
     color: rgba(25, 25, 25, 0.79);
     min-height: 100vh;
 }
+
 .header > p {
     text-align: center;
     z-index: 100;
 }
 
+
 /* Title */
 
 .title {
     padding-top: 15%;
-    position:relative;
+    position: relative;
     text-shadow: #e69d9d 0 0 14px;
 }
+
 .title > h1 {
     font-size: 5em;
 }
+
 .title > h3 {
     font-size: 3.5em;
 }
+
 .title > h5 {
     font-size: 2.8em;
     vertical-align: bottom;
 }
+
 .header > .title > h1,
 .header > .title > h3,
 .header > .title > h5 {
     width: 60%;
     margin: auto;
 }
+
 .container {
     padding-bottom: 40px;
 }
 
-
 #space1 {
     height: 10px;
 }
+
 .space2 {
     height: 22px;
 }
+
 #selected-variable {
     font-size: 14px;
     width: 450px;
@@ -68,12 +84,15 @@ html {
     font-weight: bold;
     color: black;
 }
+
 #global-funding {
     text-align: center;
 }
+
 .chart-text {
     font-size: 12px;
 }
+
 
 /* Choropleth */
 

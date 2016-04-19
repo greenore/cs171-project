@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Treemap</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <div class="col-md-12">
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <h2>Fuel Economy of Electric Cars</h2>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="ranking-type" id="chart_text">Chart Data:</label>
+                        <select class="form-control" id="selected-variable">
+                            <option value="Electric">Fuel Economy for Electric Cars</option>
+                            <option value="Hybrid">Fuel Economy for Hybrids</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Parent container for the visualization -->
+        <div class="row">
+            <div class="visArea" id="treemap"></div>
+        </div>
+    </div>
+
+
+
+    <!-- Load JS libraries: jQuery, bootstrap, D3, D3 Tooltips -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/d3-tip.js"></script>
+    <script src="js/queue.min.js"></script>
+    <script src="js/colorbrewer.js"></script>
+
+    <!-- Treemap -->
+    <script src="js/treemap.js"></script>
+
+</body>
+
+</html>

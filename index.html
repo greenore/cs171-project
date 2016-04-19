@@ -19,13 +19,15 @@
     <div class="header">
         <div class="title">
             <h1>The U.S. emits more greenhouse gas per capita than any other nation.</h1>
-            <br><br>
+            <br>
+            <br>
             <h3>Approximately one third of the CO2 emission come from the transportation system.</h3>
-            <br><br>
+            <br>
+            <br>
             <h5>Could you change this by driving a different car?</h5>
         </div>
     </div>
-    
+
 
     <div class="container">
 
@@ -35,9 +37,9 @@
             <p>The project takes a deep dive into electric vehicle usage in the US. It is going to tell the story for a reader who could be a possible buyer of an electric vehicle in the near future. That mean it gives a general overview about electric vehicle technologies and how the environment can benefit from using it. Consequently that means guiding the reader through model overviews / market shares / sales statistics towards important usage questions like service and charging network.</p>
         </div>
 
-    <div id="container"></div>
+        <div id="container"></div>
 
-                <!-- Select box to choose the ranking type -->
+        <!-- Select box to choose the ranking type -->
         <div class="col-md-12">
             <!-- Parent container for the visualization -->
             <div class="row">
@@ -66,24 +68,16 @@
             </p>
         </div>
 
+
+
         <div class="col-md-12">
+            <select class="form-control" id="selected-variable" onchange="document.getElementById('youriframe3').src = this.options[this.selectedIndex].value">
+                <option value="html/vis2/index.html">Treemap</option>
+                <option value="html/vis3/index.html">Binary Tree</option>
+            </select>
 
-            <h2>Fuel Economy of Electric Cars</h2>
-            <form class="form-inline">
+            <iframe name="iframe" id="youriframe3" src="html/vis2/index.html" height=650px width=98% scrolling=no frameborder=no></iframe>
 
-                <div class="form-group">
-                    <label for="ranking-type">Chart Data:</label>
-                    <select class="form-control" id="selected-variable" onchange="document.getElementById('youriframe2').src = this.options[this.selectedIndex].value">
-                        <option value="html/tree1.html">Fuel Economy for Hybrids</option>
-                        <option value="html/tree2.html">Fuel Economy for Electric Cars</option>
-                    </select>
-                </div>
-            </form>
-
-            <!-- Parent container for the visualization -->
-            <div class="row">
-                <iframe name="iframe" id="youriframe2" src="html/tree1.html" height=550px width=98% scrolling=no frameborder=no></iframe>
-            </div>
         </div>
 
         <div class="col-md-12">
@@ -100,6 +94,8 @@
     </div>
     <!-- Load JS libraries -->
     <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.bxslider.min.js"></script>
+    <script src="js/jquery.fitvids.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/queue.min.js"></script>
     <script src="js/topojson.js"></script>
@@ -107,11 +103,7 @@
     <script src="js/colorbrewer.js"></script>
 
     <!-- Choropleth and second visualization -->
-    <script src="js/sketch.js"></script>
-    <script src="js/sketch.min.js"></script>
-
-    <script src="js/vis-choropleth.js"></script>
-    <script src="js/vis-second.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 
