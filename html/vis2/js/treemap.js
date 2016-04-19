@@ -1,8 +1,11 @@
 // Global variables
-var alldata, nested_data,
+var alldata,
+    nested_data,
     treemap,
     chart,
-    group;
+    group,
+    root,
+    data_filtered;
 
 // Size variables
 var margin = {
@@ -24,7 +27,7 @@ var color = d3.scale.quantile()
 // Path
 treemap = d3.layout.treemap()
     .size([width, height])
-    .sticky(true)
+    .sticky(false)
     .sort(function (a, b) {
         return a.fuel_economy_city - b.fuel_economy_city;
     })
@@ -33,15 +36,13 @@ treemap = d3.layout.treemap()
         return d.fuel_economy_city;
     });
 
-
 // Select DIV
-chart = d3.select("#treemap").append("div")
+chart = d3.select("#treemap").append("rect")
     .style("position", "relative")
     .style("width", (width + margin.left + margin.right) + "px")
     .style("height", (height + margin.top + margin.bottom) + "px")
     .style("left", margin.left + "px")
     .style("top", margin.top + "px");
-
 
 queue()
     .defer(d3.csv, "data/electric_vehicles_by_model2.csv")
@@ -60,7 +61,7 @@ queue()
             d.price = +d.price;
         });
 
-        var nested_data = d3.nest()
+        nested_data = d3.nest()
             .key(function (d) {
                 return d.id;
             })
@@ -103,10 +104,6 @@ queue()
                 return d.values;
             });
 
-        // Get selected variable
-        group = d3.select("#selected-variable")
-            .property("value");
-
         createVis(nested_data);
     });
 
@@ -122,7 +119,7 @@ function createVis(data) {
         return d.engine_type === group;
     });
 
-    var root = {
+    root = {
         'name': 'electric_cars',
         'children': data_filtered
     };
@@ -136,57 +133,51 @@ function createVis(data) {
     });
     color.domain([min_var, max_var])
 
+
     // Treemap implementation
     // SELECT
-    var node = chart.datum(root).selectAll(".node")
-        .data(treemap)
+    var node = chart.datum(root).selectAll("rect")
+        .data(treemap.nodes);
 
     // ENTER
-    node.enter().append("div")
-        .attr("class", "node")
+    node.enter()
+        .append("rect");
+
+    // UPDATE
+    node.on("mouseover", function (d) {
+            if (d.engine_size > 0) {
+                d3.select(this)
+                    //.style("opacity", 0.5)
+                    .transition()
+                    .duration(50)
+                    .style("background-color", "rgb(250, 255, 106)")
+                    .style("color", "white");
+            }
+        })
+        .on("mouseout", function (d) {
+            if (d.engine_size > 0) {
+                d3.select(this)
+                    .transition()
+                    .duration(50)
+                    .style("background-color", color(d.engine_size))
+                    .style("color", "black");
+            }
+        })
         .call(position)
-        .style("background", function (d) {
+        .transition()
+        .duration(400)
+        .ease("linear")
+        .style("background-color", function (d) {
             return color(d.engine_size);
         })
         .text(function (d) {
             return d.children ? null : d.manufacturer + ": " + d.model + " (" + d.engine_size + ")";
         })
-        .on("mouseover", function (d) {
-            d3.select(this)
-                .style("background", "rgb(250, 255, 106)");
-        })
-        .on("mouseout", function (d) {
-            d3.select(this)
-                .style("background", color(d.engine_size));
-        });
+        .attr("class", "node");
+
+    // EXIT
     node.exit().remove();
-    console.log(root)
-
 };
-
-// Change
-$(".form-control").change(function () {
-    d3.selectAll(".node").remove();
-    // Get selected variable
-    group = d3.select("#selected-variable")
-        .property("value");
-
-    // Get selected variable
-    group = d3.select("#selected-variable")
-        .property("value");
-
-    // Filter
-    data_filtered = nested_data.filter(function (d) {
-        return d.engine_type === group;
-    });
-
-    var root = {
-        'name': 'electric_cars',
-        'children': data_filtered
-    };
-    createVis(nested_data);
-    location.reload();
-});
 
 
 // Position function

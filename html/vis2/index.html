@@ -23,7 +23,7 @@
                 <form class="form-inline">
                     <div class="form-group">
                         <label for="ranking-type" id="chart_text">Chart Data:</label>
-                        <select class="form-control" id="selected-variable">
+                        <select class="form-control" id="selected-variable" onchange="createVis(nested_data)">
                             <option value="Electric">Fuel Economy for Electric Cars</option>
                             <option value="Hybrid">Fuel Economy for Hybrids</option>
                         </select>
