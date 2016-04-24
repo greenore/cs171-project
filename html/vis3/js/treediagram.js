@@ -1,4 +1,3 @@
-<<<<<<< HEAD:html/Vis 2/js/treediagram.js
 
 /*
  *  TreeDiagram - Object constructor function
@@ -164,8 +163,7 @@ TreeDiagram.prototype.click = function(d,vis) {
         d._children = null;
     }
     vis.updateVis(d);
-
-=======
+}
 /*
  *  TreeDiagram - Object constructor function
  *  @param _parentElement   -- HTML element in which to draw the visualization
@@ -355,6 +353,5 @@ TreeDiagram.prototype.click = function (d, vis) {
         d._children = null;
     }
     vis.updateVis(d);
-
->>>>>>> a60bc37bc2d641b0f1c06cfdd7e62713247838cc:html/vis3/js/treediagram.js
-};
+}
+;

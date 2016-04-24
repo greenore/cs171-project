@@ -1,4 +1,3 @@
-<<<<<<< HEAD:html/Vis 2/js/main.js
 //http://bl.ocks.org/davetaz/9954190
 //http://bl.ocks.org/d3noob/8375092
 //http://bl.ocks.org/d3noob/8329404
@@ -82,7 +81,6 @@ function createVis() {
     treeDiagram = new TreeDiagram('#treediagram',ModelData,salesNumbers);
 };
 
-=======
 //http://bl.ocks.org/davetaz/9954190
 //http://bl.ocks.org/d3noob/8375092
 //http://bl.ocks.org/d3noob/8329404
@@ -164,4 +162,3 @@ function createVis() {
     treeDiagram = new TreeDiagram('#treediagram',ModelData,salesNumbers);
 };
 
->>>>>>> a60bc37bc2d641b0f1c06cfdd7e62713247838cc:html/vis3/js/main.js
