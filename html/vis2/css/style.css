@@ -16,7 +16,7 @@ form {
     top: 10px;
 }
 
-.node {
+.node_tree {
     line-height: 1.5;
     border-radius: 0px;
     border: solid 1px #222;
@@ -32,4 +32,26 @@ h2 {
 
 #chart_text {
     color: white;
+}
+
+
+/* Tooltip */
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 250px;
+    height: 150px;
+    padding: 2px;
+    color: white;
+    font-size: 14px;
+    background: black;
+    border: 1px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+#tooltip2 {
+    width: 170px;
+    height: 70px;
 }
