@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -14,54 +15,65 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
 
     <!-- Custom CSS code -->
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
-    <link rel="stylesheet" href="css/style2.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<div class="container">
-    <div class="row">
-        <h2>US Statistics</h2>
-        <form class="form-inline">
-            <div class="form-group">
-                <label for="ranking-type">Chart Data:</label>
-                <select class="form-control" id="selected-variable"  onchange="updateUSVisualization()">
-                    <option value="CO2">EV - Annual CO2 Equivalence in pounds</option>
-                    <option value="PCT">EV - Percentage</option>
-                    <option value="POP">People living in the states</option>
-                </select>
+    <div class="container-fluid">
+        <div class="row">
+            <h2>US Statistics</h2>
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="ranking-type">Chart Data:</label>
+                    <select class="form-control" id="selected-variable" onchange="updateUSVisualization()">
+                        <option value="CO2">EV - Annual CO2 Equivalence in pounds</option>
+                        <option value="PCT">EV - Percentage</option>
+                    </select>
+                </div>
+            </form>
+            <div class="col-md-7">
+                <div id="evmap"></div>
             </div>
-        </form>
-        <div class="col-md-8">
-            <div id="evmap"></div>
-        </div>
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-6"><div id="pichart">Electricity Sources<span id="statename"></span></div></div>
-            </div>
-            <div class="row">
-                <div class="col-md-6"><div id="barchart">Annual Emissions Per Vehicle</div></div>
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="row">
+                        <div id="pichart">Electricity Sources<span id="statename"></span></div>
+                    </div>
+
+                    <div class="row">
+                        <br>
+                        <div id="piechart_area"> </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="barchart">Annual Emissions Per Vehicle</div>
+                </div>
+                <div class="row">
+                    <div id="barchart_area"> </div>
+                </div>
+
             </div>
         </div>
     </div>
-</div>
 
 
-<!-- Load JS libraries -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/queue.v1.min.js"></script>
-<script src="js/topojson.v1.min.js"></script>
-<script src="js/d3.min.js"></script>
-<script src="js/d3.tip.js"></script>
-<script src="js/d3-legend.min.js"></script>
+    <!-- Load JS libraries -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/queue.v1.min.js"></script>
+    <script src="js/topojson.v1.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/d3.tip.js"></script>
+    <script src="js/d3-legend.min.js"></script>
 
-<!-- Visualization objects -->
-<script src="js/evmap.js"></script>
-<script src="js/pichart.js"></script>
-<script src="js/barchart.js"></script>
+    <!-- Visualization objects -->
+    <script src="js/evmap.js"></script>
+    <script src="js/pichart.js"></script>
+    <script src="js/barchart.js"></script>
 
-<!-- Load data, create visualizations -->
-<script src="js/main.js"></script>
+    <!-- Load data, create visualizations -->
+    <script src="js/main.js"></script>
 </body>
+
 </html>

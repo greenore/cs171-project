@@ -8,6 +8,8 @@
 .Fillc .q08-9{fill: #54278F}
 .Fillc .q09-9{fill: #3F007D}
 
+
+
 .Fillc .q11-9{fill: #BDEDFF}
 .Fillc .q12-9{fill: #ADDFFF}
 .Fillc .q13-9{fill: #A0CFED}
@@ -41,29 +43,14 @@
 .Fillc .q44-9{fill: #DE2D26}
 .Fillc .q45-9{fill: #A50F15}
 
-/* Main HTML */
-body,
-html {
-    font-family: 'Signika', sans-serif;
-    min-width: 679px;
-    margin: 0;
-    padding: 0;
-    background-color: #222;
-    color: white;
-}
-
-/*****************/
-/*   Choropleth  */
-/*****************/
-
 .d3-tip {
     line-height: 1;
+    font-weight: bold;
     padding: 12px;
-    background: rgba(0, 0, 0, 0.58);
-    border: 0px solid black;
-    color: white;
-    fill: white;
-    border-radius: 0px;
+    background: white;
+    border: 1px solid black;
+    color: blue;
+    border-radius: 2px;
 }
 
 /* Creates a small triangle extender for the tooltip */
@@ -73,7 +60,7 @@ html {
     font-size: 10px;
     width: 100%;
     line-height: 1;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(0, 0, 0, 0.8);
     content: "\25BC";
     position: absolute;
     text-align: center;
@@ -85,11 +72,6 @@ html {
     top: 100%;
     left: 0;
 }
-
-.legendq {
-    fill: white;
-}
-
 
 /****************/
 /*   BAR-CHART  */
@@ -111,7 +93,7 @@ html {
 .axis line,
 .domain {
     fill: none;
-    stroke: white;
+    stroke: #888;
     shape-rendering: crispEdges;
 }
 
@@ -119,10 +101,7 @@ html {
     font-size: 11px;
 }
 
-.axis {
-    fill: white;
-}
 .axis-label {
-    fill: white;
+    fill: #888;
     font-size: 10px;
 }

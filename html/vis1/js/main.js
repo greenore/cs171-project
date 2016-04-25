@@ -1,8 +1,3 @@
-//Lab5 bar chart
-//Pie chart
-//Lab6 map.html choropleth
-//Lab7 connect main to 1 and 2
-
 // Will be used to the save the loaded JSON, CSV data
 var allData = [];
 var filteredData = [];
@@ -87,7 +82,7 @@ queue()
                     Oil: +d.Oil
                 },
                 bdata: {
-                    AllElectric: +d.AllElectric,
+                    AllElectric: +d.CO2,
                     PlugInHybrid: +d.PlugInHybrid,
                     Hybrid: +d.Hybrid,
                     Gasoline: +d.Gasoline

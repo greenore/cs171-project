@@ -1,0 +1,45 @@
+form {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.node_tree {
+    line-height: 1.5;
+    border-radius: 0px;
+    border: solid 1px #222;
+    overflow: hidden;
+    position: absolute;
+    text-indent: 2px;
+    text-shadow: -1px -1px 2px hsla(0, 0%, 100%, 0.25);
+}
+
+h2 {
+    color: white;
+}
+
+#chart_text {
+    color: white;
+}
+
+
+/* Tooltip */
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 250px;
+    height: 150px;
+    padding: 2px;
+    color: white;
+    font-size: 14px;
+    background: black;
+    border: 1px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+#tooltip2 {
+    width: 170px;
+    height: 70px;
+}

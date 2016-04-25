@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/vis2.css">
+    <link rel="stylesheet" href="css/vis3.css">
+
 </head>
 
 <body>
@@ -43,7 +46,7 @@
         <div class="col-md-12">
             <!-- Parent container for the visualization -->
             <div class="row">
-                <iframe name="iframe" id="youriframe" src="html/vis1/index.html" height=650px width=98% scrolling=no frameborder=no></iframe>
+                <iframe name="iframe" id="youriframe" src="html/vis1/index.html" height=600px width=98% scrolling=no frameborder=no></iframe>
             </div>
         </div>
 
@@ -73,11 +76,14 @@
         <div class="col-md-12">
             <select class="form-control" id="selected-variable" onchange="document.getElementById('youriframe3').src = this.options[this.selectedIndex].value">
                 <option value="html/vis2/index.html">Treemap</option>
-                <option value="html/vis3/index.html">Binary Tree</option>
             </select>
 
             <iframe name="iframe" id="youriframe3" src="html/vis2/index.html" height=650px width=98% scrolling=no frameborder=no></iframe>
 
+        </div>
+
+        <div class="col-md-12">
+            <div class="visArea" id="treediagram"></div>
         </div>
 
         <div class="col-md-12">
@@ -94,15 +100,15 @@
     </div>
     <!-- Load JS libraries -->
     <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.bxslider.min.js"></script>
-    <script src="js/jquery.fitvids.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/queue.min.js"></script>
-    <script src="js/topojson.js"></script>
     <script src="js/d3.min.js"></script>
+    <script src="js/d3-tip.js"></script>
     <script src="js/colorbrewer.js"></script>
 
-    <!-- Choropleth and second visualization -->
+    <!-- Individual scripts -->
+    <script src="js/treediagram.js"></script>
+    <script src="js/salesNumbers.js"></script>
     <script src="js/main.js"></script>
 
 </body>

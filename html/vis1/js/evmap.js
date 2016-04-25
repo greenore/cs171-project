@@ -4,12 +4,13 @@
  * @param _data				-- data
  */
 
-EvMap = function(_parentElement, _data, _topomapdata, _selected){
+EvMap = function (_parentElement, _data, _topomapdata, _selected) {
     this.parentElement = _parentElement;
     this.data = _data;
     this.topomapdata = _topomapdata;
     this.selected = _selected;
     this.populationdiv = 1000000;
+    this.dcline = [];
 
     console.log("EvMap");
     console.log(this.data);
@@ -24,20 +25,25 @@ EvMap = function(_parentElement, _data, _topomapdata, _selected){
  * Initialize visualization (static content, e.g. SVG area or axes)
  */
 
-EvMap.prototype.initVis = function(){
+EvMap.prototype.initVis = function () {
     var vis = this;
 
-    vis.margin = { top: 40, right: 0, bottom: 60, left: 0 };
+    vis.margin = {
+        top: 40,
+        right: 0,
+        bottom: 60,
+        left: 5
+    };
 
-    vis.width = 750 - vis.margin.left - vis.margin.right;
-    vis.height = 500 - vis.margin.top - vis.margin.bottom;
+    vis.width = 800 - vis.margin.left - vis.margin.right;
+    vis.height = 400 - vis.margin.top - vis.margin.bottom;
 
     vis.tip = d3.tip()
         .attr("class", "d3-tip")
         .offset([0, 0]);
 
     vis.stateXY = {};
-    vis.data.forEach(function(d) {
+    vis.data.forEach(function (d) {
         //console.log(d);
         vis.stateXY[d.stateid] = d.evdata.stateXY;
     });
@@ -71,51 +77,94 @@ EvMap.prototype.initVis = function(){
         .enter()
         .append("path")
         .attr("d", vis.path)
-        .attr("stroke", "white")  //Put lines for states
-        .attr("stroke-width", "0.8px")  //Put lines for states
-        .on("click", function(d) {
+        .attr("stroke", "#222") //Put lines for states
+        .attr("stroke-width", "1.2px") //Put lines for states
+        .attr("stroke-dasharray", "0.5")
+        .on("mouseover", function (d) {
+            vis.mouseincolor(d);
+            vis.tip.show(d);
             stateClicked(d.id);
         })
-        .on("mouseover", function(d) { vis.mouseincolor(d); vis.tip.show(d); })
-        .on("mouseout", function(d) { vis.mouseoutcolor(d); vis.tip.hide(d); });
+        .on("mouseout", function (d) {
+            vis.mouseoutcolor(d);
+            vis.tip.hide(d);
+        });
 
     vis.statefontsize = 0;
 
-/*    vis.mapdata.forEach(function(d) {
-        if (vis.stateXY[d.id] == "ME") {
+    vis.mapdata.forEach(function (d) {
+        if (vis.stateXY[d.id] == "NH") {
             vis.xcoord = vis.path.centroid(d)[0] + 50;
-            vis.ycoord = vis.path.centroid(d)[1] - 20;
+            vis.ycoord = vis.path.centroid(d)[1];
         }
-    });*/
+    });
 
     // Add State Abbreviations
     vis.svg.append("g")
         .selectAll("text")
         .data(vis.mapdata)
         .enter()
-        .append("svg:text")
-        .text(function(d){
+        .append("text")
+        .attr("id", function (d) {
+            return "stateid" + d.id;
+        })
+        .text(function (d) {
             return vis.stateXY[d.id];
         })
-        .attr("x", function(d){
+        .attr("x", function (d) {
             if (vis.inacluster(vis.stateXY[d.id])) {
+                if (vis.stateXY[d.id] == "DC") {
+                    vis.dcline.push({
+                        x1: vis.xcoord,
+                        x2: vis.path.centroid(d)[0]
+                    });
+                }
                 return vis.xcoord;
 
             } else {
                 return vis.path.centroid(d)[0];
             }
         })
-        .attr("y", function(d){
+        .attr("y", function (d) {
             if (vis.inacluster(vis.stateXY[d.id])) {
                 vis.statefontsize += 20;
+                if (vis.stateXY[d.id] == "DC") {
+                    vis.dcline.push({
+                        y1: vis.ycoord + vis.statefontsize,
+                        y2: vis.path.centroid(d)[1]
+                    });
+                }
                 return vis.ycoord + vis.statefontsize;
 
             } else {
                 return vis.path.centroid(d)[1];
             }
         })
-        .attr("text-anchor","middle")
-        .attr('fill', "rgb(0, 0, 0)");
+        .on("mouseover", function (d) {
+            vis.mouseincolor(d);
+            if (vis.inacluster(vis.stateXY[d.id]))
+
+            {
+                vis.tip.show(d);
+                stateClicked(d.id);
+
+            }
+
+
+        })
+        .on("mouseout", function (d) {
+            vis.mouseoutcolor(d);
+            if (vis.inacluster(vis.stateXY[d.id])) vis.tip.hide(d);
+        })
+        .attr("text-anchor", "middle")
+        .attr('fill', function (d) {
+            if (vis.inacluster(vis.stateXY[d.id])) {
+                return "#FFFFFF";
+
+            } else {
+                return "#F2BB66";
+            }
+        });
 
 
     // TO-DO: (Filter, aggregate, modify data)
@@ -128,7 +177,7 @@ EvMap.prototype.initVis = function(){
  * Data wrangling if necessary
  */
 
-EvMap.prototype.wrangleData = function(){
+EvMap.prototype.wrangleData = function () {
     var vis = this;
 
     // Update the visualization
@@ -141,49 +190,65 @@ EvMap.prototype.wrangleData = function(){
  * Function parameters only needed if different kinds of updates are needed
  */
 
-EvMap.prototype.updateVis = function(){
+EvMap.prototype.updateVis = function () {
     var vis = this;
 
     vis.svg.selectAll("path")
-        .attr("class", function(d) { return vis.mapquantize(d); });
+        .attr("class", function (d) {
+            return vis.mapquantize(d);
+        });
 
 
-    vis.tip.html(function(d) {
+    vis.tip.html(function (d) {
         return vis.getInfo(d.id);
     });
     vis.svg.call(vis.tip);
 
 
-    if(vis.selected == "POP") {
-        vis.dmin = d3.min(vis.data, function(d){return d.evdata[vis.selected]});
-        vis.dmax = d3.max(vis.data, function(d){return d.evdata[vis.selected]});
+    if (vis.selected == "POP") {
+        vis.dmin = d3.min(vis.data, function (d) {
+            return d.evdata[vis.selected]
+        });
+        vis.dmax = d3.max(vis.data, function (d) {
+            return d.evdata[vis.selected]
+        });
         vis.item = "2";
-    } else if(vis.selected == "PCT") {
-        vis.dmin = d3.min(vis.data, function(d){return d.evdata[vis.selected]});
-        vis.dmax = d3.max(vis.data, function(d){return d.evdata[vis.selected]});
+    } else if (vis.selected == "PCT") {
+        vis.dmin = d3.min(vis.data, function (d) {
+            return d.evdata[vis.selected]
+        });
+        vis.dmax = d3.max(vis.data, function (d) {
+            return d.evdata[vis.selected]
+        });
         vis.item = "1";
-    } else if(vis.selected == "CO2") {
-        vis.dmin = d3.min(vis.data, function(d){return d.evdata[vis.selected]});
-        vis.dmax = d3.max(vis.data, function(d){return d.evdata[vis.selected]});
+    } else if (vis.selected == "CO2") {
+        vis.dmin = d3.min(vis.data, function (d) {
+            return d.evdata[vis.selected]
+        });
+        vis.dmax = d3.max(vis.data, function (d) {
+            return d.evdata[vis.selected]
+        });
         vis.item = "0";
     }
 
     vis.quantize = d3.scale.quantize()
-        .domain([ vis.dmin, vis.dmax ])
-        .range(d3.range(9).map(function(i) { return "q" + vis.item + (i+1) + "-9"; }));
+        .domain([vis.dmin, vis.dmax])
+        .range(d3.range(9).map(function (i) {
+            return "q" + vis.item + (i + 1) + "-9";
+        }));
 
     vis.svg.append("g")
         .attr("class", "legendq")
         .attr("data-legend-color", "white")
-        .attr("transform", "translate(5,100)");
+        .attr("transform", "translate(5,20)");
 
-    vis.dformat= d3.format(".2f");
+    vis.dformat = d3.format(".2f");
     vis.co2format = d3.format(".0f");
     vis.legend = d3.legend.color()
-        .labelFormat(function(d) {
-            if(vis.selected == "POP") {
-                return vis.dformat(d/vis.populationdiv) + " M";
-            } else if(vis.selected == "PCT") {
+        .labelFormat(function (d) {
+            if (vis.selected == "POP") {
+                return vis.dformat(d / vis.populationdiv) + " M";
+            } else if (vis.selected == "PCT") {
                 return vis.dformat(d) + "%";
             } else {
                 return vis.co2format(d);
@@ -197,12 +262,23 @@ EvMap.prototype.updateVis = function(){
 
 };
 
-EvMap.prototype.mouseincolor = function(d) {
+EvMap.prototype.mouseincolor = function (d) {
     vis = this;
 
+    var stateAbbr = "#stateid" + d.id;
+    $(stateAbbr).css('fill', 'blue');
+
+    if (vis.stateXY[d.id] == "DC") {
+        line = vis.append("line")
+            .attr("x1", vis.dline[0].x1)
+            .attr("y1", vis.dline[1].y1)
+            .attr("x2", vis.dline[0].x2)
+            .attr("y2", vis.dline[1].y2);
+    }
+
     vis.svg.selectAll("path")
-        .attr("class", function(p) {
-            if(d.id == p.id) {
+        .attr("class", function (p) {
+            if (d.id == p.id) {
                 return "q31-9";
             } else {
                 return vis.mapquantize(p);
@@ -210,47 +286,63 @@ EvMap.prototype.mouseincolor = function(d) {
         });
 }
 
-EvMap.prototype.mouseoutcolor = function(d) {
+EvMap.prototype.mouseoutcolor = function (d) {
     vis = this;
 
     vis.svg.selectAll("path")
-        .attr("class", function(p) {
+        .attr("class", function (p) {
             return vis.mapquantize(p);
         });
+    var stateAbbr = "#stateid" + d.id;
+    $(stateAbbr).css('fill', 'blue');
+
+    if (vis.inacluster(vis.stateXY[d.id])) {
+        $(stateAbbr).css('fill', '#FFFFFF');
+    } else {
+        $(stateAbbr).css('fill', '#F2BB66');
+    }
+
 }
 
-EvMap.prototype.inacluster = function(d) {
+EvMap.prototype.inacluster = function (d) {
     switch (d) {
-        case 'VT': return true;
-        case 'NH': return true;
-        case 'MA': return true;
-        case 'RI': return true;
-        case 'CT': return true;
-        case 'NJ': return true;
-        case 'DE': return true;
-        case 'MD': return true;
-        case 'ME': return true;
-        case 'DC': return true;
+    case 'VT':
+        return true;
+    case 'NH':
+        return true;
+    case 'MA':
+        return true;
+    case 'RI':
+        return true;
+    case 'CT':
+        return true;
+    case 'NJ':
+        return true;
+    case 'DE':
+        return true;
+    case 'MD':
+        return true;
+        //case 'ME': return true;
+    case 'DC':
+        return true;
     }
     return false;
 }
 
 EvMap.prototype.getInfo = function (id) {
     vis = this;
-    var returnData = "<span style='color:white'><strong>No data</strong></span>";
+    var returnData = "<span style='color:black'><strong>No data</strong></span>";
     //console.log(id);
-    vis.data.forEach( function(j)  {
+    vis.data.forEach(function (j) {
         //console.log(j.stateid);
-        if(j.stateid == id) {
-            returnData = "<span style='color:white'>"
-                + j.state + "<br>"
-                + j.evdata[vis.selected] + "</span>";
+        if (j.stateid == id) {
+            returnData = "<span style='color:white'>" + j.state + "<br>" + j.evdata[vis.selected] + "</span>";
         }
     });
     return returnData;
 }
 
-EvMap.prototype.mapquantize = function(d) {
+EvMap.prototype.mapquantize = function (d) {
     var vis = this;
 
     var scalenumber = 0;
@@ -265,13 +357,13 @@ EvMap.prototype.mapquantize = function(d) {
 
 
 
-    vis.data.forEach( function(j)  {
+    vis.data.forEach(function (j) {
         //console.log("stateid");
         //console.log(j.stateid);
-        if(vis.selected == "CO2" && (!calculated)) {
+        if (vis.selected == "CO2" && (!calculated)) {
             itemnum = "0";
             maxscale = 9;
-            divnum = Math.floor((j.evdata.co2max-j.evdata.co2min)/maxscale);
+            divnum = Math.floor((j.evdata.co2max - j.evdata.co2min) / maxscale);
             calculated = true;
             /*
             console.log("CStart");
@@ -280,12 +372,12 @@ EvMap.prototype.mapquantize = function(d) {
             console.log(divnum);
             console.log("CEnd");
             */
-        } else if(vis.selected == "PCT" && (!calculated)) {
+        } else if (vis.selected == "PCT" && (!calculated)) {
             itemnum = "1";
             maxscale = 9;
             var max = j.evdata.pctmax;
             var min = j.evdata.pctmin;
-            divnum = Math.floor((max-min)/maxscale);
+            divnum = Math.floor((max - min) / maxscale);
             calculated = true;
             /*
             console.log("PCStart");
@@ -294,10 +386,10 @@ EvMap.prototype.mapquantize = function(d) {
             console.log(divnum);
             console.log("PCEnd");
             */
-        } else if(vis.selected == "POP" && (!calculated)) {
+        } else if (vis.selected == "POP" && (!calculated)) {
             itemnum = "2";
             maxscale = 9;
-            divnum = Math.floor((j.evdata.popmax-j.evdata.popmin)/maxscale);
+            divnum = Math.floor((j.evdata.popmax - j.evdata.popmin) / maxscale);
             divnum = vis.populationdiv;
             calculated = true;
             /*
@@ -309,7 +401,7 @@ EvMap.prototype.mapquantize = function(d) {
             */
         }
         //console.log(j.evdata[vis.selected]);
-        if(j.stateid == d.id) {
+        if (j.stateid == d.id) {
             state = j.state;
             found = true;
             /*
@@ -320,12 +412,12 @@ EvMap.prototype.mapquantize = function(d) {
             console.log(j.evdata[vis.selected]);
             */
             var datavalue;
-            if(vis.selected == "CO2") {
+            if (vis.selected == "CO2") {
                 datavalue = j.evdata[vis.selected];
-            } else if(vis.selected == "PCT") {
+            } else if (vis.selected == "PCT") {
                 datavalue = j.evdata[vis.selected] * 100;
-                
-            } else if(vis.selected == "POP") {
+
+            } else if (vis.selected == "POP") {
                 datavalue = j.evdata[vis.selected];
             }
             scalenumber = Math.ceil(datavalue / divnum);
@@ -333,19 +425,19 @@ EvMap.prototype.mapquantize = function(d) {
     });
 
 
-    if(scalenumber > maxscale) {
+    if (scalenumber > maxscale) {
         scalenumber = maxscale;
     }
-    if(scalenumber < minscale) {
+    if (scalenumber < minscale) {
         scalenumber = minscale;
     }
     if (found) {
 
-        var rtnclass = "q"+itemnum+scalenumber+"-9";
+        var rtnclass = "q" + itemnum + scalenumber + "-9";
         return (rtnclass);
     } else {
         return "#FFFFFF";
 
     }
-    
+
 }
