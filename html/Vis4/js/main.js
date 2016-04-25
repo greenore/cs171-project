@@ -53,7 +53,7 @@ function filterMap(filter,action){
         chargerMap.removeMarkers([filter]);
     }
     chargerMap.updateVis();
-}
+    chargerDistr.updateData(chargerMap.returnChargerDistr());}
 
 // Start application by loading the data
 loadData();
@@ -73,7 +73,6 @@ function loadData() {
 
 
 function createVis() {
-    // TO-DO: INSTANTIATE VISUALIZATION
     chargerMap = new ChargerMap('charger-map',allData.fuel_stations,centerUS,chargerTypes);
     chargerDistr = new ChargerDistr('#chargerDist',chargerMap.returnChargerDistr());
 }

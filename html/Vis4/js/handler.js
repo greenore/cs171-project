@@ -4,16 +4,17 @@
 $('#locationSearch').click(function (){locationSearch($('#locationSearchTerm').val())} );
 
 $('#rangeCheck').click(function(){
+    var x = $('#rangeInM').val();
+    if (x > 0) {
         d3.select(this).classed("active", !d3.select(this).classed("active"));
         if (d3.select(this).classed("active")) {
-            console.log($('#rangeInM').val());
-            chargerMap.drawRangeCircle($('#rangeInM').val()*1000);
+            chargerMap.drawRangeCircle($('#rangeInM').val() * 1000);
         }
         else {
             chargerMap.removeRangeCircle();
         }
-    chargerDistr.updateData(chargerMap.returnChargerDistr());
-
+        chargerDistr.updateData(chargerMap.returnChargerDistr());
+    }
 });
 
 

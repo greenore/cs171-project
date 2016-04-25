@@ -4,6 +4,7 @@
 ChargerDistr = function(_parentElement, _data  ) {
     this.parentElement = _parentElement;
     this.data = _data;
+    this.duration = 750;
     this.margin = {top: 20, right: 5, bottom: 5, left: 5};
     this.width = 800 / 2 - this.margin.left - this.margin.right;
     this.height = 300 - this.margin.top - this.margin.bottom;
@@ -93,6 +94,7 @@ ChargerDistr.prototype.updateVis = function() {
 
     vis.chart.selectAll('rect')
         .data(vis.data)
+        .transition(vis.duration)
         .attr("y", function (d) {
             return vis.yScaleRight(d.value);
         })
