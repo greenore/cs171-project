@@ -3,6 +3,19 @@
  */
 $('#locationSearch').click(function (){locationSearch($('#locationSearchTerm').val())} );
 
+$('#rangeCheck').click(function(){
+        d3.select(this).classed("active", !d3.select(this).classed("active"));
+        if (d3.select(this).classed("active")) {
+            console.log($('#rangeInM').val());
+            chargerMap.drawRangeCircle($('#rangeInM').val()*1000);
+        }
+        else {
+            chargerMap.removeRangeCircle();
+        }
+    chargerDistr.updateData(chargerMap.returnChargerDistr());
+
+});
+
 
 function locationSearch(locationSeachTerm){
     var url ='https://maps.googleapis.com/maps/api/geocode/json?address=' +locationSeachTerm;

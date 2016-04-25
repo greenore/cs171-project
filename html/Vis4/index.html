@@ -43,6 +43,15 @@
       </div>
       <div class="row">
         <div class="col-lg-6" id = 'filterButtons'>
+          <!--<button onclick="chargerDistr.updateData(chargerMap.returnChargerDistr())" class='btn btn-default'>Get Distr</button>-->
+          <div class="checkbox">
+            <label><input type="checkbox" id = 'rangeCheck' value="">Show Range</label>
+            <input type="text" class="form-control" id="rangeInM">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6" id = 'chargerDist'>
         </div>
       </div>
       <div><br></div>
@@ -65,6 +74,8 @@
 
 <!-- Visualization objects -->
 <script src="js/chargerMap.js"></script>
+<script src="js/chargerDistr.js"></script>
+
 
 <!-- Load data, create visualizations -->
 <script src="js/main.js"></script>

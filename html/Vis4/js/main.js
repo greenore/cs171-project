@@ -2,7 +2,7 @@
 var allData = [];
 var centerUS = [39.8333333,-98.585522];
 // Variable for the visualization instance
-var chargerMap;
+var chargerMap,chargerDistr;
 var chargerTypes = {
 
     NEMA515 : "NEMA 5-15",
@@ -13,6 +13,7 @@ var chargerTypes = {
     J1772COMBO : "SAE J1772 Combo",
     TESLA : "Tesla"
 };
+console.log(Object.keys(chargerTypes));
 
 d3.select('#filterButtons').selectAll('button')
     .data(Object.keys(chargerTypes))
@@ -20,11 +21,12 @@ d3.select('#filterButtons').selectAll('button')
     .append('button')
     .attr('class','btn btn-default')
     .attr('id',function(d){
-        console.log(d);
         return 'filter-'+ d
     })
     .attr('type','button')
-    .text(function(d){return chargerTypes[d]})
+    .text(function(d){
+        console.log("adding" + d);
+        return chargerTypes[d]})
     .on('click',function(d){
         d3.select(this).classed("active", !d3.select(this).classed("active"));
         if (d3.select(this).classed("active"))
@@ -59,17 +61,6 @@ loadData();
 
 function loadData() {
 
-    // Hubway XML station feed
-    //var url = 'http://www.thehubway.com/data/stations/bikeStations.xml';
-    //var yql = 'https://query.yahooapis.com/v1/public/yql?q='
-    //    + encodeURIComponent('SELECT * FROM xml WHERE url="' + url + '"')
-    //    + '&format=json&callback=?';
-
-    //$.getJSON(yql, function(jsonData){
-    //  //console.log(jsonData);
-    //    allData = jsonData.query.results.stations.station;
-    //    //console.log(allData);
-    //    $('#station-count').text(allData.length);
 
     $.getJSON('data/APIanswer-elec.json', function(data) {
         allData = data;
@@ -78,13 +69,11 @@ function loadData() {
     });
 
 
-    //});
-    // TO-DO: LOAD DATA
-
 }
 
 
 function createVis() {
     // TO-DO: INSTANTIATE VISUALIZATION
     chargerMap = new ChargerMap('charger-map',allData.fuel_stations,centerUS,chargerTypes);
+    chargerDistr = new ChargerDistr('#chargerDist',chargerMap.returnChargerDistr());
 }
