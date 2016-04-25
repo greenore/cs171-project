@@ -1,5 +1,5 @@
-
 /*Set initial visibilities*/
+
 .line {
     fill: none;
     stroke: steelblue;
@@ -13,7 +13,6 @@
     shape-rendering: crispEdges;
 }
 
-
 .node {
     cursor: pointer;
 }
@@ -26,13 +25,16 @@
 
 .node text {
     font: 12px sans-serif;
-}
+    color : white ;
+    }
 
 .link {
     fill: none;
     stroke: #ccc;
     stroke-width: 1.5px;
 }
+
+
     /*********************/
     /*  TOOLTIP OVERLAY  */
     /*********************/
@@ -77,50 +79,16 @@
     left: 0;
 }
 
-/* Main HTML */
+/*!* Main HTML *!*/
 
-body,
-html {
-    font-family: 'Signika', sans-serif;
-    min-width: 679px;
-    margin: 0;
-    padding: 0;
-    background-color: #222;
-    color: white;
-}
+/*body {*/
+    /*font-family: 'Signika', sans-serif;*/
+    /*min-width: 679px;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*!*background-color: #222222;*!*/
+    /*background-color: #ffffdc;*/
+    /*color: white;*/
+/*}*/
 
 
-/*Set initial visibilities*/
-
-.line {
-    fill: none;
-    stroke: steelblue;
-    stroke-width: 1.5px;
-}
-
-.axis path,
-.axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-}
-
-.node {
-    cursor: pointer;
-}
-
-.node circle {
-    fill: #fff;
-    stroke: steelblue;
-    stroke-width: 1.5px;
-}
-
-.node text {
-    font: 12px sans-serif;
-}
-
-.link {
-    fill: none;
-    stroke: #ccc;
-    stroke-width: 1.5px;
-}
