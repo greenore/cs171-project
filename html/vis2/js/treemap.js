@@ -1,5 +1,5 @@
 // Global variables
-var alldata,
+var all_data,
     nested_data,
     treemap,
     chart,
@@ -36,7 +36,7 @@ treemap = d3.layout.treemap()
         return d.fuel_economy_city;
     });
 
-// Select DIV
+// Select SVG
 chart = d3.select("#treemap").append("rect")
     .style("position", "relative")
     .style("width", (width + margin.left + margin.right) + "px")
@@ -44,15 +44,19 @@ chart = d3.select("#treemap").append("rect")
     .style("left", margin.left + "px")
     .style("top", margin.top + "px");
 
+var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
 queue()
-    .defer(d3.csv, "data/electric_vehicles_by_model2.csv")
+    .defer(d3.csv, "data/electric_vehicles_by_model.csv")
     .await(function (error, data) {
 
         //DataWrangling
-        alldata = data;
+        all_data = data;
 
         // Convert numeric values to 'numbers'
-        alldata.forEach(function (d) {
+        all_data.forEach(function (d) {
             d.engine_size = +d.engine_size;
             d.fuel_economy_city = +d.fuel_economy_city;
             d.fuel_economy_highway = +d.fuel_economy_highway;
@@ -94,11 +98,13 @@ queue()
                     'fuel_economy_highway_units': v[0].fuel_economy_highway_units,
                     'gas_fuel_economy_city': v[0].gas_fuel_economy_city,
                     'gas_fuel_economy_highway': v[0].gas_fuel_economy_highway,
+                    'fuel': v[0].fuel,
                     'engine_type': v[0].engine_type,
-                    'engine_size': v[0].engine_size
+                    'engine_size': v[0].engine_size,
+                    'units': v[0].units
                 };
             })
-            .entries(alldata)
+            .entries(all_data)
             .map(function (d) {
                 d.values['name'] = d.key;
                 return d.values;
@@ -116,7 +122,7 @@ function createVis(data) {
 
     // Filter
     data_filtered = nested_data.filter(function (d) {
-        return d.engine_type === group;
+        return d.fuel === group;
     });
 
     root = {
@@ -131,20 +137,19 @@ function createVis(data) {
     var max_var = d3.max(root.children, function (d) {
         return d.engine_size;
     });
-    color.domain([min_var, max_var])
-
+    color.domain([0, max_var])
 
     // Treemap implementation
     // SELECT
-    var node = chart.datum(root).selectAll("rect")
+    var node_tree = chart.datum(root).selectAll("rect")
         .data(treemap.nodes);
 
     // ENTER
-    node.enter()
+    node_tree.enter()
         .append("rect");
 
     // UPDATE
-    node.on("mouseover", function (d) {
+    node_tree.on("mouseover", function (d) {
             if (d.engine_size > 0) {
                 d3.select(this)
                     //.style("opacity", 0.5)
@@ -152,6 +157,20 @@ function createVis(data) {
                     .duration(50)
                     .style("background-color", "rgb(250, 255, 106)")
                     .style("color", "white");
+
+                div.transition().duration(100)
+                    .style("opacity", 0.8)
+                div.html(function () {
+                        return "<strong>" + d.manufacturer + "</strong>" + "</br>" +
+                            "Model: " + d.model + " - " + d.model_year + "</br>" +
+                            "Category: " + d.category + "</br>" +
+                            "Engine Size: " + d.engine_size + " " + d.units + "</br>" +
+                            "Fuel Economy City: " + d.fuel_economy_city + " " + d.fuel_economy_city_units + "</br>" +
+                            "Fuel Economy Highway: " + d.fuel_economy_highway + " " + d.fuel_economy_highway_units + "</br>" +
+                            "Price: " + d.price
+                    })
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 30) + "px");
             }
         })
         .on("mouseout", function (d) {
@@ -161,6 +180,10 @@ function createVis(data) {
                     .duration(50)
                     .style("background-color", color(d.engine_size))
                     .style("color", "black");
+
+                div.transition().duration(300)
+                    .style("opacity", 0);
+
             }
         })
         .call(position)
@@ -173,10 +196,10 @@ function createVis(data) {
         .text(function (d) {
             return d.children ? null : d.manufacturer + ": " + d.model + " (" + d.engine_size + ")";
         })
-        .attr("class", "node");
+        .attr("class", "node_tree");
 
     // EXIT
-    node.exit().remove();
+    node_tree.exit().remove();
 };
 
 
