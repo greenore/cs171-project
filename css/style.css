@@ -9,14 +9,17 @@
 
 body,
 html {
-    font-family: 'Signika', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     min-width: 679px;
     margin: 0;
     padding: 0;
-    background-color: #222;
+    background-color: rgba(34, 34, 34, 0.99);
     color: white;
 }
 
+p {
+    font-size: 18px;
+}
 
 /* Header */
 
@@ -34,6 +37,43 @@ html {
 .header > p {
     text-align: center;
     z-index: 100;
+}
+
+
+/* Blockquote */
+
+blockquote {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-style: italic;
+    width: 600px;
+    margin: 0.25em 0;
+    padding: 0.25em 40px;
+    line-height: 1.45;
+    position: relative;
+    border-color: #222;
+    color: #White;
+}
+
+blockquote:before {
+    display: block;
+    content: "\201C";
+    font-size: 100px;
+    position: absolute;
+    left: -15px;
+    top: -20px;
+    color: #7a7a7a;
+}
+
+blockquote cite {
+    color: #999999;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+}
+
+blockquote cite:before {
+    content: "\2014 \2009";
 }
 
 
@@ -91,4 +131,11 @@ html {
 
 .chart-text {
     font-size: 12px;
+}
+
+
+/* Choropleth */
+
+.btn {
+    background-color: #cecece;
 }

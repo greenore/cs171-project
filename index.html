@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/vis2.css">
     <link rel="stylesheet" href="css/vis3.css">
-
 </head>
 
 <body>
@@ -31,24 +30,38 @@
         </div>
     </div>
 
-
     <div class="container">
 
         <div class="col-md-12">
-
-            <h2 id="sketch">MOTIVATION & ABSTRACT</h2>
+            <h2>MOTIVATION & ABSTRACT</h2>
             <p>The project takes a deep dive into electric vehicle usage in the US. It is going to tell the story for a reader who could be a possible buyer of an electric vehicle in the near future. That mean it gives a general overview about electric vehicle technologies and how the environment can benefit from using it. Consequently that means guiding the reader through model overviews / market shares / sales statistics towards important usage questions like service and charging network.</p>
         </div>
 
-        <div id="container"></div>
-
-        <!-- Select box to choose the ranking type -->
         <div class="col-md-12">
-            <!-- Parent container for the visualization -->
-            <div class="row">
-                <iframe name="iframe" id="youriframe" src="html/vis1/index.html" height=600px width=98% scrolling=no frameborder=no></iframe>
-            </div>
+            <blockquote>
+                Over their lifetime, battery electric vehicles produce far less global warming pollution than their gasoline counterparts—and they’re getting cleaner.
+                <cite>Union of Concerned Scientists</cite>
+            </blockquote>
         </div>
+
+        <div class="col-md-12">
+            <h2>Why should you care?</h2>
+            <p>The project takes a deep dive into electric vehicle usage in the US. It is going to tell the story for a reader who could be a possible buyer of an electric vehicle in the near future. That mean it gives a general overview about electric vehicle technologies and how the environment can benefit from using it. Consequently that means guiding the reader through model overviews / market shares / sales statistics towards important usage questions like service and charging network.</p>
+        </div>
+
+        <div class="col-md-12">
+
+            <iframe width="100%" height="630px" src="https://www.youtube.com/embed/4yqIjShoW6U" frameborder="0" allowfullscreen></iframe>
+
+        </div>
+
+        <div class="col-md-12">
+
+
+        </div>
+
+
+
 
         <div class="col-md-12">
             <p>The primary data source will be http://www.afdc.energy.gov/data/ from the US Department of Energy. We have acquired sufficient data to generate at least 2 different visualizations without much data cleaning.</p>
@@ -60,6 +73,20 @@
             <p>
                 We also did some preliminary data analysis and data munging on one of the datasets. That is, the “Electric Vehicles by Model” set. The reproducible R-Code as well as the data is on a private Github repository: https://github.com/greenore/cs171-project</p>
         </div>
+
+        <div id="container">
+
+            <!-- Select box to choose the ranking type -->
+            <div class="col-md-12">
+                <!-- Parent container for the visualization -->
+                <div class="row">
+                    <iframe name="iframe" id="youriframe" src="html/vis1/index.html" height=600px width=98% scrolling=no frameborder=no></iframe>
+                </div>
+            </div>
+
+
+        </div>
+
 
         <div class="space2"></div>
 
@@ -73,17 +100,53 @@
 
 
 
+        <!--
+<div class="col-md-12">
+    <select class="form-control" id="selected-variable" onchange="document.getElementById('youriframe3').src = this.options[this.selectedIndex].value">
+        <option value="html/vis2/index.html">Treemap</option>
+    </select>
+
+    <iframe name="iframe" id="youriframe3" src="html/vis2/index.html" height=650px width=98% scrolling=no frameborder=no></iframe>
+
+</div>
+-->
+
         <div class="col-md-12">
-            <select class="form-control" id="selected-variable" onchange="document.getElementById('youriframe3').src = this.options[this.selectedIndex].value">
-                <option value="html/vis2/index.html">Treemap</option>
-            </select>
+            <div class="row">
 
-            <iframe name="iframe" id="youriframe3" src="html/vis2/index.html" height=650px width=98% scrolling=no frameborder=no></iframe>
+                <div class="col-md-6">
 
+                    <h2>Fuel Economy of Electric Cars</h2>
+
+                </div>
+                <div class="col-md-6">
+
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="ranking-type" id="chart_text">Chart Data:</label>
+                            <select class="form-control" id="selected-variable" onchange="createVisTree(nested_data_tree)">
+                                <option value="Electric">Fuel Economy for Electric Cars</option>
+                                <option value="Hybrid Electric">Fuel Economy for Hybrid Electric Cars</option>
+                                <option value="Plug-in Hybrid Electric">Fuel Economy for Plug-in Hybrids Electric Cars</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
         </div>
 
         <div class="col-md-12">
-            <div class="visArea" id="treediagram"></div>
+            <!-- Parent container for the visualization -->
+            <div class="row">
+                <div id="myTreemap"></div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="visArea" id="treediagram"></div>
+            </div>
         </div>
 
         <div class="col-md-12">
@@ -94,7 +157,7 @@
 
         </div>
         <div class="row">
-            <iframe name="iframe" id="youriframe3" src="html/Vis4/index.html" height=1000px width=98% scrolling=no frameborder=no></iframe>
+            <iframe name="iframe" id="youriframe3" src="html/vis4/index.html" height=1500px width=98% scrolling=no frameborder=no></iframe>
         </div>
 
     </div>
@@ -107,9 +170,11 @@
     <script src="js/colorbrewer.js"></script>
 
     <!-- Individual scripts -->
+    <script src="js/treemap.js"></script>
     <script src="js/treediagram.js"></script>
     <script src="js/salesNumbers.js"></script>
     <script src="js/main.js"></script>
+
 
 </body>
 

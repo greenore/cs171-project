@@ -1,5 +1,5 @@
-// Global variables
-var all_data;
+var add_data,
+    nested_data_tree;
 
 // Size variables
 var margin_tree = {
@@ -31,8 +31,7 @@ treemap = d3.layout.treemap()
     });
 
 // Select SVG
-chart = d3.select("#treemap").append("rect")
-    .style("position", "relative")
+chart_tree = d3.select("#myTreemap").append("rect")
     .style("width", (width_tree + margin_tree.left + margin_tree.right) + "px")
     .style("height", (height_tree + margin_tree.top + margin_tree.bottom) + "px")
     .style("left", margin_tree.left + "px")
@@ -44,10 +43,10 @@ var div_tooltip = d3.select("body").append("div")
 
 queue()
     .defer(d3.csv, "data/electric_vehicles_by_model.csv")
-    .await(function (error, data) {
+    .await(function (error, data2) {
 
         //DataWrangling
-        all_data = data;
+        all_data = data2;
 
         // Convert numeric values to 'numbers'
         all_data.forEach(function (d) {
@@ -59,7 +58,7 @@ queue()
             d.price = +d.price;
         });
 
-        nested_data = d3.nest()
+        nested_data_tree = d3.nest()
             .key(function (d) {
                 return d.id;
             })
@@ -104,18 +103,18 @@ queue()
                 return d.values;
             });
 
-        createVis(nested_data);
+        createVisTree(nested_data_tree);
     });
 
-function createVis(data) {
-    nested_data = data
+function createVisTree(data) {
+    nested_data_tree = data
 
     // Get selected variable
     group = d3.select("#selected-variable")
         .property("value");
-
-    // Filter
-    data_filtered = nested_data.filter(function (d) {
+    console.log(group)
+        // Filter
+    data_filtered = nested_data_tree.filter(function (d) {
         return d.fuel === group;
     });
 
@@ -135,7 +134,7 @@ function createVis(data) {
 
     // Treemap implementation
     // SELECT
-    var node_tree = chart.datum(root).selectAll("rect")
+    var node_tree = chart_tree.datum(root).selectAll("rect")
         .data(treemap.nodes);
 
     // ENTER
@@ -180,7 +179,10 @@ function createVis(data) {
 
             }
         })
-        .call(position)
+        .on("click", function (d) {
+            treeDiagram.openToModel(d.model);
+        })
+        .call(position_tree)
         .transition()
         .duration(400)
         .ease("linear")
@@ -198,7 +200,7 @@ function createVis(data) {
 
 
 // Position function
-function position() {
+function position_tree() {
     this.style("left", function (d) {
             return d.x + "px";
         })

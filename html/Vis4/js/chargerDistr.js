@@ -1,11 +1,13 @@
-
-
-
-ChargerDistr = function(_parentElement, _data  ) {
+ChargerDistr = function (_parentElement, _data) {
     this.parentElement = _parentElement;
     this.data = _data;
     this.duration = 750;
-    this.margin = {top: 20, right: 5, bottom: 5, left: 5};
+    this.margin = {
+        top: 20,
+        right: 5,
+        bottom: 5,
+        left: 5
+    };
     this.width = 800 / 2 - this.margin.left - this.margin.right;
     this.height = 300 - this.margin.top - this.margin.bottom;
 
@@ -19,19 +21,19 @@ ChargerDistr = function(_parentElement, _data  ) {
  */
 
 
-ChargerDistr.prototype.initVis = function() {
+ChargerDistr.prototype.initVis = function () {
     var vis = this;
 
     vis.chart = d3.select(vis.parentElement).append("svg")
-        .attr("width", vis.width + vis.margin.left +  vis.margin.right)
-        .attr("height", vis.height +  vis.margin.top +  vis.margin.bottom)
+        .attr("width", vis.width + vis.margin.left + vis.margin.right)
+        .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
-        .attr("transform", "translate(" +  vis.margin.left + "," +  vis.margin.top + ")");
+        .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
     vis.chart.append("text")
         .text("Charger Distribution")
         .attr("x", vis.width / 2)
-        .attr("y", - vis.margin.top / 2);
+        .attr("y", -vis.margin.top / 2);
 
     vis.yScaleRight = d3.scale.linear()
         .range([vis.height, 0]);
@@ -41,8 +43,7 @@ ChargerDistr.prototype.initVis = function() {
 
     vis.xAxisRight = d3.svg.axis()
         .scale(vis.xScaleRight)
-        .orient("bottom")
-        ;
+        .orient("bottom");
 
 
     vis.yAxisRight = d3.svg.axis()
@@ -56,26 +57,29 @@ ChargerDistr.prototype.initVis = function() {
     vis.updateVis();
 };
 
-ChargerDistr.prototype.updateData = function(updatedData) {
+ChargerDistr.prototype.updateData = function (updatedData) {
     var vis = this;
     vis.data = updatedData;
     vis.updateVis();
 };
 
 
-ChargerDistr.prototype.updateVis = function() {
+ChargerDistr.prototype.updateVis = function () {
     var vis = this;
-    vis.yScaleRight.domain([0, d3.max(vis.data,function(d){return d.value})]);
+    vis.yScaleRight.domain([0, d3.max(vis.data, function (d) {
+        return d.value
+    })]);
 
     vis.xScaleRight.domain(vis.data.map(function (d) {
-            return d.key
-        }));
+        return d.key
+    }));
 
     vis.bar = vis.chart.selectAll("g")
         .data(vis.data)
         .enter().append("g")
-        .attr('id',function(d){
-            return d})
+        .attr('id', function (d) {
+            return d
+        })
         .attr("transform", function (d) {
             return "translate(" + vis.xScaleRight(d.key) + ",0)";
         })
@@ -85,10 +89,10 @@ ChargerDistr.prototype.updateVis = function() {
         //    {filterMap(d.key,'add')}
         //    else {filterMap(d.key,'remove')}
         //})
-        ;
+    ;
 
 
-   vis.bar.append("rect")
+    vis.bar.append("rect")
         .attr("class", "distrRect")
         .attr("width", vis.xScaleRight.rangeBand());
 
@@ -104,10 +108,11 @@ ChargerDistr.prototype.updateVis = function() {
 
     vis.bar.append("text")
         .attr("x", vis.xScaleRight.rangeBand() / 2)
-        .attr('class','chargerText')
+        .attr('class', 'chargerText')
         .style("text-anchor", "middle")
+        .style("fill", "white")
         .text(function (d) {
-                console.log(d);
+            console.log(d);
             return chargerTypes[d.key]
         })
         .attr("y", function (d) {
@@ -117,12 +122,14 @@ ChargerDistr.prototype.updateVis = function() {
 
     vis.chart.append("g")
         .attr("class", "x axis")
+        .style("fill", "white")
         .attr("transform", "translate(0," + vis.height + ")")
         .call(vis.xAxisRight);
 
     vis.chart.append("g")
         .attr("class", "y axis")
         .call(vis.yAxisRight)
+        .style("fill", "white")
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)

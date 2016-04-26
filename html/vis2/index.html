@@ -14,31 +14,51 @@
 
 <body>
 
-    <div class="col-md-12">
-        <div class="row">
 
-            <div class="col-md-12">
+    <div class="container">
 
-                <h2>Fuel Economy of Electric Cars</h2>
-                <form class="form-inline">
-                    <div class="form-group">
-                        <label for="ranking-type" id="chart_text">Chart Data:</label>
-                        <select class="form-control" id="selected-variable" onchange="createVis(nested_data)">
-                            <option value="Electric">Fuel Economy for Electric Cars</option>
-                            <option value="Hybrid Electric">Fuel Economy for Hybrid Electric Cars</option>
-                            <option value="Plug-in Hybrid Electric">Fuel Economy for Plug-in Hybrids Electric Cars</option>
-                        </select>
-                    </div>
-                </form>
+        <div class="col-md-12">
+
+            <h2 id="sketch">Why should you care?</h2>
+            <p>The project takes a deep dive into electric vehicle usage in the US. It is going to tell the story for a reader who could be a possible buyer of an electric vehicle in the near future. That mean it gives a general overview about electric vehicle technologies and how the environment can benefit from using it. Consequently that means guiding the reader through model overviews / market shares / sales statistics towards important usage questions like service and charging network.</p>
+        </div>
+
+        <div class="col-md-12">
+
+            <h2>MOTIVATION & ABSTRACT</h2>
+            <p>The project takes a deep dive into electric vehicle usage in the US. It is going to tell the story for a reader who could be a possible buyer of an electric vehicle in the near future. That mean it gives a general overview about electric vehicle technologies and how the environment can benefit from using it. Consequently that means guiding the reader through model overviews / market shares / sales statistics towards important usage questions like service and charging network.</p>
+        </div>
+
+
+        <div class="col-md-12">
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <h2>Fuel Economy of Electric Cars</h2>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="ranking-type" id="chart_text">Chart Data:</label>
+                            <select class="form-control" id="selected-variable" onchange="createVisTree(nested_data_tree)">
+                                <option value="Electric">Fuel Economy for Electric Cars</option>
+                                <option value="Hybrid Electric">Fuel Economy for Hybrid Electric Cars</option>
+                                <option value="Plug-in Hybrid Electric">Fuel Economy for Plug-in Hybrids Electric Cars</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
         <!-- Parent container for the visualization -->
-        <div class="row">
-            <div class="visArea" id="treemap"></div>
+        <div class="col-md-12">
+            <div id="myDiv"></div>
+            <div class="row">
+                <div id="myTreemap"></div>
+            </div>
         </div>
-    </div>
 
+    </div>
 
 
     <!-- Load JS libraries: jQuery, bootstrap, D3, D3 Tooltips -->
