@@ -14,11 +14,12 @@
   <link rel="stylesheet" href="css/leaflet.css" />
   <link href='css/MarkerCluster.css' rel='stylesheet' />
   <link href='css/MarkerCluster.Default.css' rel='stylesheet' />
+  <link href="css/bootstrap-switch.css" rel="stylesheet">
+  <link href="css/bootstrap-slider.css" rel="stylesheet">
+
 
 
 </head>
-<body>
-
 <div class="container-fluid">
 
   <div class="row">
@@ -32,43 +33,52 @@
           </span>
       </h1>
       <div class="row">
-        <div class="col-lg-6">
-          <div class="input-group">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" id = 'locationSearch' type="button">Go!</button>
+                <button class="btn btn-default" id = 'locationSearch' type="button">Search...</button>
               </span>
-            <input type="text" id = 'locationSearchTerm' class="form-control" placeholder="Search">
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
-      </div>
-      <div class="row">
-        <div class="col-lg-6" id = 'filterButtons'>
-          <!--<button onclick="chargerDistr.updateData(chargerMap.returnChargerDistr())" class='btn btn-default'>Get Distr</button>-->
-          <div class="checkbox">
-            <label><input type="checkbox" id = 'rangeCheck' value="">Show Range</label>
-            <input type="text" placeholder="Radius in km around map center" class="form-control" id="rangeInM">
+              <input type="text" id = 'locationSearchTerm' class="form-control" placeholder="Search">
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-6 -->
+        </div>
+        <div class="row">
+          <div class="col-lg-6" id = 'filterButtons'>
+            <div class="checkbox">
+              <input type="checkbox" name="range-checkbox" id="rangeCheck" checked>
+              <input id="rangeSlider" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="50"/>
+            </div>
+            <button class = 'btn btn-default active' type ='button' id = 'selectAllChargers'>All</button>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-lg-6" id = 'chargerDist'>
+      <div class="col-md-6" id = 'chargerDist'></div>
         </div>
-      </div>
-      <div><br></div>
-      <!-- Visualization placeholders -->
-      <div id="charger-map"></div>
     </div>
+    <div><br></div>
+    <!-- Visualization placeholders -->
+    <div id="charger-map"></div>
   </div>
+</div>
 </div>
 
 </div>
 
 <!-- Load JS libraries -->
 <script src="js/jquery.min.js"></script>
+
+
 <script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-switch.js"></script>
+<script src="js/bootstrap-slider.min.js"></script>
+
+
 <script src="js/leaflet.js"></script>
 <script src='js/leaflet.markercluster.js'></script>
 <script src="js/leaflet.featuregroup.subgroup-src.js"></script>
+<script src="js/Leaflet.MakiMarkers.js"></script>
 <script src="js/d3.min.js"></script>
 
 

@@ -37,8 +37,10 @@ h1 .sub-headline {
     stroke: #000;
     shape-rendering: crispEdges;
 }
-.x.axis path {
-    display: none;
+
+.markerText{
+    color: black;
+    stroke: black;
 }
 .distrRect {
     fill: #fff7bc;

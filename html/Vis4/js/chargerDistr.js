@@ -1,15 +1,16 @@
-ChargerDistr = function (_parentElement, _data) {
+ChargerDistr = function (_parentElement, _data,_colorScale) {
     this.parentElement = _parentElement;
+    this.colorScale = _colorScale;
     this.data = _data;
     this.duration = 750;
     this.margin = {
-        top: 20,
+        top: 5,
         right: 5,
         bottom: 5,
         left: 5
     };
-    this.width = 800 / 2 - this.margin.left - this.margin.right;
-    this.height = 300 - this.margin.top - this.margin.bottom;
+    this.width = 400  - this.margin.left - this.margin.right;
+    this.height = 200 - this.margin.top - this.margin.bottom;
 
     this.initVis();
 };
@@ -23,6 +24,7 @@ ChargerDistr = function (_parentElement, _data) {
 
 ChargerDistr.prototype.initVis = function () {
     var vis = this;
+
 
     vis.chart = d3.select(vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -43,15 +45,12 @@ ChargerDistr.prototype.initVis = function () {
 
     vis.xAxisRight = d3.svg.axis()
         .scale(vis.xScaleRight)
-        .orient("bottom");
+        .orient("bottom")
+        .tickValues(vis.xScaleRight.domain());
 
 
     vis.yAxisRight = d3.svg.axis()
         .scale(vis.yScaleRight)
-        .ticks(5)
-        .tickFormat(function (d) {
-            return d + "%";
-        })
         .orient("left");
 
     vis.updateVis();
@@ -82,20 +81,22 @@ ChargerDistr.prototype.updateVis = function () {
         })
         .attr("transform", function (d) {
             return "translate(" + vis.xScaleRight(d.key) + ",0)";
-        })
+        });
+
         //.on('click',function(d){
         //    d3.select(this).classed("active", !d3.select(this).classed("active"));
         //    if (d3.select(this).classed("active"))
         //    {filterMap(d.key,'add')}
         //    else {filterMap(d.key,'remove')}
         //})
-    ;
+
 
 
     vis.bar.append("rect")
         .attr("class", "distrRect")
-        .attr("width", vis.xScaleRight.rangeBand());
-
+        .attr("width", vis.xScaleRight.rangeBand())
+        .style('fill',function(d){return vis.colorScale(d.key)});
+    vis.bar.append('title').text(function(d) {return d.key + ' : ' + d.value});
     vis.chart.selectAll('rect')
         .data(vis.data)
         .transition(vis.duration)
@@ -106,18 +107,18 @@ ChargerDistr.prototype.updateVis = function () {
             return vis.height - vis.yScaleRight(d.value);
         });
 
-    vis.bar.append("text")
-        .attr("x", vis.xScaleRight.rangeBand() / 2)
-        .attr('class', 'chargerText')
-        .style("text-anchor", "middle")
-        .style("fill", "white")
-        .text(function (d) {
-            console.log(d);
-            return chargerTypes[d.key]
-        })
-        .attr("y", function (d) {
-            return vis.yScaleRight(d.value) - 10
-        });
+    //vis.bar.append("text")
+    //    .attr("x", vis.xScaleRight.rangeBand() / 2)
+    //    .attr('class', 'chargerText')
+    //    .style("text-anchor", "middle")
+    //    .style("fill", "white")
+    //    .text(function (d) {
+    //        console.log(d);
+    //        return chargerTypes[d.key]
+    //    })
+    //    .attr("y", function (d) {
+    //        return vis.yScaleRight(d.value) - 10
+    //    });
 
 
     vis.chart.append("g")

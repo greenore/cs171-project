@@ -3,16 +3,21 @@
  */
 $('#locationSearch').click(function (){locationSearch($('#locationSearchTerm').val())} );
 
-$('#rangeCheck').click(function(){
-    var x = $('#rangeInM').val();
+var rangeCheckbox =$("[name='range-checkbox']").bootstrapSwitch('state',false);
+var rangeSlider = $("#rangeSlider").slider();
+
+
+rangeCheckbox.on('switchChange.bootstrapSwitch',function(){
+    var x = rangeSlider.slider('getValue');
     if (x > 0) {
-        d3.select(this).classed("active", !d3.select(this).classed("active"));
-        if (d3.select(this).classed("active")) {
-            chargerMap.drawRangeCircle($('#rangeInM').val() * 1000);
+        if(rangeCheckbox.bootstrapSwitch('state'))
+        {
+            chargerMap.drawRangeCircle(x * 1000);
         }
         else {
             chargerMap.removeRangeCircle();
         }
+        console.log(chargerMap.returnChargerDistr());
         chargerDistr.updateData(chargerMap.returnChargerDistr());
     }
 });

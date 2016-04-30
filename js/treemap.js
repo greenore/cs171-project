@@ -180,7 +180,7 @@ function createVisTree(data) {
             }
         })
         .on("click", function (d) {
-            treeDiagram.openToModel(d.model);
+            treeDiagram.openToModel(d.model); //TODO This should moved into a handler fct.... the treemap doesn't necessarily know about the treeDiagramm
         })
         .call(position_tree)
         .transition()

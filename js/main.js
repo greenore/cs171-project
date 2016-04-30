@@ -12,8 +12,7 @@ var ModelData = {};
 
 queue()
     .defer(d3.csv, "data/electric_vehicles_by_model.csv")
-    .defer(d3.csv, "data/sales07-15.csv")
-    .await(function(error, data,sales){
+    .await(function(error, data){
         //DataWrangling for Model Tree
         allData = data;
 
@@ -77,13 +76,6 @@ queue()
     });
 
 function createVis() {
-    function wait(ms){
-        var start = new Date().getTime();
-        var end = start;
-        while(end < start + ms) {
-            end = new Date().getTime();
-        }
-    }
     treeDiagram = new TreeDiagram('#treediagram',ModelData,salesNumbers);
 };
 
