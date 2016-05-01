@@ -33,9 +33,16 @@ h1 .sub-headline {
 }
 .axis path,
 .axis line {
-    fill: none;
-    stroke: #000;
+    fill: none  ;
+    stroke: none;
     shape-rendering: crispEdges;
+}
+.axis text {
+    font-size: 10px;
+
+}
+#ex1Slider{
+    margin-left: 10px;
 }
 
 .markerText{
@@ -46,4 +53,7 @@ h1 .sub-headline {
     fill: #fff7bc;
     stroke: none;
     stroke-width: 2;
+}
+.customBtn {
+    width: 140px !important;
 }

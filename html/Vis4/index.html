@@ -29,42 +29,45 @@
       <h1>EV's - Charger Network in the US
         <span class="divider">|</span>
           <span class="sub-headline">
-            <span id="charger-count"></span> Chargers
+            <span id="charger-count"></span> Charger locations
           </span>
       </h1>
       <div class="row">
-      <div class="col-md-6">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="input-group">
+        <div class="col-md-6 " >
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="input-group">
               <span class="input-group-btn">
                 <button class="btn btn-default" id = 'locationSearch' type="button">Search...</button>
               </span>
-              <input type="text" id = 'locationSearchTerm' class="form-control" placeholder="Search">
-            </div><!-- /input-group -->
-          </div><!-- /.col-lg-6 -->
-        </div>
-        <div class="row">
-          <div class="col-lg-6" id = 'filterButtons'>
-            <div class="checkbox">
-              <input type="checkbox" name="range-checkbox" id="rangeCheck" checked>
-              <input id="rangeSlider" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="50"/>
-            </div>
-            <button class = 'btn btn-default active' type ='button' id = 'selectAllChargers'>All</button>
+                <input type="text" id = 'locationSearchTerm' class="form-control" placeholder="Search">
+              </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
           </div>
+          <div class="row">
+
+            <div class="col-lg-6" >
+              <div class="checkbox" >
+                <span class="input-group-addon" id="basic-addon1">Draw range circle</span>
+                <input type="checkbox" name="range-checkbox" id="rangeCheck" checked>
+                <input id="rangeSlider" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="50"/>
+              </div>
+              <div>
+                <div id = 'filterButtons'> </div>
+              </div>
+            </div>
+          </div>
+
         </div>
+        <div class="col-md-6 " id = 'chargerDist'></div>
       </div>
-      <div class="col-md-6" id = 'chargerDist'></div>
-        </div>
+      <div><br></div>
+      <!-- Visualization placeholders -->
+      <div id="charger-map"></div>
     </div>
-    <div><br></div>
-    <!-- Visualization placeholders -->
-    <div id="charger-map"></div>
   </div>
 </div>
-</div>
 
-</div>
 
 <!-- Load JS libraries -->
 <script src="js/jquery.min.js"></script>

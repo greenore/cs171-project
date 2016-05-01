@@ -34,6 +34,7 @@ ChargerMap.prototype.initVis = function() {
     vis.CircleMarkerList = [];
     vis.chargerTypesList = Object.keys(vis.chargerTypes);
 
+
     vis.chargerTypesList.map(function (d) {
         //TODO  API icons or offline icons ?
         vis.iconList[d] = L.MakiMarkers.icon({icon: "fuel", color: vis.colorScale(d), size: "m"});
@@ -60,28 +61,32 @@ ChargerMap.prototype.initVis = function() {
     var tmpMarker;
     // sort every station from data into its specific marker list
     vis.data.map(function(d,index){
-            if (+d.latitude && +d.longitude ) {
-                x = d.ev_connector_types;
-                if (x) {
-                    x.forEach(function (el) {
-                        tmpMarker = L.marker([+d.latitude, +d.longitude],{icon: vis.iconList[el]})
-                            .bindPopup('<div class = "markerText"><strong>'  + d.street_address + '<br>'
-                                + d.city + '<br> Charger(s): '
-                                +d.ev_connector_types.join() + '</strong></div>'
-                            );
-                        vis.markerList[el].push(tmpMarker);
-                    });
-                }
+        if (+d.latitude && +d.longitude ) {
+            x = d.ev_connector_types;
+            if (x) {
+                x.forEach(function (el) {
+                    tmpMarker = L.marker([+d.latitude, +d.longitude],{icon: vis.iconList[el]})
+                        .bindPopup('<div class = "markerText"><strong>'  + d.street_address + '<br>'
+                            + d.city + '<br> Charger(s): '
+                            +d.ev_connector_types.join() + '</strong></div>'
+                        );
+                    vis.markerList[el].push(tmpMarker);
+                });
             }
+        }
     });
 
     //create map
     vis.map = L.map(vis.parentElement).setView(vis.mapPosition, 5);
+
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(vis.map);
 
-
+    vis.centerMarker = L.marker(vis.mapPosition, {
+        'draggable' : true
+    });
+    vis.centerMarker.addTo(vis.map);
     // create marker parent
     vis.allChargers = new L.MarkerClusterGroup({ chunkedLoading: true});
     vis.circleChargers = new L.MarkerClusterGroup({ chunkedLoading: true});
@@ -114,16 +119,18 @@ ChargerMap.prototype.addAllMarkers = function() {
         vis.filterList[d] = 1;
         vis.circleFilterList[d]=1;
     });
+    vis.initialState = true;
 };
 
 
 ChargerMap.prototype.removeAllMarkers = function() {
     var vis =  this;
     vis.chargerTypesList.map(function (d,i) {
-       vis.filterList[d] = 0;
-       vis.circleFilterList[d]=0;
+        vis.filterList[d] = 0;
+        vis.circleFilterList[d]=0;
     });
     vis.initialState = false;
+
 };
 
 ChargerMap.prototype.addMarkers = function(filter) {
@@ -148,7 +155,10 @@ ChargerMap.prototype.removeMarkers = function(filter) {
  */
 ChargerMap.prototype.goTo = function(location,bounds){
     var vis =  this;
+    vis.map.removeLayer(vis.centerMarker);
     //map.setView(location);
+    vis.centerMarker = L.marker(location, {});
+    vis.map.addLayer(vis.centerMarker);
     vis.map.fitBounds(bounds);
     vis.updateVis();
 };
@@ -177,24 +187,21 @@ ChargerMap.prototype.returnChargerDistr  = function() {
 
 ChargerMap.prototype.drawRangeCircle = function(radius){
     var vis = this;
-    var center = vis.map.getCenter();
+    var center = vis.centerMarker.getLatLng();
     vis.mode = 'circle';
     vis.CircleSubGroup = {};
-    vis.circle = L.circle( vis.map.getCenter(),radius).addTo(vis.map);
+    vis.circle = L.circle( center,radius).addTo(vis.map);
     vis.map.removeLayer(vis.allChargers);
     vis.chargerTypesList.map(function (d,i) {
         vis.CircleMarkerList[d]=[];
         vis.markerList[d].forEach(function(e,i){
-           // console.log(e.getLatLng().distanceTo(center));
             if (e.getLatLng().distanceTo(center) < radius)
             {
                 vis.CircleMarkerList[d].push(e);
-                //console.log('pushing ' + e);
             }
         });
         vis.CircleSubGroup[d] = L.featureGroup.subGroup(vis.circleChargers,vis.CircleMarkerList[d]);
-        vis.initialState = true;
-        console.log("adding markers : " + i);
+        // vis.initialState = true;
     });
     vis.updateVis();
 };
@@ -204,10 +211,16 @@ ChargerMap.prototype.removeRangeCircle = function(){
     vis.mode = 'full';
     vis.CircleMarkerList = [];
     vis.map.removeLayer(vis.circle);
+    vis.map.removeLayer(vis.circleChargers);
     vis.circleChargers.clearLayers();
-    vis.initialState = true;
+    //vis.initialState = true;
+    vis.chargerTypesList.map(function (d,i) {
+        vis.map.removeLayer(vis.CircleSubGroup[d]);
+        if (vis.circleFilterList[d] == 2){
+            vis.circleFilterList[d] = 1;
+        };
+    });
     vis.updateVis();
-
 };
 
 
@@ -215,15 +228,20 @@ ChargerMap.prototype.removeRangeCircle = function(){
 ChargerMap.prototype.updateVis = function() {
     var vis =  this;
     //console.log("adding charger stations");
+    console.log( vis.mySubGroup);
+    console.log(vis.filterList);
     switch (vis.mode) {
         case 'full' :
             vis.chargerTypesList.map(function (d, i) {
                 switch (vis.filterList[d]) {
 
                     case 0 :
+                        console.log('removing from  map: ' + d);
+
                         vis.map.removeLayer(vis.mySubGroup[d]);
                         break;
                     case 1 :
+                        console.log('adding to map: ' + d);
                         vis.mySubGroup[d].addTo(vis.map);
                         vis.filterList[d] = 2;
                         break;
@@ -232,7 +250,7 @@ ChargerMap.prototype.updateVis = function() {
                         break;
                 }
             });
-            if (vis.initialState) {vis.allChargers.addTo(vis.map)}
+            vis.allChargers.addTo(vis.map);
             vis.allChargers.refreshClusters();
 
             break;
@@ -253,7 +271,7 @@ ChargerMap.prototype.updateVis = function() {
                         break;
                 }
             });
-            if (vis.initialState) {vis.circleChargers.addTo(vis.map)}
+            vis.circleChargers.addTo(vis.map);
             vis.circleChargers.refreshClusters();
             break;
 

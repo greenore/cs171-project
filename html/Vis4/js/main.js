@@ -23,11 +23,11 @@ chargerColorScale =d3.scale.ordinal()
     .domain(Object.keys(chargerTypes));
 
 
-d3.select('#filterButtons').selectAll('button')
+var filterButtons = d3.select('#filterButtons').selectAll('button')
     .data(Object.keys(chargerTypes))
     .enter()
     .append('button')
-    .attr('class','btn btn-default')
+    .attr('class','btn btn-default customBtn')
     .attr('id',function(d){
         return 'filter-'+ d
     })
@@ -42,13 +42,27 @@ d3.select('#filterButtons').selectAll('button')
         else {filterMap(d,'remove')}
     });
 
-d3.select('#selectAllChargers').on('click',function(d){
-    d3.select(this).classed("active", !d3.select(this).classed("active"));
-    if (d3.select(this).classed("active")){
+d3.select('#filterButtons').append('button')
+    .attr('class' , 'btn btn-default active customBtn')
+    .attr('id' , 'selectAllChargers')
+    .text("All");
+
+
+d3.select('#selectAllChargers').on('click',function(){
+    //d3.select(this).classed("active", !d3.select(this).classed("active"));
+    if (!d3.select(this).classed("active")){
+        d3.select(this).classed("active",true);
+        console.log('adding all markers');
         chargerMap.removeAllMarkers();
+        chargerMap.updateVis();
         chargerMap.addAllMarkers();
+        filterButtons.classed('active',false)
+
     }
     else {
+        d3.select(this).classed("active",false);
+        console.log('removing all markers');
+
         chargerMap.removeAllMarkers();
     }
     chargerMap.updateVis();

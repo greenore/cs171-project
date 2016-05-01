@@ -4,12 +4,12 @@ ChargerDistr = function (_parentElement, _data,_colorScale) {
     this.data = _data;
     this.duration = 750;
     this.margin = {
-        top: 5,
+        top: 20,
         right: 5,
-        bottom: 5,
+        bottom: 30,
         left: 5
     };
-    this.width = 400  - this.margin.left - this.margin.right;
+    this.width = 600  - this.margin.left - this.margin.right;
     this.height = 200 - this.margin.top - this.margin.bottom;
 
     this.initVis();
@@ -32,21 +32,24 @@ ChargerDistr.prototype.initVis = function () {
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-    vis.chart.append("text")
-        .text("Charger Distribution")
-        .attr("x", vis.width / 2)
-        .attr("y", -vis.margin.top / 2);
+    //vis.chart.append("text")
+    //    .style("fill", "white")
+    //    .text("Charger Distribution")
+    //    .attr("x", vis.width / 2)
+    //    .attr("y", -vis.margin.top / 2);
 
     vis.yScaleRight = d3.scale.linear()
         .range([vis.height, 0]);
 
     vis.xScaleRight = d3.scale.ordinal()
+        .domain(vis.data.map(function (d) {
+            return d.key
+        }))
         .rangeRoundBands([0, vis.width], 0.1);
 
     vis.xAxisRight = d3.svg.axis()
         .scale(vis.xScaleRight)
-        .orient("bottom")
-        .tickValues(vis.xScaleRight.domain());
+        .orient("bottom");
 
 
     vis.yAxisRight = d3.svg.axis()
@@ -68,10 +71,6 @@ ChargerDistr.prototype.updateVis = function () {
     vis.yScaleRight.domain([0, d3.max(vis.data, function (d) {
         return d.value
     })]);
-
-    vis.xScaleRight.domain(vis.data.map(function (d) {
-        return d.key
-    }));
 
     vis.bar = vis.chart.selectAll("g")
         .data(vis.data)
@@ -95,8 +94,15 @@ ChargerDistr.prototype.updateVis = function () {
     vis.bar.append("rect")
         .attr("class", "distrRect")
         .attr("width", vis.xScaleRight.rangeBand())
-        .style('fill',function(d){return vis.colorScale(d.key)});
-    vis.bar.append('title').text(function(d) {return d.key + ' : ' + d.value});
+        .style('fill',function(d){return vis.colorScale(d.key)})
+        .append('title')
+        .text(function(d) {return d.name + ' : ' + d.value});
+
+
+    vis.chart.selectAll('title')
+        .data(vis.data)
+        .text(function(d) {return d.name + ' : ' + d.value});
+
     vis.chart.selectAll('rect')
         .data(vis.data)
         .transition(vis.duration)
@@ -132,9 +138,9 @@ ChargerDistr.prototype.updateVis = function () {
         .call(vis.yAxisRight)
         .style("fill", "white")
         .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
+        .attr("transform", "translate("+ '-5' +","+(vis.height/2)+")rotate(-90)")
+        .attr("y", 0)
         .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("Number");
+        .style("text-anchor", "middle")
+        .text("Charger Distribution");
 };
