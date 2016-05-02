@@ -55,7 +55,7 @@ EvMap.prototype.initVis = function(){
     vis.path = d3.geo.path()
         .projection(vis.projection);
 
-    vis.mapdata = topojson.feature(vis.topomapdata, vis.topomapdata.objects.states).features
+    vis.mapdata = topojson.feature(vis.topomapdata, vis.topomapdata.objects.states).features;
 
     // Render the mapdata by using the path generator
     vis.svg.append("g")
@@ -222,7 +222,7 @@ EvMap.prototype.updateVis = function(){
 };
 
 EvMap.prototype.mouseincolor = function(d) {
-    vis = this;
+    var vis = this;
 
     var stateAbbr = "#stateid"+d.id;
     $(stateAbbr).css('fill', 'red');

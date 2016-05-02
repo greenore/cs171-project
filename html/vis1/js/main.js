@@ -67,7 +67,7 @@ queue()
                     co2max: co2max,
                     co2min: co2min,
                     registratons: d.Electric_Vehicle_Registrations,
-                    stateXY: stateXY[d.State],
+                    stateXY: stateXY[d.State]
                 },
                 pdata: {
 /*
@@ -103,7 +103,7 @@ function createVis() {
     // areachart = new ...
     evmap = new EvMap("evmap", evDataByStateId, mapData, selected);
     //Default state for bar and pie charts
-    currentState = stateID["Alabama"];
+    currentState = stateID["Alaska"];
     pichart = new PiChart("pichart", evDataByStateId, currentState);
     barchart = new BarChart("barchart", evDataByStateId, currentState);
 }
