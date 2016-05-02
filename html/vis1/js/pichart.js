@@ -28,7 +28,7 @@
 
         vis.margin = {top: 10, right: 0, bottom: 60, left: 10};
 
-        vis.width = 400 - vis.margin.left - vis.margin.right;
+        vis.width = 300 - vis.margin.left - vis.margin.right;
         vis.height = 250 - vis.margin.top - vis.margin.bottom;
         vis.radius = (vis.height + 40) / 2;
         vis.color = d3.scale.category20c();

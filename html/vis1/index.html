@@ -26,26 +26,20 @@
                 <label for="ranking-type">Chart Data:</label>
                 <select class="form-control" id="selected-variable"  onchange="updateUSVisualization()">
                     <option value="CO2">EV - Annual CO2 Equivalence in pounds</option>
-                    <option value="PCT">EV - Percentage</option>
+                    <option value="PCT">EV - Percentage of Electric Vehicles</option>
                 </select>
             </div>
         </form>
-        <div class="col-md-1">
-            <div></div>
-        </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
             <div id="evmap"></div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="row">
                 <div class="col-md-6"><div id="pichart">Electricity Sources<span id="statename"></span></div></div>
             </div>
             <div class="row">
                 <div class="col-md-6"><div id="barchart">Annual Emissions Per Vehicle</div></div>
             </div>
-        </div>
-                <div class="col-md-1">
-            <div></div>
         </div>
 
     </div>

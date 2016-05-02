@@ -16,7 +16,6 @@ EvMap = function (_parentElement, _data, _topomapdata, _selected) {
 };
 
 
-
 /*
  * Initialize visualization (static content, e.g. SVG area or axes)
  */
@@ -28,7 +27,7 @@ EvMap.prototype.initVis = function () {
         top: 40,
         right: 0,
         bottom: 60,
-        left: 5
+        left: 15
     };
 
     vis.width = 800 - vis.margin.left - vis.margin.right;

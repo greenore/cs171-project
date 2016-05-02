@@ -26,7 +26,7 @@ BarChart.prototype.initVis = function(){
     vis.ypadding = 5;
     vis.margin = { top: 40, right: 0, bottom: 60, left: 60 };
 
-    vis.width = 400 - vis.margin.left - vis.margin.right;
+    vis.width = 300 - vis.margin.left - vis.margin.right;
     vis.height = 250 - vis.margin.top - vis.margin.bottom;
 
     // Format text
