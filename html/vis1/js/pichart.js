@@ -51,51 +51,40 @@
             .outerRadius(vis.r);
 
         vis.pie = d3.layout.pie()
+            .sort(null)
             .value(function (d) {
                 return d.value;
             });
 
+        vis.category[0] = "Coal";
+        vis.category[1] = "Oil";
+        vis.category[2] = "Natural Gas";
+        vis.category[3] = "Nuclear";
+        vis.category[4] = "Other";
+        vis.category[5] = "Hydro";
+        vis.category[6] = "Biomass";
+        vis.category[7] = "Geothermal";
+        vis.category[8] = "Solar";
+        vis.category[9] = "Wind";
 
-        vis.category[0] = "CO2 Free";
-        vis.category[1] = "CO2 Producing";
-
-        vis.dynamicval["#e5e5e5"] = 0;
-        vis.dynamicval["#3942a7"] = 1;
-
-        vis.color = ["#e5e5e5", "#3942a7"];
-
-/*        vis.category[0] = "Natural Gas";
-        vis.category[1] = "Nuclear";
-        vis.category[2] = "Coal";
-        vis.category[3] = "Other";
-        vis.category[4] = "Hydro";
-        vis.category[5] = "Biomass";
-        vis.category[6] = "Geothermal";
-        vis.category[7] = "Solar";
-        vis.category[8] = "Wind";
-        vis.category[9] = "Oil";
-
-        vis.dynamicval["#3A01DF"] = 0;
-        vis.dynamicval["#B40404"] = 1;
-        vis.dynamicval["#000000"] = 2;
-        vis.dynamicval["#FF00FF"] = 3;
-        vis.dynamicval["#01A9DB"] = 4;
-        vis.dynamicval["#886A08"] = 5;
-        vis.dynamicval["#DF7401"] = 6;
-        vis.dynamicval["#FFFF00"] = 7;
-        vis.dynamicval["#3ADF00"] = 8;
-        vis.dynamicval["#6E6E6E"] = 9;
-
+        vis.dynamicval["#543005"] = 0;
+        vis.dynamicval["#8c510a"] = 1;
+        vis.dynamicval["#bf812d"] = 2;
+        vis.dynamicval["#dfc27d"] = 3;
+        vis.dynamicval["#f6e8c3"] = 4;
+        vis.dynamicval["#c7eae5"] = 5;
+        vis.dynamicval["#80cdc1"] = 6;
+        vis.dynamicval["#35978f"] = 7;
+        vis.dynamicval["#01665e"] = 8;
+        vis.dynamicval["#003c30"] = 9;
 
         //var color = d3.scale.category20b();
 
-        vis.color = ["#3A01DF", "#B40404",
-                     "#000000", "#FF00FF",
-                     "#01A9DB", "#886A08",
-                     "#DF7401", "#FFFF00",
-                     "#3ADF00", "#6E6E6E"];
-                     */
-
+        vis.color = ["#543005", "#8c510a",
+                     "#bf812d", "#dfc27d",
+                     "#f6e8c3", "#c7eae5",
+                     "#80cdc1", "#35978f",
+                     "#01665e", "#003c30"];
 
         vis.legend = vis.svg.selectAll('.legend')
             .data(vis.color)
@@ -128,7 +117,9 @@
         vis.legend.append('text')
             .attr('x', vis.legendrectsz - ( 6 * (vis.legendrectsz  + vis.lspacing)))
             .attr('y', vis.legendrectsz - vis.lspacing)
-            .text(function(d,i) { return vis.category[i]; });
+            .text(function(d,i) {
+                return vis.category[i] + "x";
+        });
 
 
         // TO-DO: (Filter, aggregate, modify data)
@@ -193,13 +184,14 @@
             })
             .attr("d", vis.arc)
             .attr("stroke-dasharray", "0.5")
-            .attr("stroke-width", "0.5")
+            .attr("stroke-width", "2")
             .attr("stroke", "#222");
 
         vis.legend.selectAll('.dynamictext')
             .attr('x', vis.legendrectsz + vis.lspacing)
             .attr('y', vis.legendrectsz - vis.lspacing)
             .text(function(d,i) {
+                console.log(d);
                 return vis.chartdata[vis.dynamicval[d]].value;
             });
 

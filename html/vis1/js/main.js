@@ -70,20 +70,20 @@ queue()
                     stateXY: stateXY[d.State],
                 },
                 pdata: {
-/*
-                    NaturalGas: +d.NaturalGas,
-                    Nuclear: +d.Nuclear,
                     Coal: +d.Coal,
+                    Oil: +d.Oil,
+                    NaturalGas: +d.NaturalGas,
                     Other: +d.Other,
+                    Nuclear: +d.Nuclear,
                     Hydro: +d.Hydro,
                     Biomass: +d.Biomass,
                     Geothermal: +d.Geothermal,
                     Solar: +d.Solar,
-                    Wind: +d.Wind,
-                    Oil: +d.Oil,
-*/
+                    Wind: +d.Wind
+/*
                     NoCO2: +d.co2_free,
                     CO2: +d.co2_producing
+                    */
                 },
                 bdata: {
                     AllElectric: +d.CO2,
