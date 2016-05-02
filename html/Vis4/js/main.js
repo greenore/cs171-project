@@ -22,6 +22,28 @@ chargerColorScale =d3.scale.ordinal()
     .range(chargerColors)
     .domain(Object.keys(chargerTypes));
 
+var rangeCheckbox =$("[name='range-checkbox']").bootstrapSwitch('state',false);
+var rangeSlider = $("#rangeSlider").slider();
+
+
+rangeCheckbox.on('switchChange.bootstrapSwitch',function(){
+    var x = rangeSlider.slider('getValue');
+    if (x > 0) {
+        if(rangeCheckbox.bootstrapSwitch('state'))
+        {
+            allFilterButton.classed('active',true);
+            filterButtons.classed('active',false);
+            chargerMap.drawRangeCircle(x * 1000);
+        }
+        else {
+            allFilterButton.classed('active',true);
+            filterButtons.classed('active',false);
+            chargerMap.removeRangeCircle();
+        }
+        chargerDistr.updateData(chargerMap.returnChargerDistr());
+    }
+});
+
 
 var filterButtons = d3.select('#filterButtons').selectAll('button')
     .data(Object.keys(chargerTypes))
@@ -48,7 +70,7 @@ d3.select('#filterButtons').append('button')
     .text("All");
 
 
-d3.select('#selectAllChargers').on('click',function(){
+var allFilterButton = d3.select('#selectAllChargers').on('click',function(){
     //d3.select(this).classed("active", !d3.select(this).classed("active"));
     if (!d3.select(this).classed("active")){
         d3.select(this).classed("active",true);
@@ -66,6 +88,9 @@ d3.select('#selectAllChargers').on('click',function(){
     chargerDistr.updateData(chargerMap.returnChargerDistr());
 
 });
+
+
+
 
 
 function filterMap(filter,action){

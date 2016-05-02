@@ -115,8 +115,12 @@ ChargerMap.prototype.isInitial = function (){
 ChargerMap.prototype.addAllMarkers = function() {
     var vis =  this;
     vis.chargerTypesList.map(function (d,i) {
-        vis.filterList[d] = 1;
-        vis.circleFilterList[d]=1;
+        if (vis.mode == 'full') {
+            vis.filterList[d] = 1;
+        }
+        else {
+            vis.circleFilterList[d] = 1;
+        }
     });
     vis.initialState = true;
 };
@@ -125,8 +129,12 @@ ChargerMap.prototype.addAllMarkers = function() {
 ChargerMap.prototype.removeAllMarkers = function() {
     var vis =  this;
     vis.chargerTypesList.map(function (d,i) {
-        vis.filterList[d] = 0;
-        vis.circleFilterList[d]=0;
+        if ( vis.mode== 'full') {
+            vis.filterList[d] = 0;
+        }
+        else {
+            vis.circleFilterList[d] = 0;
+        }
     });
     vis.initialState = false;
 
@@ -135,8 +143,13 @@ ChargerMap.prototype.removeAllMarkers = function() {
 ChargerMap.prototype.addMarkers = function(filter) {
     var vis =  this;
     filter.forEach(function(d){
-        vis.circleFilterList[d] = 1;
-        vis.filterList[d] = 1;
+        if (vis.mode == 'full') {
+            vis.filterList[d] = 1;
+
+        }
+        else {
+            vis.circleFilterList[d] = 1;
+        }
     });
     //console.log(vis.filterList);
 };
@@ -144,8 +157,12 @@ ChargerMap.prototype.addMarkers = function(filter) {
 ChargerMap.prototype.removeMarkers = function(filter) {
     var vis =  this;
     filter.forEach(function(d){
-        vis.filterList[d] = 0;
-        vis.circleFilterList[d]=0;
+        if (vis.mode == 'full') {
+            vis.filterList[d] = 0;
+        }
+        else {
+            vis.circleFilterList[d] = 0;
+        }
     });
 };
 
@@ -192,6 +209,7 @@ ChargerMap.prototype.drawRangeCircle = function(radius){
     vis.circle = L.circle( center,radius).addTo(vis.map);
     vis.map.removeLayer(vis.allChargers);
     vis.chargerTypesList.map(function (d,i) {
+        vis.circleFilterList[d] = 1;
         vis.CircleMarkerList[d]=[];
         vis.markerList[d].forEach(function(e,i){
             if (e.getLatLng().distanceTo(center) < radius)
@@ -202,6 +220,8 @@ ChargerMap.prototype.drawRangeCircle = function(radius){
         vis.CircleSubGroup[d] = L.featureGroup.subGroup(vis.circleChargers,vis.CircleMarkerList[d]);
         // vis.initialState = true;
     });
+    vis.initialState = true;
+    console.log(vis.circleFilterList);
     vis.updateVis();
 };
 
@@ -215,10 +235,13 @@ ChargerMap.prototype.removeRangeCircle = function(){
     //vis.initialState = true;
     vis.chargerTypesList.map(function (d,i) {
         vis.map.removeLayer(vis.CircleSubGroup[d]);
-        if (vis.circleFilterList[d] == 2){
-            vis.circleFilterList[d] = 1;
-        };
+        if (vis.filterList[d] == 0){
+            vis.filterList[d] = 1;
+        }
+
     });
+    vis.initialState = true;
+    console.log(vis.filterList);
     vis.updateVis();
 };
 
@@ -228,6 +251,9 @@ ChargerMap.prototype.updateVis = function() {
     var vis =  this;
     switch (vis.mode) {
         case 'full' :
+            console.log('adding full map markers:');
+            console.log(vis.filterList);
+
             vis.chargerTypesList.map(function (d, i) {
                 switch (vis.filterList[d]) {
 
@@ -247,14 +273,16 @@ ChargerMap.prototype.updateVis = function() {
 
             break;
         case 'circle' :
+            console.log('adding circle markers: ');
+            console.log(vis.circleFilterList);
             vis.chargerTypesList.map(function (d, i) {
+
                 switch (vis.circleFilterList[d]) {
 
                     case 0 :
                         vis.map.removeLayer(vis.CircleSubGroup[d]);
                         break;
                     case 1 :
-                        console.log('adding subgroups');
                         vis.CircleSubGroup[d].addTo(vis.map);
                         vis.circleFilterList[d] = 2;
                         break;
