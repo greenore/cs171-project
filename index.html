@@ -63,9 +63,6 @@
                 <a href="https://en.wikipedia.org/wiki/Hybrid_electric_vehicle">(Learn more ...)</a>
             </p>
 
-
-
-
             <p>A <strong>plug-in hybrid electric vehicle (PHEV)</strong>, also known as a plug-in hybrid, is a hybrid electric vehicle with rechargeable batteries that can be restored to full charge by connecting a plug to an external electric power source. A PHEV shares the characteristics of both a conventional hybrid electric vehicle, having an electric motor and an internal combustion engine; and of an all-electric vehicle, also having a plug to connect to the electrical grid. PHEVs have a much larger all-electric range as compared to conventional gasoline-electric hybrids, and also eliminate the "range anxiety" associated with all-electric vehicles, because the combustion engine works as a backup when the batteries are depleted.
                 <a href="https://en.wikipedia.org/wiki/Hybrid_electric_vehicle#Plug-in_hybrids_.28PHEVs.29">(Learn more ...)</a> </p>
 
@@ -73,8 +70,14 @@
                 <a href="https://en.wikipedia.org/wiki/Battery_electric_vehicle">(Learn more ...)</a></p>
         </div>
 
-        <div id="container">
 
+        <div class="col-md-12">
+            <h2>Will the environment benefit from driving an electric car? </h2>
+
+            <p>See how your state generate its electricity (green - renewable, brown - conventional) and what that means for the CO2 equivalent of electric vehicles. (CO2 output per vehicle annual data to inform the choice for selection.</p>
+        </div>
+
+        <div id="container">
             <!-- Select box to choose the ranking type -->
             <div class="col-md-12">
                 <!-- Parent container for the visualization -->
@@ -86,17 +89,15 @@
 
         </div>
 
-
-        <div class="space2"></div>
-
-
         <div class="col-md-12">
-            <p>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            <h2>Already eyeing one?</h2>
 
-            </p>
+            <p>Compare electric vehicles by their fuel economy and dive into the model variety of all those manufacturers. The larger the square, the further you can drive with the same charge. The darker the color, the bigger your engine is going to be. (You can click on the treemap!)</p>
+            
+            <p>This visualization also provides the mechanical/electrical data as well as the the millage, capacity/size of the motor, image, and the price of one’s interested vehicle.</p>
+            
+            <p>When clicking on the nodes or a car a tree unfolds which indicates what are the best selling cars. The larger the size the higher the number of sales.</p>
         </div>
-
 
         <div class="col-md-12">
             <div class="row">
@@ -140,30 +141,22 @@
             </div>
         </div>
 
-
         <div class="col-md-12">
-            <p> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." Sektion 1.10.32 des "de Finibus Bonorum et Malorum", geschrieben von Cicero, 45 v. Chr.</p>
+            <h2>1.21 gigawatts... Only (Doc’s) Deloreans need so much electricity!</h2>
 
-            <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+            <p> This map will give you an idea where to charge your next electric car. (This visualization introduces the type of connector requires for the EV’s and the range require for one’s destination -- plan ahead for the trip, as in what type connector, distance, location availability etc…..)
             </p>
-
         </div>
+
         <div class="row">
-            <iframe name="iframe" id="youriframe3" src="html/Vis4/index.html" height=1500px width=98% scrolling=no frameborder=no></iframe>
+            <iframe name="iframe" id="youriframe3" src="html/Vis4/index.html" height=900px width=98% scrolling=no frameborder=no></iframe>
         </div>
 
 
-
-
         <div class="col-md-12">
-            <p>The primary data source will be http://www.afdc.energy.gov/data/ from the US Department of Energy. We have acquired sufficient data to generate at least 2 different visualizations without much data cleaning.</p>
-            <p>
-                We will rely on an API provided by http://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/ to implement a third visualization. The API is very well documented and shouldn't require a great amount of work to obtain useful data.
-            </p>
-            <p>
-                A fourth visualization will require some web-scraping from http://www.afdc.energy.gov/vehicles/electric_emissions.php. This data source will most likely require the largest amount of data munging, because it is not documented and will rely on reverse engineering. However we are confident that we can solve this within a reasonable time limit.</p>
-            <p>
-                We also did some preliminary data analysis and data munging on one of the datasets. That is, the “Electric Vehicles by Model” set. The reproducible R-Code as well as the data is on a private Github repository: https://github.com/greenore/cs171-project</p>
+            <h2>What is the source material?</h2>
+
+            <p>The primary data source is http://www.afdc.energy.gov/data/ from the US Department of Energy. Furthermore, the API provided by http://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/ was used. We also used a video from the Union of Concerned Scientists (https://www.youtube.com/embed/4yqIjShoW6U). The car images are taken from the company websites. The header image is taken from http://jawallpapers.com and touched up with gimp.</p>
         </div>
 
     </div>

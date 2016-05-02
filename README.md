@@ -12,6 +12,11 @@ A focused, minimum viable product (hence MVP). The project takes a deep dive int
 
 ## Architecture/Philosophies
 * HTML, CSS, and JS
-* Bootstrap & D3 as frameworks (keep it simple!)
+* Bootstrap, JQuery, Colorbrewer & D3 as frameworks (keep it simple!)
 * Mobile-friendly (check for different screen sizes)
 * Prototypes in R, Accesible via iFrames
+* Encapsilated code as much as possible.
+
+
+
+

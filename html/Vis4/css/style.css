@@ -3,7 +3,7 @@ body {
     min-width: 679px;
     margin: 0;
     padding: 0;
-    background-color: rgba(34, 34, 34, 0.99);
+    background-color: #222;
     color: white;
 }
 .btn.active {
