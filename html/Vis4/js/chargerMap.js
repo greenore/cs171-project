@@ -157,7 +157,7 @@ ChargerMap.prototype.goTo = function(location,bounds){
     var vis =  this;
     vis.map.removeLayer(vis.centerMarker);
     //map.setView(location);
-    vis.centerMarker = L.marker(location, {});
+    vis.centerMarker = L.marker(location, {'draggable' : true});
     vis.map.addLayer(vis.centerMarker);
     vis.map.fitBounds(bounds);
     vis.updateVis();
