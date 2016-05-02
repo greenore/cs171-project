@@ -118,7 +118,7 @@
             .attr('x', vis.legendrectsz - ( 6 * (vis.legendrectsz  + vis.lspacing)))
             .attr('y', vis.legendrectsz - vis.lspacing)
             .text(function(d,i) {
-                return vis.category[i] + "x";
+                return vis.category[i];
         });
 
 

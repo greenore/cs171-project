@@ -29,8 +29,8 @@ BarChart.prototype.initVis = function(){
     vis.width = 400 - vis.margin.left - vis.margin.right;
     vis.height = 250 - vis.margin.top - vis.margin.bottom;
 
-
-
+    // Format text
+    vis.format = d3.format(",");
 
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -114,15 +114,13 @@ BarChart.prototype.updateVis = function(){
 
         vis.svg.selectAll(".bartext")
             .data(vis.bardata)
-            .attr("x", function(d) { return (vis.x(d.type)); /*+ (vis.x.rangeBand()/2)-10);*/ })
+            .attr("x", function(d) { return (vis.x(d.type) + (vis.x.rangeBand()/3));})
             .attr("y", function(d) { return vis.y(d.value)-vis.ypadding; })
             .text(function(d){
-                return (d.value);
+                return (vis.format(d.value));
             });
 
     } else {
-
-
 
         vis.svg.append("g")
             .attr("class", "axis x-axis")
@@ -141,7 +139,7 @@ BarChart.prototype.updateVis = function(){
             .enter()
             .append("rect")
             .attr("class", "bar")
-            .style("fill", "lightblue")
+            .style("fill", "#35978f")
             .attr("x", function(d) { return vis.x(d.type); })
             .attr("width", vis.x.rangeBand())
             .attr("y", function(d) { return vis.y(d.value); })
@@ -153,10 +151,10 @@ BarChart.prototype.updateVis = function(){
             .append("g")
             .append("text")
             .attr("class", "bartext")
-            .attr("x", function(d) { return (vis.x(d.type)); /* + (vis.x.rangeBand()/2));*/ })
+            .attr("x", function(d) { return (vis.x(d.type) + (vis.x.rangeBand()/3));})
             .attr("y", function(d) { return vis.y(d.value)-vis.ypadding; })
             .text(function(d){
-                return (d.value);
+                return (vis.format(d.value));
             });
 
         // Add the text label for the Y axis

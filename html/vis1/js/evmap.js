@@ -70,7 +70,7 @@ EvMap.prototype.initVis = function () {
         .append("path")
         .attr("d", vis.path)
         .attr("stroke", "#222") //Put lines for states
-        .attr("stroke-width", "1.2px") //Put lines for states
+        .attr("stroke-width", "2") //Put lines for states
         .attr("stroke-dasharray", "0.5")
         .on("mouseover", function (d) {
             vis.mouseincolor(d);
