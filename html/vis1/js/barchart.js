@@ -4,14 +4,12 @@
  * @param _data				-- data
  */
 
-BarChart = function (_parentElement, _data, _stateid) {
+BarChart = function(_parentElement, _data, _stateid){
     this.parentElement = _parentElement;
     this.data = _data;
     this.stateid = _stateid;
     this.update = false;
 
-    console.log("BarChart");
-    console.log(this.data);
 
     this.initVis();
 };
@@ -22,23 +20,18 @@ BarChart = function (_parentElement, _data, _stateid) {
  * Initialize visualization (static content, e.g. SVG area or axes)
  */
 
-BarChart.prototype.initVis = function () {
+BarChart.prototype.initVis = function(){
     var vis = this;
 
     vis.ypadding = 5;
-    vis.margin = {
-        top: 40,
-        right: 0,
-        bottom: 60,
-        left: 60
-    };
+    vis.margin = { top: 40, right: 0, bottom: 60, left: 60 };
 
     vis.width = 400 - vis.margin.left - vis.margin.right;
     vis.height = 250 - vis.margin.top - vis.margin.bottom;
 
 
     // SVG drawing area
-    vis.svg = d3.select("#barchart_area").append("svg")
+    vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
@@ -48,7 +41,7 @@ BarChart.prototype.initVis = function () {
     vis.x = d3.scale.ordinal().rangeRoundBands([0, vis.width], .05);
     vis.y = d3.scale.linear().range([vis.height, 0]);
 
-
+    
     // TO-DO: (Filter, aggregate, modify data)
     vis.wrangleData();
 };
@@ -59,29 +52,24 @@ BarChart.prototype.initVis = function () {
  * Data wrangling if necessary
  */
 
-BarChart.prototype.wrangleData = function () {
+BarChart.prototype.wrangleData = function(){
     var vis = this;
     vis.barobj = [];
-    vis.data.map(function (d) {
-        if (d.stateid == vis.stateid) {
+    vis.data.map( function(d)  {
+        if (d.stateid == vis.stateid ) {
             vis.barobj.push(d.bdata);
         }
     });
 
     vis.bardata = [];
-    $.each(vis.barobj, function (key, value) {
-        //console.log( key );
-        $.each(value, function (k, v) {
-            //console.log(k);
-            //console.log(v);
+    $.each( vis.barobj, function( key, value ) {
+        $.each( value, function( k, v ) {
             vis.bardata.push({
                 type: k,
                 value: v
             });
         });
     });
-
-    console.log(vis.bardata);
 
     // Update the visualization
     vis.updateVis();
@@ -93,7 +81,7 @@ BarChart.prototype.wrangleData = function () {
  * Function parameters only needed if different kinds of updates are needed
  */
 
-BarChart.prototype.updateVis = function () {
+BarChart.prototype.updateVis = function(){
     var vis = this;
 
     vis.min = d3.min(vis.bardata, function (d) {
@@ -102,9 +90,7 @@ BarChart.prototype.updateVis = function () {
     vis.max = d3.max(vis.bardata, function (d) {
         return d.value;
     });
-    vis.x.domain(vis.bardata.map(function (d) {
-        return d.type;
-    }));
+    vis.x.domain(vis.bardata.map(function(d) { return d.type; }));
 
     vis.xAxis = d3.svg.axis()
         .scale(vis.x)
@@ -118,22 +104,14 @@ BarChart.prototype.updateVis = function () {
     if (vis.update) {
         vis.svg.selectAll("rect")
             .data(vis.bardata)
-            .attr("y", function (d) {
-                return vis.y(d.value);
-            })
-            .attr("height", function (d) {
-                return vis.height - vis.y(d.value);
-            });
+            .attr("y", function(d) { return vis.y(d.value); })
+            .attr("height", function(d) { return vis.height - vis.y(d.value); });
 
         vis.svg.selectAll(".bartext")
             .data(vis.bardata)
-            .attr("x", function (d) {
-                return (vis.x(d.type)); /*+ (vis.x.rangeBand()/2)-10);*/
-            })
-            .attr("y", function (d) {
-                return vis.y(d.value) - vis.ypadding;
-            })
-            .text(function (d) {
+            .attr("x", function(d) { return (vis.x(d.type)); /*+ (vis.x.rangeBand()/2)-10);*/ })
+            .attr("y", function(d) { return vis.y(d.value)-vis.ypadding; })
+            .text(function(d){
                 return (d.value);
             });
 
@@ -141,9 +119,7 @@ BarChart.prototype.updateVis = function () {
         vis.y.domain([0, vis.max]);
         vis.yAxis = d3.svg.axis()
             .scale(vis.y)
-            .tickFormat(function (d) {
-                return (d / 1000) + " K";
-            })
+            .tickFormat(function(d) { return (d/1000) + " K"; })
             .orient("left")
             .ticks(10);
 
@@ -157,17 +133,22 @@ BarChart.prototype.updateVis = function () {
             .append("rect")
             .attr("class", "bar")
             .style("fill", "lightblue")
-            .attr("x", function (d) {
-                return vis.x(d.type);
-            })
+            .attr("x", function(d) { return vis.x(d.type); })
             .attr("width", vis.x.rangeBand())
-            .attr("y", function (d) {
-                return vis.y(d.value);
-            })
-            .attr("height", function (d) {
-                return vis.height - vis.y(d.value);
-            });
+            .attr("y", function(d) { return vis.y(d.value); })
+            .attr("height", function(d) { return vis.height - vis.y(d.value); });
 
+        vis.svg.selectAll(".rect")
+            .data(vis.bardata)
+            .enter()
+            .append("g")
+            .append("text")
+            .attr("class", "bartext")
+            .attr("x", function(d) { return (vis.x(d.type)); /* + (vis.x.rangeBand()/2));*/ })
+            .attr("y", function(d) { return vis.y(d.value)-vis.ypadding; })
+            .text(function(d){
+                return (d.value);
+            });
 
         // Add the text label for the Y axis
         vis.svg.append("text")
@@ -176,7 +157,7 @@ BarChart.prototype.updateVis = function () {
         vis.svg.selectAll("text.ytext")
             .attr("transform", "rotate(-90)")
             .attr("y", 0 - (vis.margin.left - 15))
-            .attr("x", 0 - (vis.height / 2))
+            .attr("x",0 - (vis.height / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
             .text("Pounds of CO2 Equivalent");

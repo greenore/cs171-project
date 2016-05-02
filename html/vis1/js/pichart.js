@@ -14,10 +14,6 @@
         this.legendrectsz = 10;
         this.lspacing = 4;
 
-        //console.log("PiChart");
-        console.log(this.data);
-        //console.log(this.stateid);
-        //console.log(this.statename);
 
         this.initVis();
     };
@@ -30,12 +26,7 @@
     PiChart.prototype.initVis = function () {
         var vis = this;
 
-        vis.margin = {
-            top: 10,
-            right: 0,
-            bottom: 60,
-            left: 10
-        };
+        vis.margin = {top: 10, right: 0, bottom: 60, left: 10};
 
         vis.width = 400 - vis.margin.left - vis.margin.right;
         vis.height = 250 - vis.margin.top - vis.margin.bottom;
@@ -44,7 +35,7 @@
 
 
         // TO-DO
-        vis.svg = d3.select("#piechart_area").append("svg")
+        vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
             .attr("height", vis.height)
             .append("g")
@@ -65,7 +56,15 @@
             });
 
 
-        vis.category[0] = "Natural Gas";
+        vis.category[0] = "CO2 Free";
+        vis.category[1] = "CO2 Producing";
+
+        vis.dynamicval["#e5e5e5"] = 0;
+        vis.dynamicval["#3942a7"] = 1;
+
+        vis.color = ["#e5e5e5", "#3942a7"];
+
+/*        vis.category[0] = "Natural Gas";
         vis.category[1] = "Nuclear";
         vis.category[2] = "Coal";
         vis.category[3] = "Other";
@@ -95,6 +94,7 @@
                      "#01A9DB", "#886A08",
                      "#DF7401", "#FFFF00",
                      "#3ADF00", "#6E6E6E"];
+                     */
 
 
         vis.legend = vis.svg.selectAll('.legend')
@@ -102,9 +102,9 @@
             .enter()
             .append('g')
             .attr('class', 'legend')
-            .attr('transform', function (d, i) {
+            .attr('transform', function(d, i) {
                 ht = vis.legendrectsz + vis.lspacing;
-                ofst = ht * vis.color.length / 2;
+                ofst =  ht * vis.color.length / 2;
                 hz = 16 * vis.legendrectsz;
                 vt = i * ht - ofst;
                 return 'translate(' + hz + ',' + vt + ')';
@@ -114,17 +114,21 @@
             .data(vis.color)
             .attr('width', vis.legendrectsz)
             .attr('height', vis.legendrectsz)
-            .style('fill', function (d) {
+            .style('fill', function(d){
                 return d;
             })
             .style('stroke', "#222");
 
         vis.legend.append('text')
-            .attr('x', vis.legendrectsz - (6 * (vis.legendrectsz + vis.lspacing)))
+            .attr("class", "dynamictext")
+            .attr('x', vis.legendrectsz + vis.lspacing)
             .attr('y', vis.legendrectsz - vis.lspacing)
-            .text(function (d, i) {
-                return vis.category[i];
-            });
+            .text("place holder");
+
+        vis.legend.append('text')
+            .attr('x', vis.legendrectsz - ( 6 * (vis.legendrectsz  + vis.lspacing)))
+            .attr('y', vis.legendrectsz - vis.lspacing)
+            .text(function(d,i) { return vis.category[i]; });
 
 
         // TO-DO: (Filter, aggregate, modify data)
@@ -148,22 +152,16 @@
         vis.data.forEach(function (d) {
             if (d.stateid == vis.stateid) {
                 vis.statename = d.state;
-                console.log("STATE");
-                console.log(vis.statename);
             }
         });
 
-        //console.log(vis.piedata);
 
         vis.chartdata = [];
         vis.labelarray = [];
 
         $.each(vis.piedata, function (key, value) {
-            //console.log( key );
             var i = 0;
             $.each(value, function (k, v) {
-                //console.log(k);
-                //console.log(v);
                 vis.labelarray[i++] = k;
                 vis.chartdata.push({
                     label: k,
@@ -172,9 +170,6 @@
             });
         });
 
-        console.log("Hello World!");
-        console.log(vis.chartdata);
-
         // Update the visualization
         vis.updateVis();
     };
@@ -182,8 +177,6 @@
 
     PiChart.prototype.updateVis = function () {
         var vis = this;
-        //console.log(vis.chartdata[0].value);
-        console.log(vis.statename);
         $("#statename").html("<br> (" + vis.statename + ")");
 
         vis.svg.data([vis.chartdata]);
@@ -193,10 +186,9 @@
             .enter()
             .append("g")
             .attr("class", "slice");
-
+        
         vis.arcs.append("path")
             .attr("fill", function (d, i) {
-                //console.log(d.value);
                 return vis.color[i];
             })
             .attr("d", vis.arc)
@@ -204,4 +196,12 @@
             .attr("stroke-width", "0.5")
             .attr("stroke", "#222");
 
+        vis.legend.selectAll('.dynamictext')
+            .attr('x', vis.legendrectsz + vis.lspacing)
+            .attr('y', vis.legendrectsz - vis.lspacing)
+            .text(function(d,i) {
+                return vis.chartdata[vis.dynamicval[d]].value;
+            });
+
     };
+

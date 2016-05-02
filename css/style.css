@@ -13,8 +13,8 @@ html {
     min-width: 679px;
     margin: 0;
     padding: 0;
-    background-color: rgba(34, 34, 34, 0.99);
-    color: white;
+    background-color: #222;
+    color: #ffffff;
 }
 
 p {
@@ -24,20 +24,59 @@ p {
 /* Header */
 
 .header {
-    background-image: url("../img/header.jpg");
+    background-image: url("../img/header4.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     background-attachment: fixed;
-    color: rgba(25, 25, 25, 0.79);
+    color: #222;
     min-height: 100vh;
 }
 
-.header > p {
-    text-align: center;
-    z-index: 100;
+.title {
+    top: 21%;
+    left: 20%;
+    position: absolute;
+    text-align: left;
+    text-shadow: #000000 0 0 14px;
+    color: white;
+    width: 60%;
+    z-index: 999;
 }
+
+.title > h1 {
+    font-size: 5em;
+}
+
+.title > h3 {
+    font-size: 3.5em;
+}
+
+.title > h5 {
+    font-size: 2.8em;
+}
+
+#header-background {
+    top: 20%;
+    left: 18%;
+    position: absolute;
+    text-align: left;
+    text-shadow: #ffffff 0 0 14px;
+    color: white;
+    width: 64%;
+    height: 60%;
+    background-color: black;
+    z-index: 0;
+    opacity: 0.3;
+}
+
+
+
+.container {
+    padding-bottom: 40px;
+}
+
 
 
 /* Blockquote */
@@ -76,66 +115,3 @@ blockquote cite:before {
     content: "\2014 \2009";
 }
 
-
-/* Title */
-
-.title {
-    padding-top: 15%;
-    position: relative;
-    text-shadow: #e69d9d 0 0 14px;
-}
-
-.title > h1 {
-    font-size: 5em;
-}
-
-.title > h3 {
-    font-size: 3.5em;
-}
-
-.title > h5 {
-    font-size: 2.8em;
-    vertical-align: bottom;
-}
-
-.header > .title > h1,
-.header > .title > h3,
-.header > .title > h5 {
-    width: 60%;
-    margin: auto;
-}
-
-.container {
-    padding-bottom: 40px;
-}
-
-#space1 {
-    height: 10px;
-}
-
-.space2 {
-    height: 22px;
-}
-
-#selected-variable {
-    font-size: 14px;
-    width: 450px;
-    background-color: rgba(217, 209, 209, 0.88);
-    font-weight: bold;
-    color: black;
-}
-
-#global-funding {
-    text-align: center;
-}
-
-.chart-text {
-    font-size: 12px;
-}
-
-
-/* Choropleth */
-
-.btn {
-    background-color: #cecece;
-}

@@ -70,6 +70,7 @@ queue()
                     stateXY: stateXY[d.State],
                 },
                 pdata: {
+/*
                     NaturalGas: +d.NaturalGas,
                     Nuclear: +d.Nuclear,
                     Coal: +d.Coal,
@@ -79,7 +80,10 @@ queue()
                     Geothermal: +d.Geothermal,
                     Solar: +d.Solar,
                     Wind: +d.Wind,
-                    Oil: +d.Oil
+                    Oil: +d.Oil,
+*/
+                    NoCO2: +d.co2_free,
+                    CO2: +d.co2_producing
                 },
                 bdata: {
                     AllElectric: +d.CO2,
@@ -100,7 +104,6 @@ function createVis() {
     evmap = new EvMap("evmap", evDataByStateId, mapData, selected);
     //Default state for bar and pie charts
     currentState = stateID["Alabama"];
-    console.log(currentState);
     pichart = new PiChart("pichart", evDataByStateId, currentState);
     barchart = new BarChart("barchart", evDataByStateId, currentState);
 }
@@ -111,8 +114,7 @@ function updateUSVisualization() {
 }
 
 
-function stateClicked(stateid) {
-    console.log(stateid);
+function stateHover(stateid) {
     pichart.stateid = stateid;
     pichart.wrangleData();
     barchart.stateid = stateid;
