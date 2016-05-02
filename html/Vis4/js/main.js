@@ -22,6 +22,28 @@ chargerColorScale =d3.scale.ordinal()
     .range(chargerColors)
     .domain(Object.keys(chargerTypes));
 
+var rangeCheckbox =$("[name='range-checkbox']").bootstrapSwitch('state',false);
+var rangeSlider = $("#rangeSlider").slider();
+
+
+rangeCheckbox.on('switchChange.bootstrapSwitch',function(){
+    var x = rangeSlider.slider('getValue');
+    if (x > 0) {
+        if(rangeCheckbox.bootstrapSwitch('state'))
+        {
+            allFilterButton.classed('active',true);
+            filterButtons.classed('active',false);
+            chargerMap.drawRangeCircle(x * 1000);
+        }
+        else {
+            allFilterButton.classed('active',true);
+            filterButtons.classed('active',false);
+            chargerMap.removeRangeCircle();
+        }
+        chargerDistr.updateData(chargerMap.returnChargerDistr());
+    }
+});
+
 
 var filterButtons = d3.select('#filterButtons').selectAll('button')
     .data(Object.keys(chargerTypes))
@@ -48,11 +70,10 @@ d3.select('#filterButtons').append('button')
     .text("All");
 
 
-d3.select('#selectAllChargers').on('click',function(){
+var allFilterButton = d3.select('#selectAllChargers').on('click',function(){
     //d3.select(this).classed("active", !d3.select(this).classed("active"));
     if (!d3.select(this).classed("active")){
         d3.select(this).classed("active",true);
-        console.log('adding all markers');
         chargerMap.removeAllMarkers();
         chargerMap.updateVis();
         chargerMap.addAllMarkers();
@@ -61,8 +82,6 @@ d3.select('#selectAllChargers').on('click',function(){
     }
     else {
         d3.select(this).classed("active",false);
-        console.log('removing all markers');
-
         chargerMap.removeAllMarkers();
     }
     chargerMap.updateVis();
@@ -71,19 +90,17 @@ d3.select('#selectAllChargers').on('click',function(){
 });
 
 
+
+
+
 function filterMap(filter,action){
     if (action == 'add') {
-        console.log(filter + ':'  + action );
-
-
         if (chargerMap.isInitial()) {
-            console.log('removing all');
             chargerMap.removeAllMarkers();
         }
         chargerMap.addMarkers([filter]);
     }
     else if (action == 'remove'){
-        console.log(filter + ':'  + action );
 
         chargerMap.removeMarkers([filter]);
     }
@@ -108,7 +125,6 @@ function loadData() {
 
 
 function createVis() {
-    console.log(allData.fuel_stations);
     chargerMap = new ChargerMap('charger-map',allData.fuel_stations,centerUS,chargerTypes,chargerColorScale);
     chargerDistr = new ChargerDistr('#chargerDist',chargerMap.returnChargerDistr(),chargerColorScale);
 }

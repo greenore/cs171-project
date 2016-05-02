@@ -3,25 +3,6 @@
  */
 $('#locationSearch').click(function (){locationSearch($('#locationSearchTerm').val())} );
 
-var rangeCheckbox =$("[name='range-checkbox']").bootstrapSwitch('state',false);
-var rangeSlider = $("#rangeSlider").slider();
-
-
-rangeCheckbox.on('switchChange.bootstrapSwitch',function(){
-    var x = rangeSlider.slider('getValue');
-    if (x > 0) {
-        if(rangeCheckbox.bootstrapSwitch('state'))
-        {
-            chargerMap.drawRangeCircle(x * 1000);
-        }
-        else {
-            chargerMap.removeRangeCircle();
-        }
-        console.log(chargerMap.returnChargerDistr());
-        chargerDistr.updateData(chargerMap.returnChargerDistr());
-    }
-});
-
 
 function locationSearch(locationSeachTerm){
     var url ='https://maps.googleapis.com/maps/api/geocode/json?address=' +locationSeachTerm;
