@@ -14,7 +14,6 @@ TreeDiagram = function (_parentElement, _data, _salesNumbers) {
     this.i = 0;
 };
 
-
 TreeDiagram.prototype.initVis = function () {
 
     var margin = {
@@ -26,16 +25,6 @@ TreeDiagram.prototype.initVis = function () {
     var width = 800 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
     var vis = this;
-    vis.tip = d3.tip().attr('class', 'd3-tip').offset([-10, 0]).html(
-        function (d) {
-            var url = './img/Cs_171_EV_pics/' + d.id + '.jpg';
-            return (
-                "<img class='tooltip-img' src=" + url + ">" +
-                '<p>' + d.model + '</p>' +
-                '<p>' + d.model_year + '</p>' +
-                '<p>$ ' + d.price + '</p>')
-        });
-
 
     vis.data['x0'] = height / 2;
     vis.data['y0'] = 0;
@@ -51,13 +40,46 @@ TreeDiagram.prototype.initVis = function () {
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom).append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    vis.chart.call(vis.tip);
     vis.collapse(vis.data, vis);
     vis.updateVis(vis.data);
 };
 
+TreeDiagram.prototype.carInfo = function carInfo(d) {
+
+    // Format text
+    format = d3.format(",");
+
+    // HTML Txt
+    //---------
+    var htmlTxt = "<div class='col-md-12' id='car_info'>";
+
+    htmlTxt += "<h4 id='car-info-title'><strong>" + d.manufacturer + "</strong></h4>"
+    htmlTxt += "<table class='mytable'>"
+
+    htmlTxt += "<tr><td rowspan='7'><img src='./img/Cs_171_EV_pics/" + d.id + ".jpg' alt = 'Image' class = 'tooltip-img'></td><td>Model:</td><td>" + d.model + " - " + d.model_year + "</td></tr>"
+
+    htmlTxt += "<tr><td><strong>Category:</strong></td>"
+    htmlTxt += "<td>" + d.category + "</td></tr>"
+
+    htmlTxt += "<tr><td><strong>Engine Size:</strong></td>"
+    htmlTxt += "<td>" + d.engine_size + " " + d.units + "</td></tr>"
+
+    htmlTxt += "<tr><td><strong>Fuel Economy City:</strong></td>"
+    htmlTxt += "<td>" + d.fuel_economy_city + " " + d.fuel_economy_city_units + "</td></tr>"
+
+    htmlTxt += "<tr><td><strong>Fuel Economy Highway:</strong></td>"
+    htmlTxt += "<td>" + d.fuel_economy_highway + " " + d.fuel_economy_highway_units + "</td></tr>"
+
+    htmlTxt += "<tr><td><strong>Price:</strong></td>"
+    htmlTxt += "<td>" + format(d.price) + " $" + "</td></tr>"
+
+    htmlTxt += "</tr></table></div></div>"
+    document.getElementById("car_info").innerHTML = htmlTxt
+}
+
 TreeDiagram.prototype.updateVis = function (source) {
     var vis = this;
+
     // Compute the new tree layout.
     vis.nodes = vis.tree.nodes(vis.data);
     vis.links = vis.tree.links(vis.nodes);
@@ -82,12 +104,7 @@ TreeDiagram.prototype.updateVis = function (source) {
         })
         .on("mouseover", function (d, index) {
             if (d.id) {
-                vis.tip.show(d);
-            }
-        })
-        .on("mouseout", function (d, index) {
-            if (d.id) {
-                vis.tip.hide(d);
+                TreeDiagram.prototype.carInfo(d);
             }
         });
 

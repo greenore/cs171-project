@@ -30,50 +30,11 @@ treemap = d3.layout.treemap()
         return d.fuel_economy_city;
     });
 
-// Select SVG
-
-function clickFunction(element) {
-        console.log(element);
-        
-        // HTML Txt
-        //---------
-        var htmlTxt = "<div class='col-sm-4' id='building_picture'>";
-        htmlTxt += "<img src='img/" + element.image + "' alt='Image' class='image'></div>"
-        htmlTxt += "<div class='col-sm-4' id='building_info'>"
-        
-                  
-        htmlTxt += "<h4 id='building-title'>" + element.building + "</h4>"
-
-        htmlTxt += "<table class='mytable'>"
-
-        htmlTxt += "<tr><td>Height</td>"
-        htmlTxt += "<td>" + element.height_m + "m" + "</td></tr>"
-
-        htmlTxt += "<tr><td>City</td>"
-        htmlTxt += "<td>" + element.city + "</td></tr>"
-
-        htmlTxt += "<tr><td>Country</td>"
-        htmlTxt += "<td>" + element.country + "</td></tr>"
-
-        htmlTxt += "<tr><td>Floors</td>"
-        htmlTxt += "<td>" +  element.floors + "</td></tr>"
-
-        htmlTxt += "<tr><td>Completed</td>"
-        htmlTxt += "<td>" +  element.completed + "</td></tr>"
-
-        htmlTxt += "</tr></table></div></div>"
-        document.getElementById("svg_right").innerHTML = htmlTxt
-    }
-
 chart_tree = d3.select("#myTreemap").append("rect")
     .style("width", (width_tree + margin_tree.left + margin_tree.right) + "px")
     .style("height", (height_tree + margin_tree.top + margin_tree.bottom) + "px")
     .style("left", margin_tree.left + "px")
     .style("top", margin_tree.top + "px");
-
-var div_tooltip = d3.select("body").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
 
 queue()
     .defer(d3.csv, "data/electric_vehicles_by_model.csv")
@@ -147,7 +108,7 @@ function createVisTree(data) {
     group = d3.select("#selected-variable")
         .property("value");
     console.log(group);
-        // Filter
+    // Filter
     data_filtered = nested_data_tree.filter(function (d) {
         return d.fuel === group;
     });
@@ -176,6 +137,37 @@ function createVisTree(data) {
         .append("rect")
         .style("color", "black");
 
+    function carInfo(d) {
+        // Format text
+        format = d3.format(",");
+
+        // HTML Txt
+        //---------
+        var htmlTxt = "<div class='col-md-12' id='car_info'>";
+
+        htmlTxt += "<h4 id='car-info-title'><strong>" + d.manufacturer + "</strong></h4>"
+        htmlTxt += "<table class='mytable'>"
+
+        htmlTxt += "<tr><td rowspan='7'><img src='./img/Cs_171_EV_pics/" + d.name + ".jpg' alt = 'Image' class = 'tooltip-img'></td><td>Model:</td><td>" + d.model + " - " + d.model_year + "</td></tr>"
+
+        htmlTxt += "<tr><td><strong>Category:</strong></td>"
+        htmlTxt += "<td>" + d.category + "</td></tr>"
+
+        htmlTxt += "<tr><td><strong>Engine Size:</strong></td>"
+        htmlTxt += "<td>" + d.engine_size + " " + d.units + "</td></tr>"
+
+        htmlTxt += "<tr><td><strong>Fuel Economy City:</strong></td>"
+        htmlTxt += "<td>" + d.fuel_economy_city + " " + d.fuel_economy_city_units + "</td></tr>"
+
+        htmlTxt += "<tr><td><strong>Fuel Economy Highway:</strong></td>"
+        htmlTxt += "<td>" + d.fuel_economy_highway + " " + d.fuel_economy_highway_units + "</td></tr>"
+
+        htmlTxt += "<tr><td><strong>Price:</strong></td>"
+        htmlTxt += "<td>" + format(d.price) + " $" + "</td></tr>"
+
+        htmlTxt += "</tr></table></div></div>"
+        document.getElementById("car_info").innerHTML = htmlTxt
+    }
 
     // UPDATE
     node_tree.on("mouseover", function (d) {
@@ -185,20 +177,7 @@ function createVisTree(data) {
                     .duration(50)
                     .style("background-color", "rgb(250, 255, 106)")
                     .style("color", "#cb240f");
-
-                div_tooltip.transition().duration(100)
-                    .style("opacity", 0.8)
-                div_tooltip.html(function () {
-                        return "<strong>" + d.manufacturer + "</strong>" + "</br>" +
-                            "Model: " + d.model + " - " + d.model_year + "</br>" +
-                            "Category: " + d.category + "</br>" +
-                            "Engine Size: " + d.engine_size + " " + d.units + "</br>" +
-                            "Fuel Economy City: " + d.fuel_economy_city + " " + d.fuel_economy_city_units + "</br>" +
-                            "Fuel Economy Highway: " + d.fuel_economy_highway + " " + d.fuel_economy_highway_units + "</br>" +
-                            "Price: " + d.price
-                    })
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 30) + "px");
+                carInfo(d);
             }
         })
         .on("mouseout", function (d) {
@@ -208,10 +187,6 @@ function createVisTree(data) {
                     .duration(50)
                     .style("background-color", color_tree(d.engine_size))
                     .style("color", "black");
-
-                div_tooltip.transition().duration(300)
-                    .style("opacity", 0);
-
             }
         })
         .on("click", function (d) {

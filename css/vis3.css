@@ -39,11 +39,6 @@
     /*  TOOLTIP OVERLAY  */
     /*********************/
 
-.tooltip-img{
-    width: 300px;
-    height: auto;
-}
-
 .tooltip-title {
     display: block;
     margin-bottom: 5px;
