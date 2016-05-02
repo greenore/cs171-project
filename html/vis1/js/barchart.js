@@ -30,6 +30,8 @@ BarChart.prototype.initVis = function(){
     vis.height = 250 - vis.margin.top - vis.margin.bottom;
 
 
+
+
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -41,6 +43,16 @@ BarChart.prototype.initVis = function(){
     vis.x = d3.scale.ordinal().rangeRoundBands([0, vis.width], .05);
     vis.y = d3.scale.linear().range([vis.height, 0]);
 
+    vis.yAxis = d3.svg.axis()
+        .scale(vis.y)
+        .tickFormat(function(d) { return (d/1000) + " K"; })
+        .ticks(5)
+        .orient("left")
+        .ticks(10);
+
+    vis.xAxis = d3.svg.axis()
+        .scale(vis.x)
+        .orient("bottom");
     
     // TO-DO: (Filter, aggregate, modify data)
     vis.wrangleData();
@@ -90,16 +102,9 @@ BarChart.prototype.updateVis = function(){
     vis.max = d3.max(vis.bardata, function (d) {
         return d.value;
     });
+
     vis.x.domain(vis.bardata.map(function(d) { return d.type; }));
 
-    vis.xAxis = d3.svg.axis()
-        .scale(vis.x)
-        .orient("bottom");
-
-    vis.svg.append("g")
-        .attr("class", "axis x-axis")
-        .attr("transform", "translate(0," + vis.height + ")")
-        .call(vis.xAxis);
 
     if (vis.update) {
         vis.svg.selectAll("rect")
@@ -116,12 +121,16 @@ BarChart.prototype.updateVis = function(){
             });
 
     } else {
+
+
+
+        vis.svg.append("g")
+            .attr("class", "axis x-axis")
+            .attr("transform", "translate(0," + vis.height + ")")
+            .call(vis.xAxis);
+
         vis.y.domain([0, vis.max]);
-        vis.yAxis = d3.svg.axis()
-            .scale(vis.y)
-            .tickFormat(function(d) { return (d/1000) + " K"; })
-            .orient("left")
-            .ticks(10);
+
 
         vis.svg.append("g")
             .attr("class", "axis y-axis")
