@@ -3,13 +3,13 @@ var add_data,
 
 // Size variables
 var margin_tree = {
-        top: 20,
+        top: 0,
         right: 20,
-        bottom: 20,
+        bottom: 0,
         left: 20
     },
-    width_tree = 1100 - margin_tree.left - margin_tree.right,
-    height_tree = 600 - margin_tree.top - margin_tree.bottom;
+    width_tree = 500 - margin_tree.left - margin_tree.right,
+    height_tree = 550 - margin_tree.top - margin_tree.bottom;
 
 
 //Define default colorbrewer scheme
@@ -31,6 +31,40 @@ treemap = d3.layout.treemap()
     });
 
 // Select SVG
+
+function clickFunction(element) {
+        console.log(element);
+        
+        // HTML Txt
+        //---------
+        var htmlTxt = "<div class='col-sm-4' id='building_picture'>";
+        htmlTxt += "<img src='img/" + element.image + "' alt='Image' class='image'></div>"
+        htmlTxt += "<div class='col-sm-4' id='building_info'>"
+        
+                  
+        htmlTxt += "<h4 id='building-title'>" + element.building + "</h4>"
+
+        htmlTxt += "<table class='mytable'>"
+
+        htmlTxt += "<tr><td>Height</td>"
+        htmlTxt += "<td>" + element.height_m + "m" + "</td></tr>"
+
+        htmlTxt += "<tr><td>City</td>"
+        htmlTxt += "<td>" + element.city + "</td></tr>"
+
+        htmlTxt += "<tr><td>Country</td>"
+        htmlTxt += "<td>" + element.country + "</td></tr>"
+
+        htmlTxt += "<tr><td>Floors</td>"
+        htmlTxt += "<td>" +  element.floors + "</td></tr>"
+
+        htmlTxt += "<tr><td>Completed</td>"
+        htmlTxt += "<td>" +  element.completed + "</td></tr>"
+
+        htmlTxt += "</tr></table></div></div>"
+        document.getElementById("svg_right").innerHTML = htmlTxt
+    }
+
 chart_tree = d3.select("#myTreemap").append("rect")
     .style("width", (width_tree + margin_tree.left + margin_tree.right) + "px")
     .style("height", (height_tree + margin_tree.top + margin_tree.bottom) + "px")
@@ -139,17 +173,18 @@ function createVisTree(data) {
 
     // ENTER
     node_tree.enter()
-        .append("rect");
+        .append("rect")
+        .style("color", "black");
+
 
     // UPDATE
     node_tree.on("mouseover", function (d) {
             if (d.engine_size > 0) {
                 d3.select(this)
-                    //.style("opacity", 0.5)
                     .transition()
                     .duration(50)
                     .style("background-color", "rgb(250, 255, 106)")
-                    .style("color", "white");
+                    .style("color", "#cb240f");
 
                 div_tooltip.transition().duration(100)
                     .style("opacity", 0.8)
@@ -183,6 +218,7 @@ function createVisTree(data) {
             treeDiagram.openToModel(d.model); //TODO This should moved into a handler fct.... the treemap doesn't necessarily know about the treeDiagramm
         })
         .call(position_tree)
+        .style("font-size", "0.7em")
         .transition()
         .duration(400)
         .ease("linear")

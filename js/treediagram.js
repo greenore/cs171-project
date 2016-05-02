@@ -18,13 +18,13 @@ TreeDiagram = function (_parentElement, _data, _salesNumbers) {
 TreeDiagram.prototype.initVis = function () {
 
     var margin = {
-        top: 40,
-        right: 60,
-        bottom: 60,
-        left: 200
+        top: 100,
+        right: 40,
+        bottom: 40,
+        left: 40
     };
-    var width = 1000 - margin.left - margin.right,
-        height = 600 - margin.top - margin.bottom;
+    var width = 800 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
     var vis = this;
     vis.tip = d3.tip().attr('class', 'd3-tip').offset([-10, 0]).html(
         function (d) {
@@ -35,9 +35,6 @@ TreeDiagram.prototype.initVis = function () {
                 '<p>' + d.model_year + '</p>' +
                 '<p>$ ' + d.price + '</p>')
         });
-
-
-
 
 
     vis.data['x0'] = height / 2;

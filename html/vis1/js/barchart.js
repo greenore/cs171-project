@@ -24,9 +24,9 @@ BarChart.prototype.initVis = function(){
     var vis = this;
 
     vis.ypadding = 5;
-    vis.margin = { top: 40, right: 0, bottom: 60, left: 60 };
+    vis.margin = { top: 20, right: 0, bottom: 30, left: 50 };
 
-    vis.width = 300 - vis.margin.left - vis.margin.right;
+    vis.width = 350 - vis.margin.left - vis.margin.right;
     vis.height = 250 - vis.margin.top - vis.margin.bottom;
 
     // Format text
@@ -46,9 +46,9 @@ BarChart.prototype.initVis = function(){
     vis.yAxis = d3.svg.axis()
         .scale(vis.y)
         .tickFormat(function(d) { return (d/1000) + " K"; })
-        .ticks(5)
+        .ticks(4)
         .orient("left")
-        .ticks(10);
+        .ticks(8);
 
     vis.xAxis = d3.svg.axis()
         .scale(vis.x)
@@ -163,7 +163,7 @@ BarChart.prototype.updateVis = function(){
         // Add the text label for the Y axis
         vis.svg.selectAll("text.ytext")
             .attr("transform", "rotate(-90)")
-            .attr("y", 0 - (vis.margin.left - 15))
+            .attr("y", 0 - (vis.margin.left + 0))
             .attr("x",0 - (vis.height / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")

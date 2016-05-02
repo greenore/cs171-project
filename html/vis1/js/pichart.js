@@ -12,7 +12,7 @@
         this.category = {};
         this.dynamicval = {};
         this.legendrectsz = 10;
-        this.lspacing = 4;
+        this.lspacing = 3;
 
 
         this.initVis();
@@ -26,24 +26,25 @@
     PiChart.prototype.initVis = function () {
         var vis = this;
 
-        vis.margin = {top: 10, right: 0, bottom: 60, left: 10};
+    vis.ypadding = 5;
+    vis.margin = { top: 20, right: 20, bottom: 30, left: 0 };
 
-        vis.width = 300 - vis.margin.left - vis.margin.right;
-        vis.height = 250 - vis.margin.top - vis.margin.bottom;
+    vis.width = 500 - vis.margin.left - vis.margin.right;
+    vis.height = 200 - vis.margin.top - vis.margin.bottom;
+
         vis.radius = (vis.height + 40) / 2;
         vis.color = d3.scale.category20c();
-
 
         // TO-DO
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
             .attr("height", vis.height)
             .append("g")
-            .attr("transform", "translate(" + vis.width / 2 + "," + vis.height / 2 + ")");
+            .attr("transform", "translate(" + vis.width / 4 + "," + vis.height / 2 + ")");
 
 
-        vis.w = 150,
-            vis.h = 150,
+        vis.w = 120,
+            vis.h = 120,
             vis.r = vis.h / 2,
             vis.color = d3.scale.category20c();
 
@@ -108,6 +109,7 @@
             })
             .style('stroke', "#222");
 
+
         vis.legend.append('text')
             .attr("class", "dynamictext")
             .attr('x', vis.legendrectsz + vis.lspacing)
@@ -117,9 +119,8 @@
         vis.legend.append('text')
             .attr('x', vis.legendrectsz - ( 6 * (vis.legendrectsz  + vis.lspacing)))
             .attr('y', vis.legendrectsz - vis.lspacing)
-            .text(function(d,i) {
-                return vis.category[i];
-        });
+            .text(function(d,i) { return vis.category[i]; });
+
 
 
         // TO-DO: (Filter, aggregate, modify data)
@@ -168,7 +169,7 @@
 
     PiChart.prototype.updateVis = function () {
         var vis = this;
-        $("#statename").html("<br> (" + vis.statename + ")");
+        $("#statename").html("(" + vis.statename + ")");
 
         vis.svg.data([vis.chartdata]);
 
@@ -191,9 +192,7 @@
             .attr('x', vis.legendrectsz + vis.lspacing)
             .attr('y', vis.legendrectsz - vis.lspacing)
             .text(function(d,i) {
-                console.log(d);
                 return vis.chartdata[vis.dynamicval[d]].value;
             });
 
     };
-

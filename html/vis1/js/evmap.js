@@ -11,7 +11,6 @@ EvMap = function (_parentElement, _data, _topomapdata, _selected) {
     this.selected = _selected;
     this.populationdiv = 1000000;
     this.dcline = [];
-
     this.initVis();
 };
 
@@ -31,7 +30,7 @@ EvMap.prototype.initVis = function () {
     };
 
     vis.width = 800 - vis.margin.left - vis.margin.right;
-    vis.height = 400 - vis.margin.top - vis.margin.bottom;
+    vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
     vis.tip = d3.tip()
         .attr("class", "d3-tip")
@@ -150,7 +149,7 @@ EvMap.prototype.initVis = function () {
                 return "#FFFFFF";
 
             } else {
-                return "#F2BB66";
+                return "#ff9e00";
             }
         });
 
@@ -254,7 +253,7 @@ EvMap.prototype.mouseincolor = function(d) {
     var vis = this;
 
     var stateAbbr = "#stateid" + d.id;
-    $(stateAbbr).css('fill', 'red');
+    $(stateAbbr).css('fill', '#cb240f');
 
     if (vis.inacluster(vis.stateXY[d.id])) {
         var sstring = vis.stateXY[d.id];
