@@ -366,8 +366,6 @@ EvMap.prototype.mapquantize = function (d) {
     var calculated = false;
     var state = "";
 
-
-
     vis.data.forEach(function (j) {
         if (vis.selected == "CO2" && (!calculated)) {
             itemnum = "0";
@@ -377,9 +375,7 @@ EvMap.prototype.mapquantize = function (d) {
         } else if (vis.selected == "PCT" && (!calculated)) {
             itemnum = "1";
             maxscale = 9;
-            var max = j.evdata.pctmax;
-            var min = j.evdata.pctmin;
-            divnum = Math.floor((max - min) / maxscale);
+            divnum = Math.floor(325 / maxscale);
             calculated = true;
         } else if (vis.selected == "POP" && (!calculated)) {
             itemnum = "2";
@@ -396,7 +392,6 @@ EvMap.prototype.mapquantize = function (d) {
                 datavalue = j.evdata[vis.selected];
             } else if (vis.selected == "PCT") {
                 datavalue = j.evdata[vis.selected] * 100;
-
             } else if (vis.selected == "POP") {
                 datavalue = j.evdata[vis.selected];
             }
@@ -412,7 +407,6 @@ EvMap.prototype.mapquantize = function (d) {
         scalenumber = minscale;
     }
     if (found) {
-
         var rtnclass = "q" + itemnum + scalenumber + "-9";
         return (rtnclass);
     } else {
