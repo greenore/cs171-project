@@ -107,12 +107,12 @@ queue()
     });
 
 function createVisTree(data) {
-    nested_data_tree = data
+    nested_data_tree = data;
 
     // Get selected variable
     group = d3.select("#selected-variable")
         .property("value");
-    console.log(group)
+    console.log(group);
         // Filter
     data_filtered = nested_data_tree.filter(function (d) {
         return d.fuel === group;
@@ -180,7 +180,7 @@ function createVisTree(data) {
             }
         })
         .on("click", function (d) {
-            treeDiagram.openToModel(d.model); //TODO This should moved into a handler fct.... the treemap doesn't necessarily know about the treeDiagramm
+            sendModeltoTree(d.model); //TODO This should moved into a handler fct.... the treemap doesn't necessarily know about the treeDiagramm
         })
         .call(position_tree)
         .transition()

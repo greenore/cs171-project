@@ -57,7 +57,6 @@ ChargerMap.prototype.initVis = function() {
     });
     // create filterObj to keep track what's displayed and what not.
 
-    console.log(vis.iconList);
     var tmpMarker;
     // sort every station from data into its specific marker list
     vis.data.map(function(d,index){
@@ -227,26 +226,19 @@ ChargerMap.prototype.removeRangeCircle = function(){
 
 ChargerMap.prototype.updateVis = function() {
     var vis =  this;
-    //console.log("adding charger stations");
-    console.log( vis.mySubGroup);
-    console.log(vis.filterList);
     switch (vis.mode) {
         case 'full' :
             vis.chargerTypesList.map(function (d, i) {
                 switch (vis.filterList[d]) {
 
                     case 0 :
-                        console.log('removing from  map: ' + d);
-
                         vis.map.removeLayer(vis.mySubGroup[d]);
                         break;
                     case 1 :
-                        console.log('adding to map: ' + d);
                         vis.mySubGroup[d].addTo(vis.map);
                         vis.filterList[d] = 2;
                         break;
                     default :
-                        //console.log("nothing to do for charger type: " + d);
                         break;
                 }
             });

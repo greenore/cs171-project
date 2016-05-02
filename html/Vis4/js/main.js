@@ -52,7 +52,6 @@ d3.select('#selectAllChargers').on('click',function(){
     //d3.select(this).classed("active", !d3.select(this).classed("active"));
     if (!d3.select(this).classed("active")){
         d3.select(this).classed("active",true);
-        console.log('adding all markers');
         chargerMap.removeAllMarkers();
         chargerMap.updateVis();
         chargerMap.addAllMarkers();
@@ -61,8 +60,6 @@ d3.select('#selectAllChargers').on('click',function(){
     }
     else {
         d3.select(this).classed("active",false);
-        console.log('removing all markers');
-
         chargerMap.removeAllMarkers();
     }
     chargerMap.updateVis();
@@ -73,17 +70,12 @@ d3.select('#selectAllChargers').on('click',function(){
 
 function filterMap(filter,action){
     if (action == 'add') {
-        console.log(filter + ':'  + action );
-
-
         if (chargerMap.isInitial()) {
-            console.log('removing all');
             chargerMap.removeAllMarkers();
         }
         chargerMap.addMarkers([filter]);
     }
     else if (action == 'remove'){
-        console.log(filter + ':'  + action );
 
         chargerMap.removeMarkers([filter]);
     }
@@ -108,7 +100,6 @@ function loadData() {
 
 
 function createVis() {
-    console.log(allData.fuel_stations);
     chargerMap = new ChargerMap('charger-map',allData.fuel_stations,centerUS,chargerTypes,chargerColorScale);
     chargerDistr = new ChargerDistr('#chargerDist',chargerMap.returnChargerDistr(),chargerColorScale);
 }

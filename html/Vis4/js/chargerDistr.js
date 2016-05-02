@@ -9,7 +9,7 @@ ChargerDistr = function (_parentElement, _data,_colorScale) {
         bottom: 30,
         left: 5
     };
-    this.width = 600  - this.margin.left - this.margin.right;
+    this.width = 500  - this.margin.left - this.margin.right;
     this.height = 200 - this.margin.top - this.margin.bottom;
 
     this.initVis();
@@ -56,6 +56,24 @@ ChargerDistr.prototype.initVis = function () {
         .scale(vis.yScaleRight)
         .orient("left");
 
+
+    vis.chart.append("g")
+        .attr("class", "x axis")
+        .style("fill", "white")
+        .attr("transform", "translate(0," + vis.height + ")")
+        .call(vis.xAxisRight);
+
+    vis.chart.append("g")
+        .attr("class", "y axis")
+        .call(vis.yAxisRight)
+        .style("fill", "white")
+        .append("text")
+        .attr("transform", "translate("+ '-5' +","+(vis.height/2)+")rotate(-90)")
+        .attr("y", 0)
+        .attr("dy", ".71em")
+        .style("text-anchor", "middle")
+        .text("Charger Distribution");
+
     vis.updateVis();
 };
 
@@ -72,9 +90,10 @@ ChargerDistr.prototype.updateVis = function () {
         return d.value
     })]);
 
-    vis.bar = vis.chart.selectAll("g")
+    vis.bar = vis.chart.selectAll("g.bar")
         .data(vis.data)
         .enter().append("g")
+        .attr('class' , 'bar' )
         .attr('id', function (d) {
             return d
         })
@@ -127,20 +146,5 @@ ChargerDistr.prototype.updateVis = function () {
     //    });
 
 
-    vis.chart.append("g")
-        .attr("class", "x axis")
-        .style("fill", "white")
-        .attr("transform", "translate(0," + vis.height + ")")
-        .call(vis.xAxisRight);
 
-    vis.chart.append("g")
-        .attr("class", "y axis")
-        .call(vis.yAxisRight)
-        .style("fill", "white")
-        .append("text")
-        .attr("transform", "translate("+ '-5' +","+(vis.height/2)+")rotate(-90)")
-        .attr("y", 0)
-        .attr("dy", ".71em")
-        .style("text-anchor", "middle")
-        .text("Charger Distribution");
 };
