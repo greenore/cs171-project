@@ -2,13 +2,16 @@
 A focused, minimum viable product (hence MVP). The project takes a deep dive into electric vehicle usage in the US. It is going to tell the story for a reader who could be a possible buyer of an electric vehicle in the near future. That mean it gives a general overview about electric vehicle technologies and how the environment can benefit from using it. Consequently that means guiding the reader through model overviews / market shares / sales statistics towards important usage questions like service and charging network.
 
 ## Project Organization
-* **Issues** for individual actionable items, or bugs i.e.:
-  * Design home page
-  * Implement home page
+Byron Bahan<br>
+Tim Hagmann<br>
+Enrico Mund<br>
+TA:  Andrew Reece
+
 * **Milestones** for "releases" or overall steps, i.e.:
   * [Single-page site](http://greenore.github.io/EV-Website)
   * [Process Book](https://docs.google.com/document/d/1M83uYdwIpXW8BmJTyH1ezhldWYpx9OqnXTMCWDdt3jI/edit?usp=sharing)
   * [R-Code](https://github.com/greenore/EV-R-Code)
+  * [Video](https://github.com/greenore/EV-R-Code)
 
 ## Architecture/Philosophies
 * HTML, CSS, and JS
@@ -16,18 +19,6 @@ A focused, minimum viable product (hence MVP). The project takes a deep dive int
 * Mobile-friendly (check for different screen sizes)
 * Prototypes in R, Accesible via iFrames
 * Encapsilated code as much as possible.
-
-## Team members:
-Byron Bahan
-Tim Hagmann
-Enrico Mund
-
-TA:  Andrew Reece
-
-*Project homepage:*  http://greenore.github.io/EV-Website/<br>
-*Process Book:* https://goo.gl/4wYMqe<br>
-*R-Code:* https://github.com/greenore/EV-R-Code<br>
-*Project* presentation video: <br>
 
 ## Project structure:<br>
 ||-- css (Styling)<br>
