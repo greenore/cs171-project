@@ -18,47 +18,47 @@ A focused, minimum viable product (hence MVP). The project takes a deep dive int
 * Encapsilated code as much as possible.
 
 ## Team members:
-Byron Bahan     <byron.bahan@gmail.com>
-Tim Hagmann     <tim.hagmann@gmail.com>
-Enrico Mund     <mund.enrico@gmail.com>
+Byron Bahan
+Tim Hagmann
+Enrico Mund
 
 TA:  Andrew Reece
 
-*Project homepage:*  http://greenore.github.io/EV-Website/
-*Process Book:* https://goo.gl/4wYMqe
-*R-Code:* https://github.com/greenore/EV-R-Code
-*Project* presentation video: 
+*Project homepage:*  http://greenore.github.io/EV-Website/<br>
+*Process Book:* https://goo.gl/4wYMqe<br>
+*R-Code:* https://github.com/greenore/EV-R-Code<br>
+*Project* presentation video: <br>
 
-*Project structure:*
-||-- css (Styling)
-||-- data (datasets)
-||-- fonts (helper files for fonts)
-||-- html (Subfolders for iframes)
-||-- img (All the necessary images)
-||-- js (Javascript files)
-|-- index.html 
-|-- README.md
+## Project structure:
+||-- css (Styling)\s\s
+||-- data (datasets)\s\
+||-- fonts (helper files for fonts)\s\
+||-- html (Subfolders for iframes)\s\
+||-- img (All the necessary images)\s\
+||-- js (Javascript files)\s\
+|-- index.html\s\
+|-- README.md\s\
 
 The index.html file is the master file that structures the project. The README.pdf file holds a small overview of the project.
 
-*Used libraries:*
-jquery.min.js
-bootstrap.min.js
-queue.min.js
-d3.min.js
-d3-tip.js
-colorbrewer.js
-bootstrap-switch.js
-bootstrap-slider.min.js
-leaflet.js
-leaflet.markercluster.js
-leaflet.featuregroup.subgroup-src.js
-Leaflet.MakiMarkers.js
-topojson.v1.min.js
-d3-legend.min.js
+## Used libraries:
+jquery.min.js<br>
+bootstrap.min.js<br>
+queue.min.js<br>
+d3.min.js<br>
+d3-tip.js<br>
+colorbrewer.js<br>
+bootstrap-switch.js<br>
+bootstrap-slider.min.js<br>
+leaflet.js<br>
+leaflet.markercluster.js<br>
+leaflet.featuregroup.subgroup-src.js<br>
+Leaflet.MakiMarkers.js<br>
+topojson.v1.min.js<br>
+d3-legend.min.js<br>
 
-*Visualization details:*
-Homepage layout and implementation details:
+## Visualization details:
+Homepage layout and implementation details:<br>
 
 The homepage is implemented as a flat structure that requires scrolling for navigation. Visualization 1 and 4 are integrated in iframes that help to keep the visualizations independent and avoid conflicting variable assignments etc. Vis 2 and 3 are implemented directly into the main page and are linked through handler functions.  
 
