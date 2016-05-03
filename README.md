@@ -13,7 +13,7 @@ Enrico Mund<br>
  * [Single-page site](http://greenore.github.io/EV-Website)
  * [Process Book](https://docs.google.com/document/d/1M83uYdwIpXW8BmJTyH1ezhldWYpx9OqnXTMCWDdt3jI/edit?usp=sharing)
  * [R-Code](https://github.com/greenore/EV-R-Code)
- * [Video](https://github.com/greenore/EV-R-Code)
+ * [Video](https://www.youtube.com/watch?v=IIRIiwJ_sCo)
 
 ## Architecture/Philosophies
 * HTML, CSS, and JS
