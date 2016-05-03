@@ -2,10 +2,11 @@
 A focused, minimum viable product (hence MVP). The project takes a deep dive into electric vehicle usage in the US. It is going to tell the story for a reader who could be a possible buyer of an electric vehicle in the near future. That mean it gives a general overview about electric vehicle technologies and how the environment can benefit from using it. Consequently that means guiding the reader through model overviews / market shares / sales statistics towards important usage questions like service and charging network.
 
 ## Project Organization
+**TA:** Andrew Reece <br>
+**Team Members:**
 Byron Bahan<br>
 Tim Hagmann<br>
 Enrico Mund<br>
-TA:  Andrew Reece
 
 ## Milestones:
  * [Single-page site](http://greenore.github.io/EV-Website)
