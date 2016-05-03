@@ -29,15 +29,15 @@ TA:  Andrew Reece
 *R-Code:* https://github.com/greenore/EV-R-Code<br>
 *Project* presentation video: <br>
 
-## Project structure:
-||-- css (Styling)\s\s
-||-- data (datasets)\s\
-||-- fonts (helper files for fonts)\s\
-||-- html (Subfolders for iframes)\s\
-||-- img (All the necessary images)\s\
-||-- js (Javascript files)\s\
-|-- index.html\s\
-|-- README.md\s\
+## Project structure:<br>
+||-- css (Styling)<br>
+||-- data (datasets)<br>
+||-- fonts (helper files for fonts)<br>
+||-- html (Subfolders for iframes)<br>
+||-- img (All the necessary images)<br>
+||-- js (Javascript files)<br>
+|-- index.html<br>
+|-- README.md<br>
 
 The index.html file is the master file that structures the project. The README.pdf file holds a small overview of the project.
 
