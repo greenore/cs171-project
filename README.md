@@ -3,6 +3,7 @@ A focused, minimum viable product (hence MVP). The project takes a deep dive int
 
 ## Project Organization
 **TA:** Andrew Reece <br>
+<br>
 **Team Members:** <br>
 Byron Bahan<br>
 Tim Hagmann<br>
